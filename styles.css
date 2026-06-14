@@ -146,7 +146,7 @@ a { color: var(--accent); }
 /* ---------- Hero ---------- */
 .hero {
   position: relative;
-  padding-block: clamp(4rem, 11vw, 8rem) clamp(6rem, 13vw, 10rem);
+  padding-block: clamp(4rem, 11vw, 8rem) clamp(8rem, 17vw, 13rem);
   background:
     radial-gradient(ellipse 80% 60% at 70% 0%, rgba(43, 74, 58, 0.06), transparent 70%);
 }
@@ -291,6 +291,27 @@ a { color: var(--accent); }
 .hill-layered .hill-back  { fill: rgba(43, 74, 58, 0.16); }
 .hill-layered .hill-front { fill: var(--accent); }
 
+/* Gelaagd natuurlandschap met bergen + zon onderaan de hero */
+.scene {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  line-height: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+.scene svg {
+  display: block;
+  width: 100%;
+  height: clamp(130px, 16vw, 220px);
+}
+.scene-sun       { fill: rgba(247, 244, 238, 0.55); }
+.scene-mtn-far   { fill: rgba(43, 74, 58, 0.14); }
+.scene-mtn-near  { fill: rgba(43, 74, 58, 0.26); }
+.scene .hill-back  { fill: rgba(43, 74, 58, 0.45); }
+.scene .hill-front { fill: var(--accent); }
+
 /* ---------- Over mij ---------- */
 .about {
   display: grid;
@@ -330,8 +351,19 @@ a { color: var(--accent); }
 
 /* ---------- Afsluitende CTA ---------- */
 .section-cta {
+  position: relative;
   background: var(--accent);
+  padding-top: clamp(7rem, 14vw, 11rem);
+  overflow: hidden;
 }
+.scene-top {
+  top: 0;
+  bottom: auto;
+}
+.scene-top svg { height: clamp(90px, 11vw, 150px); }
+.scene-top .scene-mtn-far  { fill: rgba(247, 244, 238, 0.5); }
+.scene-top .scene-mtn-near { fill: rgba(247, 244, 238, 0.75); }
+.scene-top .hill-front     { fill: var(--bg); }
 .section-cta h2,
 .section-cta p { color: #fff; }
 .section-cta h2 { font-size: clamp(1.7rem, 1.3rem + 1.6vw, 2.4rem); }
@@ -429,6 +461,9 @@ a { color: var(--accent); }
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 1.25rem;
   margin-top: 2.75rem;
+}
+@media (min-width: 720px) {
+  .stats-grid-3 { grid-template-columns: repeat(3, 1fr); }
 }
 .stat {
   background: var(--white);
