@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boek van de dag</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Persoonlijke leesplank: elke dag een samenvatting van een kennisboek over HR, future of work, organisatiepsychologie en AI.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+    :root {
+      --bg: #f7f4ee;
+      --bg-card: #ffffff;
+      --bg-soft: #f0ece3;
+      --ink: #25282b;
+      --ink-soft: #4a4f54;
+      --ink-faint: #8a8f94;
+      --accent: #2b4a3a;
+      --accent-dark: #1f3a2c;
+      --accent-tint: #e7efe9;
+      --line: #e0dacf;
+      --cat-fw: #2b4a3a;
+      --cat-fw-bg: #e5ede7;
+      --cat-op: #8a5a1d;
+      --cat-op-bg: #f3e9da;
+      --cat-ai: #39566b;
+      --cat-ai-bg: #e3eaf0;
+      --gold: #b98a2e;
+      --shadow: 0 1px 2px rgba(37,40,43,0.04), 0 8px 24px rgba(37,40,43,0.06);
+      --radius: 14px;
+      --serif: "Fraunces", Georgia, "Times New Roman", serif;
+      --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #191d1b;
+        --bg-card: #212723;
+        --bg-soft: #262c28;
+        --ink: #ece9e2;
+        --ink-soft: #b9bcb6;
+        --ink-faint: #7d827c;
+        --accent: #8fbca4;
+        --accent-dark: #a8cdb7;
+        --accent-tint: #2a352e;
+        --line: #333a35;
+        --cat-fw: #8fbca4;
+        --cat-fw-bg: #28332c;
+        --cat-op: #d9a45b;
+        --cat-op-bg: #362d20;
+        --cat-ai: #92b4cc;
+        --cat-ai-bg: #253039;
+        --gold: #d9b25e;
+        --shadow: 0 1px 2px rgba(0,0,0,0.2), 0 8px 24px rgba(0,0,0,0.25);
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #191d1b;
+      --bg-card: #212723;
+      --bg-soft: #262c28;
+      --ink: #ece9e2;
+      --ink-soft: #b9bcb6;
+      --ink-faint: #7d827c;
+      --accent: #8fbca4;
+      --accent-dark: #a8cdb7;
+      --accent-tint: #2a352e;
+      --line: #333a35;
+      --cat-fw: #8fbca4;
+      --cat-fw-bg: #28332c;
+      --cat-op: #d9a45b;
+      --cat-op-bg: #362d20;
+      --cat-ai: #92b4cc;
+      --cat-ai-bg: #253039;
+      --gold: #d9b25e;
+      --shadow: 0 1px 2px rgba(0,0,0,0.2), 0 8px 24px rgba(0,0,0,0.25);
+    }
+
+    * , *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation: none !important; transition: none !important; }
+    }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      font-size: 1.0625rem;
+      line-height: 1.65;
+      color: var(--ink);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 760px; margin-inline: auto; padding: 0 1.25rem 5rem; }
+
+    /* ---------- topbar ---------- */
+    .topbar {
+      display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+      padding: 1.4rem 0 1.1rem;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 2rem;
+    }
+    .brand {
+      font-family: var(--serif); font-weight: 700; font-size: 1.15rem; color: var(--ink);
+      text-decoration: none;
+    }
+    .brand span { color: var(--accent); }
+    .progress { font-size: 0.8rem; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+
+    /* ---------- date nav ---------- */
+    .datenav {
+      display: flex; align-items: center; justify-content: center; gap: 0.9rem;
+      margin-bottom: 1.4rem;
+    }
+    .datenav button {
+      appearance: none; border: 1px solid var(--line); background: var(--bg-card); color: var(--ink-soft);
+      width: 2.4rem; height: 2.4rem; border-radius: 50%; cursor: pointer;
+      font-size: 1rem; line-height: 1; display: grid; place-items: center;
+      transition: border-color .15s, color .15s;
+    }
+    .datenav button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+    .datenav button:disabled { opacity: 0.35; cursor: default; }
+    .datenav button:focus-visible, .chip:focus-visible, .toggle:focus-visible,
+    .booklet:focus-visible, .backlink:focus-visible, input:focus-visible {
+      outline: 2px solid var(--accent); outline-offset: 2px;
+    }
+    .datelabel { text-align: center; min-width: 12rem; }
+    .datelabel .day { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); font-weight: 600; }
+    .datelabel .date { font-size: 0.85rem; color: var(--ink-faint); }
+
+    /* ---------- book card ---------- */
+    .card {
+      background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: clamp(1.5rem, 4vw, 2.6rem);
+      animation: rise .35s ease both;
+    }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+    .chiprow { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
+    .catchip {
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em;
+      padding: 0.28rem 0.7rem; border-radius: 999px;
+    }
+    .catchip.fw { color: var(--cat-fw); background: var(--cat-fw-bg); }
+    .catchip.op { color: var(--cat-op); background: var(--cat-op-bg); }
+    .catchip.ai { color: var(--cat-ai); background: var(--cat-ai-bg); }
+    .readmark { font-size: 0.75rem; color: var(--accent); font-weight: 600; }
+
+    h1.booktitle {
+      font-family: var(--serif); font-weight: 700; font-size: clamp(1.7rem, 4.5vw, 2.4rem);
+      line-height: 1.12; letter-spacing: -0.01em; margin: 0 0 0.35rem; text-wrap: balance;
+    }
+    .byline { color: var(--ink-faint); font-size: 0.95rem; margin: 0 0 1.5rem; }
+    .byline b { color: var(--ink-soft); font-weight: 600; }
+
+    .kern {
+      font-family: var(--serif); font-size: 1.16rem; line-height: 1.6; color: var(--ink);
+      margin: 0 0 1.8rem; max-width: 60ch;
+    }
+
+    .seclabel {
+      font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--ink-faint); margin: 0 0 0.7rem;
+    }
+    .cols { display: grid; gap: 1.8rem; margin-bottom: 1.8rem; }
+    @media (min-width: 640px) { .cols { grid-template-columns: 1fr 1fr; gap: 2.2rem; } }
+    ul.plain { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.65rem; }
+    ul.plain li { padding-left: 1.15rem; position: relative; font-size: 0.97rem; color: var(--ink-soft); }
+    ul.inz li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 0.45rem; height: 0.45rem; border-radius: 50%; background: var(--accent); opacity: 0.55; }
+    ul.tips li::before { content: "→"; position: absolute; left: 0; top: 0; color: var(--accent); font-weight: 600; }
+
+    .actie {
+      background: var(--accent-tint); border-radius: 10px; padding: 1rem 1.2rem;
+      display: flex; gap: 0.8rem; align-items: baseline; margin-bottom: 1.6rem;
+    }
+    .actie .seclabel { color: var(--accent); margin: 0; white-space: nowrap; }
+    .actie p { margin: 0; font-size: 0.97rem; color: var(--ink); }
+
+    .cardfoot { display: flex; gap: 0.6rem; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 1.3rem; }
+    .toggle {
+      appearance: none; cursor: pointer; font-family: var(--sans); font-size: 0.85rem; font-weight: 500;
+      border: 1px solid var(--line); background: var(--bg-card); color: var(--ink-soft);
+      border-radius: 999px; padding: 0.45rem 1rem; transition: all .15s;
+    }
+    .toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .toggle[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--bg-card); }
+    .toggle.fav[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); color: #fff; }
+    .backlink {
+      appearance: none; cursor: pointer; border: none; background: none; font-family: var(--sans);
+      font-size: 0.85rem; font-weight: 500; color: var(--accent); padding: 0.45rem 0.2rem; margin-left: auto;
+      text-decoration: underline; text-underline-offset: 3px;
+    }
+
+    /* ---------- library ---------- */
+    .library { margin-top: 3.2rem; }
+    .libhead { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+    .libhead h2 { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; margin: 0; }
+    .libhead .count { font-size: 0.8rem; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+    .controls { display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1.2rem; }
+    .search {
+      width: 100%; font-family: var(--sans); font-size: 0.95rem; color: var(--ink);
+      background: var(--bg-card); border: 1px solid var(--line); border-radius: 10px;
+      padding: 0.65rem 0.9rem;
+    }
+    .search::placeholder { color: var(--ink-faint); }
+    .chips { display: flex; gap: 0.45rem; flex-wrap: wrap; }
+    .chip {
+      appearance: none; cursor: pointer; font-family: var(--sans); font-size: 0.8rem; font-weight: 500;
+      border: 1px solid var(--line); background: var(--bg-card); color: var(--ink-soft);
+      border-radius: 999px; padding: 0.35rem 0.85rem; transition: all .15s;
+    }
+    .chip:hover { border-color: var(--accent); }
+    .chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+
+    .grid { display: grid; gap: 0.7rem; }
+    @media (min-width: 560px) { .grid { grid-template-columns: 1fr 1fr; } }
+    .booklet {
+      appearance: none; cursor: pointer; text-align: left; font-family: var(--sans);
+      background: var(--bg-card); border: 1px solid var(--line); border-radius: 10px;
+      padding: 0.85rem 1rem; display: flex; flex-direction: column; gap: 0.15rem;
+      transition: border-color .15s, transform .15s;
+    }
+    .booklet:hover { border-color: var(--accent); transform: translateY(-1px); }
+    .booklet .t { font-family: var(--serif); font-weight: 600; font-size: 0.98rem; line-height: 1.3; color: var(--ink); }
+    .booklet .m { font-size: 0.78rem; color: var(--ink-faint); display: flex; align-items: center; gap: 0.45rem; }
+    .dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; flex: none; }
+    .dot.fw { background: var(--cat-fw); } .dot.op { background: var(--cat-op); } .dot.ai { background: var(--cat-ai); }
+    .marks { margin-left: auto; font-size: 0.78rem; letter-spacing: 0.1em; }
+    .empty { color: var(--ink-faint); font-size: 0.9rem; padding: 1rem 0.2rem; }
+
+    footer.pagefoot { margin-top: 4rem; padding-top: 1.4rem; border-top: 1px solid var(--line); font-size: 0.8rem; color: var(--ink-faint); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <a class="brand" href="#" onclick="return false">Boek <span>van de dag</span></a>
+      <div class="progress" id="progress"></div>
+    </header>
+
+    <nav class="datenav" aria-label="Dagnavigatie">
+      <button id="prevday" aria-label="Vorige dag">&#8249;</button>
+      <div class="datelabel">
+        <div class="day" id="daylabel">Vandaag</div>
+        <div class="date" id="datelabel"></div>
+      </div>
+      <button id="nextday" aria-label="Volgende dag">&#8250;</button>
+    </nav>
+
+    <main>
+      <article class="card" id="card" aria-live="polite"></article>
+
+      <section class="library" aria-label="Bibliotheek">
+        <div class="libhead">
+          <h2>De hele plank</h2>
+          <span class="count" id="libcount"></span>
+        </div>
+        <div class="controls">
+          <input class="search" id="search" type="search" placeholder="Zoek op titel of auteur&hellip;" aria-label="Zoek in de bibliotheek">
+          <div class="chips" id="chips" role="group" aria-label="Filter op categorie"></div>
+        </div>
+        <div class="grid" id="grid"></div>
+        <p class="empty" id="empty" hidden>Geen boeken gevonden.</p>
+      </section>
+    </main>
+
+    <footer class="pagefoot">Persoonlijke leesplank &middot; HR, future of work, organisatiepsychologie en AI &middot; elke dag &eacute;&eacute;n boek, drie tips en &eacute;&eacute;n actie.</footer>
+  </div>
+
+<script>
+"use strict";
+
+/* ============ bibliotheek ============
+   c: fw = HR & Future of Work, op = Organisatiepsychologie, ai = AI & HR */
+const BOOKS = [
+{t:"Work Rules!",a:"Laszlo Bock",y:2015,c:"fw",
+ kern:"De voormalige HR-topman van Google laat zien hoe je een cultuur bouwt op vrijheid, transparantie en data. Zijn stelling: geef mensen meer vertrouwen dan comfortabel voelt, en meet wat werkt in plaats van te leunen op HR-intuïtie.",
+ inz:["Cultuur verslaat strategie: missie, transparantie en inspraak trekken en behouden betere mensen dan salaris alleen.","Scheid ontwikkelgesprekken strikt van beoordelings- en beloningsgesprekken; anders luistert niemand meer naar feedback.","De beste voorspellers bij selectie zijn gestructureerde interviews en werkproeven, niet brainteasers of onderbuikgevoel."],
+ tips:["Vervang ongestructureerde sollicitatiegesprekken door vaste vragen met een scoringsrubriek.","Laat mensen hun eigen doelen publiek maken; transparantie stuurt gedrag zachter dan controle.","Experimenteer met één HR-proces per kwartaal als A/B-test: meet effect voordat je uitrolt."],
+ actie:"Kies één terugkerend interviewgesprek en schrijf er vandaag drie vaste vragen plus scoringscriteria voor."},
+{t:"Nine Lies About Work",a:"Marcus Buckingham & Ashley Goodall",y:2019,c:"fw",
+ kern:"Negen breed gedeelde managementwaarheden — van 'mensen willen feedback' tot 'cultuur bepaalt alles' — blijken bij nadere toetsing leugens. Wat er echt toe doet, gebeurt in het team en bij de individuele teamleider, niet in bedrijfsbrede systemen.",
+ inz:["Mensen geven niet om welk bedrijf ze werken, maar in welk team ze zitten: teamervaring voorspelt betrokkenheid en verloop.","Beoordelingsscores zeggen meer over de beoordelaar dan over de beoordeelde (idiosyncratic rater effect).","Mensen hebben geen behoefte aan feedback op tekorten, maar aan aandacht voor wat werkt."],
+ tips:["Meet betrokkenheid op teamniveau, niet alleen organisatiebreed, en geef teamleiders hun eigen cijfers.","Vervang de jaarlijkse beoordeling door frequente check-ins over prioriteiten en benodigde hulp.","Vraag in gesprekken vaker 'wat werkte er?' dan 'wat kan beter?'"],
+ actie:"Plan met één teamlid een check-in van vijftien minuten met precies twee vragen: waar werk je aan, en waar kan ik helpen?"},
+{t:"Drive",a:"Daniel Pink",y:2009,c:"fw",
+ kern:"Voor al het werk dat ook maar iets van denkkracht vraagt, werken bonussen en straffen averechts. Duurzame motivatie komt uit drie bronnen: autonomie, meesterschap en zingeving.",
+ inz:["Als-dan-beloningen versmallen de focus en doden creativiteit; ze werken alleen bij puur routinewerk.","Autonomie gaat over vier T's: taak, tijd, techniek en team.","Meesterschap vraagt om taken net boven het huidige kunnen — te makkelijk verveelt, te moeilijk maakt angstig."],
+ tips:["Toets elke bonusregeling: beloont die routine of denkkracht? Bij denkkracht: betaal ruim en haal geld van tafel als thema.","Geef bij elke opdracht het waarom en het gewenste resultaat, nooit de methode.","Bouw 'meesterschapstijd' in: vaste uren waarin mensen aan eigen verbeterideeën werken."],
+ actie:"Herformuleer vandaag één opdracht die je uitzet: alleen het doel en het waarom, laat de aanpak volledig vrij."},
+{t:"Powerful",a:"Patty McCord",y:2018,c:"fw",
+ kern:"De architect van de Netflix-cultuur rekent af met motivatieprogramma's, retentiedoelen en beoordelingscycli. Behandel medewerkers als volwassenen: radicale eerlijkheid, volledige context en een team dat continu past bij waar het bedrijf naartoe gaat.",
+ inz:["De grootste motivator is niet perks maar het probleem: uitdagend werk met uitstekende collega's.","Communiceer de strategie zo helder dat elke medewerker hem aan een vreemde kan uitleggen — context verslaat controle.","Een baan is geen levenslang verbond: soms is afscheid met respect beter voor beiden dan koste wat kost behouden."],
+ tips:["Vraag jezelf per beleidsregel af: behandelt dit mensen als volwassenen of als risico's?","Oefen radicale eerlijkheid: zeg tegen mensen zelf wat je anders alleen over ze zou zeggen.","Stel per team de vraag: als we over zes maanden willen staan waar we willen staan, welk team hebben we dan nodig?"],
+ actie:"Kies één HR-regel die wantrouwen uitstraalt (declaraties, verlof, thuiswerken) en schrijf op wat er gebeurt als je hem schrapt."},
+{t:"No Rules Rules",a:"Reed Hastings & Erin Meyer",y:2020,c:"fw",
+ kern:"Netflix bouwde zijn cultuur op drie versterkende lussen: verhoog de talentdichtheid, voer de openhartigheid op en schrap dan de controles. Vrijheid werkt alleen als de eerste twee op orde zijn — in die volgorde.",
+ inz:["Eén briljante medewerker levert meer dan twee gemiddelde; adequate prestaties verdienen een royale exitregeling.","Feedback volgens 4A's: Aim to assist, Actionable, Appreciate, Accept or discard.","'Lead with context, not control' werkt alleen bij hoge talentdichtheid én losjes gekoppelde besluitvorming."],
+ tips:["Gebruik de keeper's test: welke teamleden zou je actief tegenhouden als ze vertrokken? Handel naar het antwoord.","Introduceer de 4A-feedbackregels expliciet in je team voordat je meer openhartigheid vraagt.","Schrap één goedkeuringsstap en vervang die door een heldere context vooraf."],
+ actie:"Doe vandaag stil voor jezelf de keeper's test voor je eigen team en noteer per persoon wat dat betekent voor je aandacht."},
+{t:"Reinventing Organizations",a:"Frederic Laloux",y:2014,c:"fw",
+ kern:"Organisaties evolueren in paradigma's, en de volgende stap — teal — draait op drie doorbraken: zelfsturing, heelheid en een evolutief doel. Geen managementlagen maar afspraken; geen functieomschrijvingen maar rollen.",
+ inz:["Zelfsturing werkt niet zonder twee steunpilaren: het adviesproces (iedereen mag besluiten, mits advies gevraagd) en conflictresolutie tussen collega's.","Heelheid betekent dat mensen zich niet hoeven op te splitsen in een professioneel masker en een privé-zelf.","Het doel van de organisatie is niet vastgelegd door de top maar wordt al luisterend ontdekt."],
+ tips:["Begin klein met het adviesproces: laat één team eigen besluiten nemen na verplicht advies van betrokkenen en experts.","Vervang functieomschrijvingen door een levende rollenlijst die teams zelf bijhouden.","Check bij elke nieuwe regel: lost dit een echt probleem op, of stilt het managementangst?"],
+ actie:"Kies één besluit dat normaal via jou loopt en geef het vandaag terug aan het team, met het adviesproces als enige voorwaarde."},
+{t:"Humanocracy",a:"Gary Hamel & Michele Zanini",y:2020,c:"fw",
+ kern:"Bureaucratie kost de economie miljarden aan verspild menselijk vermogen. Het alternatief is geen plattere hark maar een organisatie gebouwd rond principes als eigenaarschap, meritocratie, openheid en experimenteren — waarin elke medewerker denkt als ondernemer.",
+ inz:["Bureaucratie groeit vanzelf; hij belonen managers voor imperiumbouw in plaats van waardecreatie.","Voorbeelden als Haier en Nucor bewijzen dat duizenden micro-ondernemingen binnen één bedrijf kunnen werken.","Verandering begint niet met een blauwdruk van de top maar met hackathons van binnenuit."],
+ tips:["Meet je eigen 'bureaucratic mass index': hoeveel lagen, goedkeuringen en rapportages staan tussen idee en actie?","Geef teams een eigen mini-winst-en-verliesrekening zodat ondernemerschap voelbaar wordt.","Organiseer een interne hackathon rond één vraag: welke regel moet weg?"],
+ actie:"Tel vandaag hoeveel goedkeuringen nodig zijn voor één alledaags besluit in je organisatie en deel het getal met je MT."},
+{t:"Redesigning Work",a:"Lynda Gratton",y:2022,c:"fw",
+ kern:"Hybride werken vraagt om echt herontwerp in vier stappen: begrijp wat mensen en taken nodig hebben, verbeeld nieuwe mogelijkheden, modelleer en test ze, en handel ernaar. Wie alleen dagen op kantoor telt, mist de kern: plaats én tijd zijn ontwerpvariabelen.",
+ inz:["Analyseer werk op productiviteitsdrivers: focus, coördinatie, samenwerking en energie vragen elk een andere plek en tijd.","Kantoren moeten verdienen dat mensen komen: ontmoeting en samenwerking, niet rijen bureaus.","Ontwerp vanuit taken, niet vanuit functies of anciënniteit — anders ontstaat oneerlijkheid."],
+ tips:["Breng per team in kaart welke taken synchrone samenwerking vragen en welke diepe focus.","Maak teamafspraken over 'anker-momenten' (wanneer samen) in plaats van generieke kantoorplicht.","Test één herontwerp als experiment met een evaluatiedatum, niet als permanent beleid."],
+ actie:"Vraag drie collega's welke taak ze het beste thuis doen en welke op kantoor — en leg de antwoorden naast je huidige hybride beleid."},
+{t:"The 100-Year Life",a:"Lynda Gratton & Andrew Scott",y:2016,c:"fw",
+ kern:"Wie nu werkt, wordt waarschijnlijk ouder dan negentig — en dat maakt het driefasenleven (leren, werken, pensioen) onhoudbaar. Loopbanen worden meerfasig, met omscholing, tussenjaren en transities als normaal onderdeel.",
+ inz:["Immateriële bezittingen (vaardigheden, netwerk, vitaliteit, zelfkennis) worden net zo belangrijk als pensioen.","Een 60-jarige carrière betekent dat kennis meermaals veroudert; leren is geen fase maar een levenslange activiteit.","Organisaties die alleen op leeftijd en anciënniteit sturen, verliezen de meerfasige werknemer."],
+ tips:["Bespreek in loopbaangesprekken expliciet transities: wat is iemands volgende fase, niet alleen volgende functie?","Maak omscholing en tussentijd (sabbatical, zorgverlof) tot normale opties in je arbeidsvoorwaarden.","Kijk bij werving verder dan het cv-pad: meerfasige levens leveren rijkere profielen op."],
+ actie:"Teken vandaag je eigen loopbaan als meerfasig leven tot je negentigste: welke transitie komt er als eerste aan?"},
+{t:"Work Without Jobs",a:"Ravin Jesuthasan & John Boudreau",y:2022,c:"fw",
+ kern:"De vaste functie als organiserend principe kraakt. Ontbind werk in taken en projecten, en koppel die aan skills van mensen — vast, flex of geautomatiseerd — via een interne talentmarktplaats. Werk stroomt dan naar wie het het beste kan doen.",
+ inz:["Functies verbergen wat mensen echt kunnen; gedeconstrueerd werk maakt verborgen capaciteit zichtbaar.","Automatisering vervangt zelden hele banen, wel specifieke taken — deconstructie laat zien welke.","Een talentmarktplaats vergroot interne mobiliteit, ontwikkeling en behoud tegelijk."],
+ tips:["Kies één vacature en beschrijf het werk eerst als takenpakket voordat je een functieprofiel schrijft.","Start een lichte interne projectmarktplaats: laat mensen naast hun functie op klussen intekenen.","Analyseer bij automatiseringsplannen op taakniveau: wat verdwijnt, wat verandert, wat wordt belangrijker?"],
+ actie:"Ontleed vandaag je eigen functie in tien taken en markeer welke drie een ander (of AI) beter of liever zou doen."},
+{t:"The Skills-Powered Organization",a:"Ravin Jesuthasan & Tanuj Kapilashrami",y:2024,c:"fw",
+ kern:"Skills — niet functies — worden de valuta van werk. Organisaties die talent, ontwikkeling en beloning rond vaardigheden organiseren, kunnen sneller schakelen in een arbeidsmarkt die door AI en demografie permanent krap en veranderlijk is.",
+ inz:["Een skills-based organisatie vraagt drie fundamenten: een gedeelde skillstaal, zicht op aanwezige skills en werk dat in skills is uitgedrukt.","Skillsdata maakt eerlijkere beslissingen mogelijk: selectie en promotie op wat iemand kan, niet op diploma of netwerk.","De transitie is een verandertraject van jaren; start bij één schaarse, kritieke talentgroep."],
+ tips:["Begin met één kritieke rol: welke vijf skills bepalen daar succes, en wie in huis heeft ze (deels) al?","Schrap diploma-eisen uit vacatures waar ze niet aantoonbaar nodig zijn.","Koppel je leeraanbod aan skillsgaps in plaats van aan functietitels."],
+ actie:"Kies de schaarste rol in je organisatie en noteer de vijf kernskills — check daarna of je vacaturetekst daarop selecteert."},
+{t:"Irresistible",a:"Josh Bersin",y:2022,c:"fw",
+ kern:"Uit onderzoek onder duizenden organisaties destilleert Bersin zeven principes van onweerstaanbare werkgevers, samengevat als: teams boven hiërarchie, werk boven functies, coach boven baas, groei boven promotie, doel boven winst, mens boven proces en... alles begint bij vertrouwen.",
+ inz:["De beste organisaties maken werk zelf betekenisvol in plaats van het te compenseren met perks.","Groei hoeft niet omhoog: laterale stappen en nieuwe skills binden mensen sterker dan promotiepaden.","Employee experience is geen HR-project maar een ontwerpprincipe voor al het werk."],
+ tips:["Vraag in exitgesprekken en enquêtes naar het werk zelf (zinvol? doenbaar?) in plaats van alleen naar randvoorwaarden.","Maak van elke leidinggevende een coach: train ze in vragen stellen, niet in beoordelen.","Vier laterale moves net zo zichtbaar als promoties."],
+ actie:"Noteer voor je eigen team: wat maakt het werk hier zwaarder dan nodig? Schrap vandaag één irritatie."},
+{t:"Redefining HR",a:"Lars Schmidt",y:2021,c:"fw",
+ kern:"Moderne HR is geen beleidsafdeling maar een productteam voor de medewerkerervaring. Schmidt bundelt praktijken van vooruitstrevende people-teams: open source werken, datagedreven beslissen en HR-professionals die businesskennis combineren met menselijkheid.",
+ inz:["De beste people-teams delen hun playbooks openlijk en lenen schaamteloos van elkaar.","HR-rollen verbreden: people analytics, employee experience design en interne communicatie horen erbij.","Geloofwaardigheid komt uit businessimpact laten zien, niet uit compliance bewaken."],
+ tips:["Steel gerust: zoek voor elk HR-vraagstuk eerst hoe drie andere organisaties het openlijk oplosten.","Formuleer voor elk HR-initiatief vooraf welke metric moet bewegen.","Behandel medewerkers als gebruikers: test nieuw beleid eerst met een kleine groep."],
+ actie:"Kies één lopend HR-initiatief en schrijf in één zin op welke meetbare uitkomst het moet verbeteren — weet je het niet, dan is dat je actie."},
+{t:"HR Disrupted",a:"Lucy Adams",y:2017,c:"fw",
+ kern:"De voormalige HR-directeur van de BBC pleit voor EACH: medewerkers als volwassenen (Adults), consumenten (Consumers) en mensen (Human beings) behandelen. Weg met infantiliserend beleid, one-size-fits-all processen en HR als politieagent.",
+ inz:["Veel HR-beleid is ontworpen voor de 5% die het verpest en straft daarmee de 95% die te vertrouwen is.","Medewerkers verwachten dezelfde gepersonaliseerde ervaring als klanten krijgen.","HR moet durven experimenteren in plaats van wachten op het perfecte, juridisch dichtgetimmerde proces."],
+ tips:["Screen je personeelshandboek op regels die volwassenen als kinderen behandelen en schrap er drie.","Segmenteer je medewerkers zoals marketing dat doet: verschillende groepen, verschillende behoeften.","Vervang één formeel proces door een gesprek."],
+ actie:"Herlees vandaag één standaardbrief of beleidstekst van HR en herschrijf hem alsof je tegen een gewaardeerde volwassene praat."},
+{t:"Bullshit Jobs",a:"David Graeber",y:2018,c:"fw",
+ kern:"Een aanzienlijk deel van de werkenden vindt de eigen baan zinloos — en lijdt daaronder. Graeber ontleedt hoe organisaties werk creëren dat zelfs de uitvoerder overbodig acht, en wat dat doet met waardigheid en moraal.",
+ inz:["Zinloos werk is geen luiheid­sprobleem maar een moreel probleem: mensen willen bijdragen.","Vijf soorten bullshitbanen: flunkies, goons, duct tapers, box tickers en taskmasters.","Zinloosheid ontstaat vaak uit managerialisme: rapportage over werk verdringt het werk zelf."],
+ tips:["Vraag in medewerkersonderzoek expliciet: welk deel van je werk zou niemand missen?","Bij elke nieuwe rapportage of procedure: wie gebruikt dit echt, en waarvoor?","Herontwerp functies rond zichtbare bijdrage; laat mensen het effect van hun werk zien."],
+ actie:"Inventariseer vandaag je eigen agenda van vorige week: welke terugkerende taak zou niemand missen als je ermee stopte?"},
+{t:"Out of Office",a:"Charlie Warzel & Anne Helen Petersen",y:2021,c:"fw",
+ kern:"Thuiswerken werd tijdens de pandemie vooral 'werken vanuit huis onder slechtere voorwaarden'. Echte flexibiliteit vraagt herontwerp van vier dingen: flexibiliteit, cultuur, technologie en gemeenschap — anders koloniseert werk het hele leven.",
+ inz:["Zonder expliciete normen vult werk elke ruimte; flexibiliteit zonder grenzen wordt permanente bereikbaarheid.","Kantoorcultuur verplaatst zich niet vanzelf online; rituelen en verbinding moeten opnieuw ontworpen worden.","Minder maar beter werken is de echte belofte: uitkomst boven aanwezigheid."],
+ tips:["Maak asynchroon de standaard: leg vast wat wél direct antwoord vereist in plaats van andersom.","Definieer teambrede offline-uren en houd je er als leidinggevende zichtbaar aan.","Beoordeel op resultaat en documenteer verwachtingen schriftelijk — dat beschermt juist de thuiswerker."],
+ actie:"Spreek vandaag met je team één blok van twee uur af waarin niemand vergadert of chat — en zet het zelf als eerste in je agenda."},
+{t:"Remote: Office Not Required",a:"Jason Fried & David Heinemeier Hansson",y:2013,c:"fw",
+ kern:"De oprichters van Basecamp beschreven al vóór de pandemie hoe remote werken echt werkt: asynchrone communicatie, schrijven als kernvaardigheid, resultaat boven aanwezigheid en overlap-uren in plaats van kantoortijden.",
+ inz:["Het kantoor is voor veel kenniswerk de slechtste plek: onderbrekingen zijn er de norm.","Vertrouwen is geen risico maar een voorwaarde; wie mensen niet remote vertrouwt, vertrouwt ze eigenlijk nergens.","Goede schriftelijke communicatie is dé selectievaardigheid voor verspreide teams."],
+ tips:["Laat kandidaten voor remote-rollen een schrijfopdracht doen; schrijven is daar samenwerken.","Vervang statusmeetings door geschreven updates die iedereen in eigen tijd leest.","Zorg voor 3-4 uur overlap per dag; de rest van de agenda is van de medewerker zelf."],
+ actie:"Zet vandaag één vaste vergadering om in een geschreven update en kijk wat er gebeurt."},
+{t:"Deep Work",a:"Cal Newport",y:2016,c:"fw",
+ kern:"Geconcentreerd, onafgeleid werken aan cognitief veeleisende taken wordt schaarser én waardevoller. Wie deep work systematisch organiseert — voor zichzelf en voor teams — bouwt een zeldzaam concurrentievoordeel op in een economie vol oppervlakkige drukte.",
+ inz:["Contextwisselingen laten 'aandachtsresidu' achter: na elke onderbreking werkt je brein minuten op halve kracht.","Drukte is geen prestatie; zichtbare activiteit verdringt vaak waardevol werk.","Concentratie is trainbaar, maar vraagt rituelen: vaste tijd, vaste plek, vaste regels."],
+ tips:["Blok dagelijks 90 minuten focustijd in de agenda van je team en bescherm die als een klantafspraak.","Voer een teamnorm in voor responstijd op chat (bijvoorbeeld: binnen vier uur is prima).","Plan oppervlakkig werk (mail, administratie) in vaste batches in plaats van er de dag mee te vullen."],
+ actie:"Reserveer voor morgenochtend 90 minuten deep work voor je belangrijkste taak, telefoon in een andere kamer."},
+{t:"A World Without Work",a:"Daniel Susskind",y:2020,c:"fw",
+ kern:"Technologische werkloosheid is dit keer wél anders: AI hoeft menselijke intelligentie niet te kopiëren om taken over te nemen. Susskind verkent een toekomst met minder werk en de grote vragen die dat oproept over inkomen, zingeving en macht.",
+ inz:["Machines vervangen taken, niet banen — maar als genoeg taken verdwijnen, verdwijnt de baan alsnog.","De 'complementariteitskracht' (technologie schept nieuw werk) wordt zwakker naarmate AI breder wordt.","Herverdeling van werk en inkomen wordt een politiek-maatschappelijk vraagstuk, geen individueel omscholingsprobleem."],
+ tips:["Denk in taakportfolio's: welke taken in je organisatie zijn het meest routiniseerbaar, ongeacht functie?","Investeer in wat lastig automatiseerbaar blijft: empathie, oordeelsvorming, creativiteit en fysiek maatwerk.","Voer het gesprek over technologie en werkgelegenheid open in de organisatie in plaats van het te vermijden."],
+ actie:"Noteer voor drie functies in je organisatie welke taken over vijf jaar waarschijnlijk geautomatiseerd zijn — en wat je nu al aan ontwikkeling kunt starten."},
+{t:"The Geek Way",a:"Andrew McAfee",y:2023,c:"fw",
+ kern:"Snelgroeiende techbedrijven winnen niet door slimmere mensen maar door vier culturele normen: wetenschap (argumenten + bewijs), eigenaarschap, snelheid (itereren boven plannen) en openheid. Samen houden ze bureaucratie en statusspelletjes in toom.",
+ inz:["Mensen zijn van nature statusgedreven; cultuur moet dat kanaliseren richting bewijs in plaats van politiek.","Grote plannen falen stil; snelle iteraties falen goedkoop en leren hardop.","Openheid — slecht nieuws vroeg delen — is een norm die je actief moet belonen, anders sterft hij."],
+ tips:["Vraag bij elke discussie: welk bewijs zou je van gedachten doen veranderen? Geen antwoord = geloofsstrijd.","Knip grote projecten op in tweewekelijkse opleveringen met echte gebruikersfeedback.","Beloon zichtbaar de brenger van slecht nieuws."],
+ actie:"Breng vandaag in één overleg de vraag in: wat is het kleinste experiment waarmee we dit kunnen testen in plaats van erover te vergaderen?"},
+
+{t:"The Fearless Organization",a:"Amy Edmondson",y:2018,c:"op",
+ kern:"Psychologische veiligheid — het geloof dat je risico's als vragen, twijfels en fouten kunt tonen zonder afgestraft te worden — is de sterkste voorspeller van teamleren en prestaties. Het is geen gezelligheid, maar de voorwaarde voor eerlijkheid.",
+ inz:["Stilte is duurder dan spreken: de meeste fouten in organisaties waren bij iemand bekend die zweeg.","Veiligheid en hoge standaarden zijn geen tegenpolen; samen vormen ze de leerzone.","Leiders bouwen veiligheid via drie stappen: het werk kaderen als leerproces, uitnodigen tot inbreng en productief reageren."],
+ tips:["Reageer op fouten eerst met nieuwsgierigheid ('wat gebeurde er?') en nooit met wie-vragen.","Stel in elk overleg minstens één echte vraag waarvan je het antwoord niet weet.","Zeg regelmatig hardop wat je zelf niet weet of fout deed; veiligheid begint bij de leider."],
+ actie:"Open je volgende teamoverleg met: 'Wat is iets dat niet lekker loopt en dat we nog niet besproken hebben?' — en bedank de eerste die antwoordt."},
+{t:"The Culture Code",a:"Daniel Coyle",y:2018,c:"op",
+ kern:"Succesvolle groepen — van Navy SEALs tot Pixar — bouwen cultuur met drie vaardigheden: veiligheid creëren via kleine verbindingssignalen, kwetsbaarheid delen en een gedeeld verhaal over het doel levend houden.",
+ inz:["Cultuur zit niet in waarden aan de muur maar in duizenden micro-signalen: aandacht, dankjewel, oogcontact.","De 'kwetsbaarheidslus': als de leider eerst hulp vraagt, durft de groep het ook.","Sterke culturen herhalen hun doelverhaal tot vervelens toe — richting is nooit één keer verteld."],
+ tips:["Begin samenwerkingen met een korte persoonlijke check-in; verbinding vóór inhoud.","Vraag als leidinggevende expliciet om hulp en feedback op je eigen werk.","Vertel bij elk groot besluit opnieuw hoe het bijdraagt aan het grotere doel."],
+ actie:"Stuur vandaag drie korte, specifieke bedankjes naar collega's — noem precies wat ze deden en welk effect het had."},
+{t:"First, Break All the Rules",a:"Marcus Buckingham & Curt Coffman",y:1999,c:"op",
+ kern:"Gallups onderzoek onder tienduizenden managers laat zien dat topmanagers de regels breken: ze selecteren op talent in plaats van ervaring, sturen op uitkomsten in plaats van methode, ontwikkelen sterke punten en zoeken de juiste plek per persoon.",
+ inz:["Mensen veranderen niet wezenlijk; haal er niet uit wat er niet in zit, maar haal eruit wat erin zit.","De twaalf kernvragen (Q12) meten wat een werkplek sterk maakt, te beginnen bij 'weet ik wat er van mij verwacht wordt?'","Besteed de meeste tijd aan je beste mensen — daar zit de grootste opbrengst."],
+ tips:["Definieer bij elke rol de gewenste uitkomsten en laat de weg ernaartoe vrij.","Vraag elk teamlid: wat zijn je sterkste punten en gebruik je die wekelijks?","Behandel iedereen verschillend: maatwerk in aandacht is eerlijker dan gelijke behandeling."],
+ actie:"Stel vandaag aan één teamlid de vraag: op welk moment van de afgelopen week was jij op je best?"},
+{t:"It's the Manager",a:"Jim Clifton & Jim Harter",y:2019,c:"op",
+ kern:"Gallups conclusie uit decennia data: 70% van de variantie in teambetrokkenheid hangt samen met één factor — de manager. De organisatie van de toekomst vervangt de baas door een coach en het jaargesprek door continue ontwikkelgesprekken.",
+ inz:["Mensen willen geen tevredenheid maar ontwikkeling: 'my growth' verslaat 'my paycheck' als bindende factor.","Sterke-puntenontwikkeling verhoogt aantoonbaar betrokkenheid, productiviteit en retentie.","De wekelijkse betekenisvolle conversatie is het krachtigste managementinstrument dat er is."],
+ tips:["Train leidinggevenden in coachende gesprekken vóórdat je nieuwe HR-instrumenten uitrolt.","Voer per medewerker wekelijks één kort, betekenisvol gesprek over werk en ontwikkeling.","Gebruik een sterke-punteninstrument als gedeelde taal in het team."],
+ actie:"Plan voor deze week met elk direct teamlid tien minuten in met als enige agenda: waar wil jij in groeien?"},
+{t:"Wellbeing at Work",a:"Jim Clifton & Jim Harter",y:2021,c:"op",
+ kern:"Welzijn is meer dan gezondheid: Gallup onderscheidt vijf elementen — loopbaan-, sociaal, financieel, fysiek en maatschappelijk welzijn — en loopbaanwelzijn (elke dag doen waar je goed in bent) blijkt het fundament onder de andere vier.",
+ inz:["Betrokkenheid en welzijn versterken elkaar; laag welzijn wist de winst van hoge betrokkenheid uit (burn-outrisico).","De manager beïnvloedt het welzijn van medewerkers vaak sterker dan hun huisarts.","Vitaliteitsprogramma's zonder aandacht voor het werk zelf zijn pleisters."],
+ tips:["Neem loopbaanwelzijn op in gesprekscycli: doet iemand dagelijks waar die sterk in is?","Kijk bij verzuim en stress eerst naar werkontwerp en leiderschap, dan pas naar fruitmanden en apps.","Maak financieel welzijn bespreekbaar; geldstress is een grote stille productiviteitskiller."],
+ actie:"Loop de vijf welzijnselementen langs voor jezelf en markeer het zwakste — kies één kleine verbetering voor deze week."},
+{t:"Thinking, Fast and Slow",a:"Daniel Kahneman",y:2011,c:"op",
+ kern:"Ons denken kent twee systemen: het snelle, intuïtieve Systeem 1 en het trage, analytische Systeem 2. Vrijwel alle denkfouten — van overmoed tot verliesaversie — ontstaan doordat Systeem 1 antwoorden geeft op vragen die om Systeem 2 vragen.",
+ inz:["What you see is all there is: we bouwen verhalen op de beschikbare informatie en merken niet wat ontbreekt.","Ankers, framing en beschikbaarheid sturen oordelen — ook van experts, ook in sollicitaties en beoordelingen.","De planningsfout is universeel: we onderschatten structureel tijd, kosten en risico's van eigen plannen."],
+ tips:["Beoordeel kandidaten en prestaties op vooraf vastgestelde criteria, apart gescoord, vóór het totaaloordeel.","Gebruik de 'outside view': hoe verging het vergelijkbare projecten elders?","Neem belangrijke beslissingen nooit tijdens of direct na tijdsdruk, honger of vermoeidheid."],
+ actie:"Kies één besluit dat je deze week neemt en noteer vooraf drie criteria waarop je het toetst — beslis pas daarna."},
+{t:"Noise",a:"Daniel Kahneman, Olivier Sibony & Cass Sunstein",y:2021,c:"op",
+ kern:"Waar bias een systematische afwijking is, is ruis willekeurige spreiding: twee beoordelaars, dezelfde casus, totaal verschillende oordelen. In beoordelingen, selectie en beloning is ruis vaak een groter probleem dan bias — en beter aan te pakken.",
+ inz:["Wie oordeelt hangt vaak meer af van humeur, tijdstip en persoon dan van de casus zelf (occasion & pattern noise).","Ruisaudits maken de spreiding zichtbaar: laat meerdere mensen onafhankelijk dezelfde casus beoordelen.","Beslishygiëne helpt: structureren, onafhankelijk oordelen, schalen verankeren met voorbeelden."],
+ tips:["Laat beoordelaars eerst onafhankelijk scoren en pas daarna overleggen — anders is het eerste oordeel besmettelijk.","Veranker beoordelingsschalen met concrete voorbeeldcasussen per niveau.","Doe een mini-ruisaudit: laat twee collega's dezelfde sollicitatiebrief beoordelen en vergelijk."],
+ actie:"Pak twee recente beoordelingen van vergelijkbare medewerkers erbij en check: verklaart het werk het verschil, of de beoordelaar?"},
+{t:"Mindset",a:"Carol Dweck",y:2006,c:"op",
+ kern:"Mensen met een groeimindset — het geloof dat vermogens ontwikkelbaar zijn — leren meer, gaan beter met tegenslag om en presteren op termijn beter dan mensen met een statische mindset. Cruciaal: mindset wordt gevormd door hoe we prijzen en falen bespreken.",
+ inz:["Prijs het proces (inzet, strategie, keuzes), niet het talent — 'wat ben jij slim' maakt voorzichtig.","Een statische mindset maakt van elke prestatie een test van eigenwaarde; falen wordt dan te riskant om te proberen.","Organisaties hebben ook een mindset: 'cultures of genius' versus 'cultures of growth'."],
+ tips:["Formuleer feedback als 'nog niet' in plaats van 'niet': taal stuurt mindset.","Vraag in beoordelingen naar leercurves en geprobeerde strategieën, niet alleen naar resultaten.","Screen je wervingsteksten: zoek je 'toptalent en high performers' of 'mensen die willen groeien'?"],
+ actie:"Vervang vandaag één compliment over slimheid of talent door een compliment over aanpak of doorzettingsvermogen."},
+{t:"Grit",a:"Angela Duckworth",y:2016,c:"op",
+ kern:"Volgehouden passie en doorzettingsvermogen voor langetermijndoelen voorspellen succes vaak beter dan talent. Grit is ontwikkelbaar via interesse, oefening, zingeving en hoop — en gedijt in een cultuur die volhouden normaal maakt.",
+ inz:["Talent × inzet = vaardigheid; vaardigheid × inzet = prestatie. Inzet telt dus dubbel.","Deliberate practice — gericht oefenen op wat nog niet lukt — verslaat ervaringsjaren.","Grit groeit in gemeenschappen: de cultuur waarin je verkeert bepaalt wat je normaal vindt om vol te houden."],
+ tips:["Vraag in selectiegesprekken naar meerjarige projecten: waar hield iemand jaren aan vast, ook toen het taai werd?","Help medewerkers hun werk te verbinden aan een doel dat groter is dan zijzelf.","Maak oefenen normaal: creëer laagdrempelige plekken waar fouten maken hoort bij beter worden."],
+ actie:"Vraag jezelf: aan welk professioneel doel werk ik al minstens twee jaar? Zo geen — formuleer er vandaag één."},
+{t:"Give and Take",a:"Adam Grant",y:2013,c:"op",
+ kern:"Givers, takers en matchers vullen elke organisatie. Givers zijn zowel de slechtst als de best presterenden: wie geeft mét grenzen en slim kiest aan wie, bouwt netwerken en reputaties op die takers nooit bereiken.",
+ inz:["Gevende culturen presteren beter, maar één taker vergiftigt meer dan tien givers goedmaken.","Succesvolle givers zijn 'otherish': hoge zorg voor anderen én voor eigen doelen.","Vijf-minuten-gunsten — kleine hulp met grote waarde voor de ander — zijn de motor van gevende netwerken."],
+ tips:["Selecteer aan de poort vooral takers eruit (referenties: hoe behandelt iemand mensen onder zich?).","Maak hulpvragen normaal en zichtbaar, bijvoorbeeld met een vast 'wie kan mij helpen met...'-moment.","Bescherm je givers tegen uitputting: begrens hun beschikbaarheid, niet hun generositeit."],
+ actie:"Doe vandaag één vijf-minuten-gunst: een introductie, een tip of gedeelde kennis waar een ander echt mee verder kan."},
+{t:"Think Again",a:"Adam Grant",y:2021,c:"op",
+ kern:"De vaardigheid van deze tijd is niet slimmer denken maar opnieuw denken: je overtuigingen behandelen als hypotheses. Denk als wetenschapper — niet als prediker, aanklager of politicus — en bouw organisaties waar herzien normaal is.",
+ inz:["Hoe slimmer mensen zijn, hoe beter ze zijn in het rationaliseren van hun bestaande mening.","'Confident humility': zeker over je vermogen om te leren, bescheiden over je huidige kennis.","Psychologische veiligheid plus verantwoordingsplicht creëert leercultuur; alleen veiligheid creëert comfort."],
+ tips:["Vraag bij meningsverschillen: welk bewijs zou jou (en mij) van gedachten doen veranderen?","Houd een 'rethinking-lijstje' bij van overtuigingen die je hebt herzien; deel het met je team.","Beloon zichtbaar mensen die publiekelijk van mening veranderen op basis van argumenten."],
+ actie:"Kies één professionele overtuiging die je al jaren hebt en zoek vandaag actief drie argumenten ertegen."},
+{t:"Hidden Potential",a:"Adam Grant",y:2023,c:"op",
+ kern:"Groei zegt meer dan startpunt: prestatie is afstand afgelegd, niet hoogte bereikt. Karaktervaardigheden — discomfort opzoeken, imperfectie toelaten, hulp vragen — plus goede 'steigers' halen potentieel naar boven dat selectie op talent mist.",
+ inz:["Wie op huidige prestaties selecteert, mist mensen met de steilste leercurve.","Perfectionisme remt groei; excellente leerders mikken bewust op 'goed genoeg om te verzenden en te leren'.","Coaches en systemen (steigers) doen meer voor potentieel dan aangeboren aanleg."],
+ tips:["Beoordeel kandidaten op afgelegde afstand: waar kwamen ze vandaan, wat hebben ze overwonnen?","Geef opdrachten net boven iemands niveau, met vangnet — ongemak is het leersignaal.","Laat mensen anderen les geven in wat ze net leren; uitleggen versnelt beheersing."],
+ actie:"Kijk vandaag anders naar één 'gemiddelde' medewerker: wat is diens leercurve van de afgelopen twee jaar, en wat zegt die?"},
+{t:"Quiet",a:"Susan Cain",y:2012,c:"op",
+ kern:"Organisaties zijn ontworpen voor extraverten — open kantoren, brainstorms, snelle sprekers winnen — terwijl een derde tot de helft van de mensen introvert is. Wie stille kwaliteiten als diep nadenken, luisteren en focus benut, ontsluit onzichtbaar talent.",
+ inz:["Er is geen verband tussen de beste spreker zijn en de beste ideeën hebben — wel tussen spreken en invloed krijgen.","Brainstorms in groepen leveren minder en slechtere ideeën dan mensen die eerst alleen nadenken.","Introverte leiders halen bij proactieve teams vaak betere resultaten dan extraverte."],
+ tips:["Stuur agenda's en vragen vooraf rond zodat nadenkers voorbereid kunnen bijdragen.","Gebruik brainwriting: eerst individueel schrijven, dan pas delen en bespreken.","Beoordeel bijdrage niet op zendtijd in vergaderingen; vraag stillere collega's actief en gericht om hun analyse."],
+ actie:"Vraag in je volgende overleg eerst iedereen twee minuten stil op te schrijven wat ze vinden — en inventariseer dan pas."},
+{t:"Flow",a:"Mihaly Csikszentmihalyi",y:1990,c:"op",
+ kern:"Mensen zijn op hun gelukkigst én productiefst in flow: volledige opslorping in een taak die uitdaagt op het randje van kunnen, met heldere doelen en directe feedback. Werk is beter in flow te brengen dan vrije tijd — mits goed ontworpen.",
+ inz:["Flow vraagt balans: uitdaging iets boven vaardigheidsniveau — te laag geeft verveling, te hoog angst.","Heldere doelen en onmiddellijke feedback zijn de twee ontwerpknoppen die flow mogelijk maken.","Versnippering is de flow-killer: elke onderbreking gooit je terug naar de start van concentratie."],
+ tips:["Herontwerp taken met directe feedback: laat mensen het effect van hun werk snel zien.","Match werkverdeling op de flow-balans: wie zit structureel in verveling of overvraging?","Bescherm aaneengesloten werktijd; flow heeft minimaal 20-30 minuten opstarttijd nodig."],
+ actie:"Noteer vandaag wanneer je voor het laatst flow ervoer op werk en wat die situatie kenmerkte — ontwerp daar deze week één moment mee."},
+{t:"Atomic Habits",a:"James Clear",y:2018,c:"op",
+ kern:"Gedragsverandering lukt niet met doelen maar met systemen: kleine gewoontes die 1% beter zijn, verankerd via vier wetten — maak het aantrekkelijk, makkelijk, zichtbaar en bevredigend. Identiteit volgt gedrag: elke handeling is een stem voor wie je wilt zijn.",
+ inz:["Je zakt niet naar het niveau van je doelen maar naar het niveau van je systemen.","Omgeving verslaat wilskracht: wie het goede gedrag makkelijk maakt, heeft geen discipline nodig.","Habit stacking — nieuw gedrag koppelen aan bestaande routine — is de snelste manier om iets te verankeren."],
+ tips:["Ontwerp organisatieverandering als gewoonteontwerp: welk klein gedrag, gekoppeld aan welk bestaand moment?","Maak gewenst gedrag de standaardoptie (opt-out in plaats van opt-in).","Maak voortgang zichtbaar: mensen houden gedrag vol dat ze kunnen afvinken."],
+ actie:"Koppel één micro-gewoonte aan een bestaand ritueel: bijvoorbeeld na elke 1-op-1 direct één waarderingszin sturen."},
+{t:"Nudge",a:"Richard Thaler & Cass Sunstein",y:2008,c:"op",
+ kern:"Keuzearchitectuur is onvermijdelijk: elke standaardinstelling, volgorde en formulering stuurt gedrag. Nudges gebruiken die architectuur om mensen te helpen kiezen wat ze zelf zouden willen — zonder opties te verbieden of prikkels te veranderen.",
+ inz:["Defaults zijn de krachtigste nudge: wat vanzelf gebeurt, gebeurt het vaakst.","Mensen kiezen vaak niet — ze stellen uit; verklein frictie op het gewenste pad.","Sociale normen ('de meeste collega's doen X') sturen sterker dan argumenten."],
+ tips:["Audit je HR-processen op defaults: waar is de goede keuze nu de moeilijke route?","Vereenvoudig formulieren en processen radicaal; elke extra stap kost deelnemers.","Gebruik sociale-normcommunicatie eerlijk: alleen als de meerderheid het gewenste gedrag echt vertoont."],
+ actie:"Kies één regeling met lage deelname (opleidingsbudget, vitaliteit) en maak deelname vandaag één klik makkelijker of standaard."},
+{t:"Influence",a:"Robert Cialdini",y:1984,c:"op",
+ kern:"Zeven universele principes sturen of mensen ja zeggen: wederkerigheid, commitment & consistentie, sociaal bewijs, sympathie, autoriteit, schaarste en eenheid. Wie ze kent, overtuigt ethischer én herkent manipulatie sneller.",
+ inz:["Wederkerigheid: wie eerst oprecht geeft, krijgt onevenredig veel terug.","Kleine publieke commitments voorspellen groot gedrag: mensen willen consistent zijn met wat ze zeiden.","Sociaal bewijs werkt het sterkst bij onzekerheid en gelijkenis: 'mensen zoals jij kozen...'"],
+ tips:["Laat mensen in verandertrajecten zelf hardop formuleren wat ze gaan doen — commitment verslaat instructie.","Gebruik bij draagvlak echte voorbeelden van vergelijkbare teams die al meedoen.","Check je eigen beïnvloeding op de ethiek-toets: zou het nog werken als de ander het principe kende?"],
+ actie:"Vraag in je volgende overleg deelnemers om hun eigen vervolgstap hardop te formuleren in plaats van acties toe te wijzen."},
+{t:"Switch",a:"Chip Heath & Dan Heath",y:2010,c:"op",
+ kern:"Verandering vraagt drie dingen tegelijk: richt de ruiter (het rationele brein: heldere richting), motiveer de olifant (het emotionele brein: voel de noodzaak) en effen het pad (maak de omgeving makkelijk). De meeste verandertrajecten doen er maar één.",
+ inz:["Wat weerstand lijkt, is vaak onduidelijkheid: 'script the critical moves' verslaat visiedocumenten.","Zoek de bright spots: wat werkt al, en hoe doen we daar meer van?","Verklein de verandering: mensen komen in beweging als de eerste stap behapbaar voelt."],
+ tips:["Vertaal elke verandering naar drie concrete gedragingen op maandagochtend.","Start veranderanalyses bij uitzonderingen die al slagen in plaats van bij wat misgaat.","Verander de omgeving vóór het gedrag: rooster, tooling, ruimte, standaardinstellingen."],
+ actie:"Neem één vastgelopen verandering en zoek vandaag de bright spot: waar of bij wie werkt het al wél, en waarom?"},
+{t:"The Progress Principle",a:"Teresa Amabile & Steven Kramer",y:2011,c:"op",
+ kern:"Uit twaalfduizend dagboekfragmenten van kenniswerkers blijkt: niets motiveert zo sterk als zichtbare voortgang in betekenisvol werk. Kleine overwinningen voeden het 'innerlijke werkleven'; kleine tegenslagen en hindernissen beschadigen het onevenredig hard.",
+ inz:["De beste werkdagen zijn voortgangsdagen; de slechtste zijn dagen met obstakels en teruggedraaid werk.","Managers onderschatten voortgang stelselmatig als motivator (ze gokken op erkenning en prikkels).","Katalysatoren (heldere doelen, autonomie, hulp) en voeding (respect, aanmoediging) versterken het voortgangseffect."],
+ tips:["Ruim als leidinggevende dagelijks obstakels op — dat is je meest onderschatte taak.","Maak voortgang zichtbaar: korte demo's, afgeronde stukken werk, geen eindeloze tussenstanden.","Draai nooit lichtvaardig werk terug; niets sloopt motivatie sneller."],
+ actie:"Vraag vandaag aan je team: wat staat jullie deze week het meest in de weg? Kies één obstakel en ruim het op."},
+{t:"Primed to Perform",a:"Neel Doshi & Lindsay McGregor",y:2015,c:"op",
+ kern:"Waaróm mensen werken bepaalt hoe goed ze werken. Drie directe motieven (plezier, zingeving, potentieel) verhogen prestaties; drie indirecte (emotionele druk, economische druk, inertie) verlagen ze. Het verschil is meetbaar als 'total motivation'.",
+ inz:["Plezier in het werk zelf is de sterkste voorspeller van adaptieve prestaties (creativiteit, veerkracht).","Prestatiedruk en angst verbeteren hooguit tactische prestaties, maar slopen aanpassingsvermogen.","Cultuur is een ontwerpvraag: rolontwerp en leiderschap beïnvloeden total motivation het meest."],
+ tips:["Meet per team waarom mensen werken, niet alleen hoe tevreden ze zijn.","Ontwerp rollen met ruimte voor experiment en zichtbare impact — daar zit het spelmotief.","Verlaag emotionele druk: minder vergelijken en afrekenen, meer leren en verbeteren."],
+ actie:"Vraag jezelf per taak van vandaag: doe ik dit uit plezier, zin of potentieel — of uit druk en gewoonte? Verschuif er één."},
+{t:"The Burnout Challenge",a:"Christina Maslach & Michael Leiter",y:2022,c:"op",
+ kern:"Burn-out is geen individueel falen maar een mismatch tussen persoon en werk op zes gebieden: werkdruk, regie, beloning, gemeenschap, rechtvaardigheid en waarden. De remedie ligt in het herontwerpen van werk, niet in weerbaarheidstrainingen alleen.",
+ inz:["Burn-out kent drie dimensies: uitputting, cynisme en verminderde effectiviteitsbeleving — uitputting alleen is het niet.","Kleine chronische ergernissen ('steentjes in de schoen') voorspellen burn-out beter dan grote incidenten.","Fix de baan, niet (alleen) de persoon: yoga tegen een oneerlijke werkverdeling werkt niet."],
+ tips:["Breng per team de zes mismatches in kaart in plaats van generiek 'werkdruk' te meten.","Inventariseer en verwijder structurele mini-frustraties: haperende tooling, dubbele registraties, onduidelijke prioriteiten.","Kijk bij verzuimtrends eerst naar teams en leidinggevenden, niet naar individuen."],
+ actie:"Vraag drie collega's naar hun grootste 'steentje in de schoen' en los er vandaag minimaal één concreet op."},
+{t:"Dying for a Paycheck",a:"Jeffrey Pfeffer",y:2018,c:"op",
+ kern:"Schadelijke managementpraktijken — baanonzekerheid, lange uren, gebrek aan regie, werk-privéconflict — maken mensen aantoonbaar ziek en kosten organisaties meer dan ze opleveren. Werkgeverschap is daarmee een volksgezondheidsvraagstuk.",
+ inz:["Gebrek aan autonomie en hoge eisen vormen samen de giftigste combinatie voor gezondheid.","Ziektekosten van slechte werkomgevingen worden afgewenteld op medewerkers en maatschappij — en blijven zo onzichtbaar op de balans.","Wellnessprogramma's compenseren geen ziekmakend werkontwerp."],
+ tips:["Behandel autonomie als arbeidsvoorwaarde: regel regie over rooster, methode en volgorde waar het kan.","Monitor structureel overwerk als gezondheidsrisico, niet als toewijding.","Neem 'maakt deze beslissing werk gezonder of ongezonder?' op in de afweging bij reorganisaties."],
+ actie:"Check vandaag van je eigen team de werktijden van afgelopen maand: wie werkt structureel te veel, en wat is jouw aandeel daarin?"},
+{t:"The Best Place to Work",a:"Ron Friedman",y:2014,c:"op",
+ kern:"Sociale psychologie toegepast op werkplekontwerp: van de kracht van mislukken en spelen tot waarom autonomie, verbondenheid en competentie (zelfdeterminatietheorie) de fundamenten zijn van elke uitzonderlijke werkplek.",
+ inz:["Fouten zijn een voorwaarde voor excellentie: wie nooit faalt, oefent op te lage moeilijkheid.","Fysieke en mentale energie sturen prestaties: pauzes, beweging en daglicht zijn productiviteitsinstrumenten.","Intrinsieke motivatie groeit met de drie basisbehoeften: autonomie, verbondenheid, competentie."],
+ tips:["Ontwerp vergaderritmes rond energie: zwaar denkwerk 's ochtends, routinewerk in de middagdip.","Normaliseer pauzeren zichtbaar; uitgeputte teams nemen slechtere beslissingen.","Toets beleid aan de drie basisbehoeften: vergroot of verkleint dit autonomie, verbinding en competentiegevoel?"],
+ actie:"Plan morgen je moeilijkste taak op je energetisch beste moment en verplaats één routineklus naar de dip."},
+{t:"Team of Teams",a:"Stanley McChrystal",y:2015,c:"op",
+ kern:"In een complexe, snelle omgeving verliest de efficiënte hiërarchie van gedeelde informatie en verspreide beslissingsbevoegdheid. McChrystal bouwde in Irak een 'team van teams': gedeeld bewustzijn plus 'empowered execution' op elk niveau.",
+ inz:["Complex is iets anders dan gecompliceerd: voorspelbaarheid verdwijnt, dus aanpassingsvermogen verslaat optimalisatie.","Silo's ontstaan door informatieschaarste; radicale transparantie is het tegengif.","Leiders worden van schaakmeester tuinman: condities kweken in plaats van zetten bepalen."],
+ tips:["Deel meer context dan comfortabel voelt: brede briefings in plaats van need-to-know.","Wissel mensen tijdelijk uit tussen teams die elkaar niet begrijpen (liaison-principe).","Verleg beslissingsbevoegdheid naar waar de informatie is, en accepteer de fouten die daarbij horen."],
+ actie:"Deel vandaag één stuk context met je team dat je normaal 'voor het MT' zou houden, en zie wat het losmaakt."},
+{t:"Range",a:"David Epstein",y:2019,c:"op",
+ kern:"In een complexe wereld winnen generalisten: mensen die breed samplen, laat specialiseren en kennis tussen domeinen verbinden, doen het beter in 'wicked' leeromgevingen waar patronen uit het verleden niet herhalen.",
+ inz:["Vroege specialisatie werkt alleen in 'kind' omgevingen met snelle, eerlijke feedback (schaken, golf) — niet in de meeste kenniswerk-domeinen.","Match quality — de fit tussen persoon en werk — voorspelt succes; die vind je door te proberen, niet door te plannen.","Buitenstaanders lossen vastgelopen problemen vaak op omdat ze analogieën uit andere velden meebrengen."],
+ tips:["Waardeer zijinstromers en carrièreswitchers om hun brede referentiekader in plaats van te focussen op ontbrekende jaren.","Stimuleer interne mobiliteit tussen afdelingen als leerinstrument, niet als uitzondering.","Betrek bij taaie vraagstukken bewust iemand van buiten het vakgebied."],
+ actie:"Nodig voor je volgende taaie vraagstuk iemand uit een totaal andere discipline uit en vraag: waar lijkt dit op in jouw wereld?"},
+{t:"Rebel Ideas",a:"Matthew Syed",y:2019,c:"op",
+ kern:"Cognitieve diversiteit — verschillende perspectieven, referentiekaders en denkstijlen — maakt teams collectief intelligent. Homogene teams van slimme mensen hebben collectieve blinde vlekken; en zonder veilige spreekruimte blijft diversiteit onbenut.",
+ inz:["Kloondiversiteit: teams die op elkaar lijken bevestigen elkaars blinde vlekken, hoe slim ook.","Dominantiehiërarchieën smoren informatie; prestigehiërarchieën (respect op basis van kunde) laten haar stromen.","Constructief dwarsdenken moet georganiseerd worden: het ontstaat niet vanzelf."],
+ tips:["Stel teams samen op complementaire denkstijlen en achtergronden, niet alleen op vakbekwaamheid.","Laat de leidinggevende als laatste spreken in discussies.","Organiseer expliciete tegenspraak: wijs bij grote besluiten een advocaat van de duivel aan."],
+ actie:"Laat bij het eerstvolgende besluit iedereen eerst anoniem of schriftelijk een standpunt geven vóór de discussie start."},
+{t:"The Culture Map",a:"Erin Meyer",y:2014,c:"op",
+ kern:"Acht schalen — van communicatie (laag-/hoogcontext) tot vertrouwen (taak/relatie), feedback, hiërarchie en tijd — verklaren waarom internationale samenwerking schuurt. Niet cultuurloos werken maar cultuurbewust vertalen is de vaardigheid.",
+ inz:["Cultuurverschillen zijn relatief: Nederlanders zijn direct vergeleken met Britten, indirect vergeleken met niemand.","Negatieve feedback en communicatie zijn twee losse schalen: sommige culturen praten indirect maar bekritiseren keihard.","Vertrouwen bouw je taakgericht (goed werk) of relatiegericht (samen tijd) — verwar de routes niet."],
+ tips:["Bespreek in internationale teams expliciet de teamnormen: hoe geven wij hier feedback, hoe besluiten we?","Kalibreer je directheid op de ontvanger; 'gewoon Hollands eerlijk' komt elders binnen als botheid.","Investeer bij relatieculturen eerst in informele tijd voordat je zaken doet."],
+ actie:"Vraag een internationale collega vandaag hoe jouw feedbackstijl op hen overkomt — en luister zonder te verdedigen."},
+{t:"Radical Candor",a:"Kim Scott",y:2017,c:"op",
+ kern:"Goede leiding combineert persoonlijke betrokkenheid met directe uitdaging. Wie wel geeft om mensen maar confrontatie mijdt, vervalt in 'ruïneuze empathie' — de meest gemaakte managementfout, die mensen groei en eerlijkheid onthoudt.",
+ inz:["Feedback achterhouden om aardig te zijn is niet aardig: het ontneemt mensen de kans om te groeien.","Vraag eerst zelf om kritiek voordat je die geeft; verdraag de stilte tot er echt iets komt.","Lof moet net zo specifiek zijn als kritiek — vaag positief is waardeloos."],
+ tips:["Geef feedback direct, persoonlijk en over gedrag (situatie-gedrag-impact), nooit over karakter.","Stel wekelijks de vraag: wat kan ik doen of laten om jou beter te maken in je werk?","Corrigeer klein en vaak; opgespaarde feedback wordt een aanklacht."],
+ actie:"Vraag vandaag aan één teamlid: wat zou ik kunnen doen of laten waardoor het prettiger wordt om met mij te werken? Tel in stilte tot zes na de vraag."},
+{t:"Thanks for the Feedback",a:"Douglas Stone & Sheila Heen",y:2014,c:"op",
+ kern:"We trainen gevers van feedback, maar de ontvanger bepaalt of er iets mee gebeurt. Drie triggers blokkeren ontvangst: waarheidstriggers (klopt niet!), relatietriggers (van jou pik ik dit niet) en identiteitstriggers (dus ik deug niet).",
+ inz:["Feedback komt in drie soorten die we constant verwarren: waardering, coaching en beoordeling.","Vraag bij vage feedback door naar de data eronder: wat zag of hoorde je precies?","Zelfs uit slechte of oneerlijke feedback valt vaak dat ene bruikbare procent te halen."],
+ tips:["Benoem bij het geven welk soort feedback dit is: waardering, coaching of beoordeling.","Leer teams de doorvraag: 'kun je een voorbeeld geven van wanneer ik dat deed?'","Scheid in de gesprekscyclus beoordeling en coaching in de tijd — samen vermorzelt het één het ander."],
+ actie:"Vraag vandaag iemand om één concreet verbeterpunt en reageer alleen met doorvragen en 'dank je' — verdedig niets."},
+{t:"Multipliers",a:"Liz Wiseman",y:2010,c:"op",
+ kern:"Sommige leiders halen twee keer zoveel uit hun mensen. Multipliers stellen vragen, geven eigenaarschap en dagen uit; diminishers — vaak onbedoeld — maken zichzelf het middelpunt en krimpen de intelligentie om hen heen.",
+ inz:["De 'accidental diminisher' is de grootste groep: helpen, ideeën spuien en redden verkleinen anderen ongemerkt.","Multipliers definiëren de uitdaging maar geven het eigenaarschap van de oplossing weg.","Wie 51% van de stemaandelen in een beslissing houdt, krijgt 49% van de denkkracht van anderen."],
+ tips:["Tel in je volgende overleg hoe vaak je zelf het antwoord geeft versus een vraag stelt.","Geef bij delegeren expliciet de 'volledige eigenaarsrol': de ander rapporteert niet aan jou, maar informeert je.","Speel je fiches spaarzaam: kies per meeting vooraf de twee momenten waarop jouw inbreng echt telt."],
+ actie:"Beantwoord vandaag elke hulpvraag eerst met een vraag terug: wat denk jij zelf, en wat heb je al geprobeerd?"},
+{t:"Dare to Lead",a:"Brené Brown",y:2018,c:"op",
+ kern:"Moedig leiderschap is aan te leren en bestaat uit vier vaardigheden: kwetsbaarheid omarmen, leven naar je waarden, vertrouwen bouwen (BRAVING) en veerkrachtig opstaan na falen. De grootste barrière is ons harnas: perfectionisme en afstand.",
+ inz:["Kwetsbaarheid is geen zwakte maar de geboortegrond van moed, creativiteit en verandering.","'Clear is kind, unclear is unkind': vage verwachtingen en vermeden gesprekken zijn de echte onvriendelijkheid.","Vertrouwen wordt gebouwd in kleine momenten (BRAVING: grenzen, betrouwbaarheid, verantwoordelijkheid, kluis, integriteit, niet-oordelen, generositeit)."],
+ tips:["Benoem in moeilijke gesprekken je eigen aandeel en onzekerheid; het opent het gesprek in plaats van het te sluiten.","Check bij aannames de story: 'het verhaal dat ik mezelf vertel is...' en toets het hardop.","Maak verwachtingen pijnlijk expliciet: wat betekent 'goed' hier precies?"],
+ actie:"Voer vandaag dat ene gesprek dat je al even uitstelt, en open met: 'Ik vind dit spannend om te bespreken, en het is te belangrijk om te laten liggen.'"},
+{t:"Turn the Ship Around!",a:"L. David Marquet",y:2012,c:"op",
+ kern:"Een onderzeebootkapitein transformeerde het slechtst presterende schip van de vloot door te stoppen met bevelen geven: leider-leider in plaats van leider-volger. Bevoegdheid verplaatsen naar waar de informatie is, gestut door competentie en helderheid.",
+ inz:["'Ik ben van plan om...' verandert uitvoerders in denkers: mensen formuleren zelf hun besluit plus rationale.","Bevoegdheid weggeven zonder competentie en helderheid te versterken is roekeloos — de drie horen bij elkaar.","Controle-mechanismen zenden wantrouwen; elk weggehaald controlepunt is een investering in denkkracht."],
+ tips:["Laat teamleden voorstellen brengen als 'ik ben van plan om...' in plaats van vragen 'mag ik...'","Specificeer per beslissingstype wie hem neemt — en verschuif elk kwartaal één type naar beneden.","Toets elke controle (goedkeuring, rapportage): welk risico dekt die echt af, en tegen welke denk-kosten?"],
+ actie:"Als iemand vandaag toestemming vraagt, antwoord dan: wat zou jij besluiten, en waarom? Ga daarna mee in hun besluit als het veilig kan."},
+{t:"The Five Dysfunctions of a Team",a:"Patrick Lencioni",y:2002,c:"op",
+ kern:"Teams falen in een voorspelbare piramide: zonder vertrouwen geen conflict, zonder conflict geen commitment, zonder commitment geen aanspreekbaarheid, zonder aanspreekbaarheid geen resultaatgerichtheid. Bouwen begint dus altijd onderaan: kwetsbaarheidsvertrouwen.",
+ inz:["Kunstmatige harmonie is een alarmsignaal: goede teams maken productief ruzie over ideeën.","Commitment vraagt geen consensus maar gehoord zijn: disagree and commit.","Teamleden moeten elkáár aanspreken; als alles via de leider loopt, is de piramide al gebroken."],
+ tips:["Start teamontwikkeling met persoonlijke geschiedenissen en werkstijlen delen — klein en concreet.","Mijn conflicten niet weg als voorzitter: benoem ze en vraag de stillere helft expliciet naar bezwaren.","Sluit elk overleg af met: wat hebben we precies besloten en wat vertellen we anderen?"],
+ actie:"Vraag je team vandaag: over welk onderwerp zijn we het eigenlijk oneens zonder dat we het uitspreken? En agendeer het."},
+{t:"Alive at Work",a:"Daniel Cable",y:2018,c:"op",
+ kern:"Ons brein heeft een 'seeking system' dat oplicht bij exploreren, experimenteren en betekenis. Veel organisaties zetten het per ongeluk uit met controle en routine — en noemen het resultaat dan gebrek aan motivatie.",
+ inz:["Kleine doses zelfexpressie, experiment en purpose activeren het zoeksysteem sterker dan grote bonussen.","Mensen die hun sterke punten in hun eigen woorden mogen inzetten (best self), presteren en blijven beter.","Purpose beklijft via persoonlijk contact met de impact van het werk, niet via missieposters."],
+ tips:["Laat nieuwe medewerkers bij onboarding hun 'beste zelf' beschrijven en die inzetten vanaf dag één.","Bouw speelruimte in: kleine experimenten binnen het werk, zonder businesscase vooraf.","Breng medewerkers direct in contact met wie baat heeft bij hun werk."],
+ actie:"Vraag een medewerker vandaag: wanneer voelde je je hier voor het laatst echt levend in je werk — en hoe krijgen we daar meer van?"},
+{t:"Why Do So Many Incompetent Men Become Leaders?",a:"Tomas Chamorro-Premuzic",y:2019,c:"op",
+ kern:"We selecteren leiders op zelfvertrouwen, charisma en zichtbaarheid — kenmerken die nauwelijks correleren met leiderschapskwaliteit en wel met narcisme. Daardoor promoveren we overmoed en missen we competentie, integriteit en nederigheid.",
+ inz:["Zelfvertrouwen wordt verward met competentie; het verband tussen die twee is zwak.","De beste voorspellers van goed leiderschap — bescheidenheid, zelfinzicht, integriteit — ogen in selectieprocedures juist onopvallend.","De lat moet niet omlaag voor één groep maar omhoog voor iedereen: meet daadwerkelijke competentie."],
+ tips:["Gebruik gevalideerde assessments en gestructureerde criteria bij leiderschapsselectie in plaats van 'uitstraling'.","Weeg trackrecord van teams onder iemands leiding (verloop, betrokkenheid) zwaarder dan presentatievaardigheid.","Wees extra alert bij kandidaten die vooral zichzelf goed verkopen: vraag naar gedeelde successen en erkende fouten."],
+ actie:"Herzie de criteria van je eerstvolgende leiderschapsbenoeming: staat 'zelfinzicht' erin, en hoe meet je dat concreet?"},
+{t:"The Talent Delusion",a:"Tomas Chamorro-Premuzic",y:2017,c:"op",
+ kern:"Talentmanagement leunt te veel op intuïtie en te weinig op wetenschap. Talent is meetbaar — als de combinatie van kunnen, willen en passen — en de meeste organisaties meten het slechter dan ze denken, met dure wanbenoemingen als gevolg.",
+ inz:["De regel van de 'vital few': een klein deel van de medewerkers levert een onevenredig groot deel van de output.","Betrokkenheid en talent zijn verschillende dingen; een tevreden medewerker is niet per se een presterende.","Zelfbeoordelingen van talent zijn notoir onbetrouwbaar; goede meting combineert tests, gedrag en resultaten."],
+ tips:["Valideer je eigen selectie: volg hoe voorspellingen uit sollicitaties zich verhouden tot prestaties na een jaar.","Gebruik wetenschappelijk gevalideerde instrumenten boven zelfontworpen competentielijstjes.","Definieer high potential expliciet: potentie voor wát precies?"],
+ actie:"Pak drie aannames uit je laatste wervingsronde ('deze persoon wordt sterk in X') en check vandaag hoe ze een jaar later uitpakten."},
+
+{t:"Co-Intelligence",a:"Ethan Mollick",y:2024,c:"ai",
+ kern:"Behandel AI als een vreemde vorm van collega-intelligentie: onvermoeibaar, breed belezen en soms overtuigend fout. Mollicks vier regels: nodig AI altijd aan tafel uit, blijf de mens in de lus, behandel AI als persoon (met instructies) en ga ervan uit dat dit de slechtste AI is die je ooit zult gebruiken.",
+ inz:["De 'jagged frontier': AI is verrassend goed in sommige taken en verrassend slecht in aanpalende — alleen experimenteren leert je de grens kennen.","Centaur- en cyborg-werkwijzen: taken opdelen tussen mens en AI, of continu verweven samenwerken.","Gemiddelde presteerders gaan er met AI het meest op vooruit; expertise verschuift naar beoordelen en regisseren."],
+ tips:["Verplicht jezelf tot tien serieuze AI-experimenten in je eigen HR-werk voordat je er beleid over maakt.","Laat AI eerste versies maken (vacatures, gesprekshandleidingen, analyses) en word zelf de kritische redacteur.","Deel intern welke taken AI goed en slecht doet: bouw een gezamenlijke kaart van de jagged frontier."],
+ actie:"Neem vandaag één terugkerende HR-taak en doe hem samen met AI — noteer wat verrassend goed en wat fout ging."},
+{t:"Human + Machine",a:"Paul Daugherty & H. James Wilson",y:2018,c:"ai",
+ kern:"De grootste waarde van AI zit niet in vervanging maar in de 'missing middle': nieuwe rollen waarin mensen machines trainen, uitleggen en bewaken, en machines mensen versterken. Herontwerp processen rond die samenwerking in plaats van taken één-op-één te automatiseren.",
+ inz:["Zes nieuwe hybride rollen ontstaan: trainers, explainers en sustainers aan de menskant; versterking, interactie en belichaming aan de machinekant.","Bedrijven die alleen kosten automatiseren missen de echte winst: herontworpen, adaptieve processen.","'Responsible AI' is een operationele discipline — governance, bias-checks, uitlegbaarheid — geen pr-hoofdstuk."],
+ tips:["Zoek per proces de missing middle: waar maakt mens+machine iets mogelijk dat geen van beide alleen kan?","Creëer expliciete rollen voor het trainen en bewaken van AI-systemen — ook binnen HR.","Herontwerp het proces vóór je automatiseert; een slecht proces sneller maken is geen vooruitgang."],
+ actie:"Kies één HR-proces en schets in tien minuten de mens+machine-versie: wat doet AI, wat de mens, en wie bewaakt het geheel?"},
+{t:"Prediction Machines",a:"Ajay Agrawal, Joshua Gans & Avi Goldfarb",y:2018,c:"ai",
+ kern:"AI is economisch gezien één ding: goedkopere voorspelling. Als voorspellen goedkoop wordt, wordt het complement schaars en waardevol — menselijk oordeel: bepalen wat we willen en wat een fout kost.",
+ inz:["Ontleed beslissingen in voorspelling, oordeel, actie en feedback; AI pakt alleen de voorspelling.","Goedkope voorspelling verhoogt de waarde van data (input) en van oordeel (wat te doen met de voorspelling).","Wachten op perfecte AI is een strategiefout: leren begint bij inzetten op tolerante use-cases."],
+ tips:["Inventariseer HR-beslissingen op hun voorspelcomponent: verloop, verzuim, wervingssucces, opleidingsbehoefte.","Leg per AI-toepassing vast wie het oordeel velt en wat een fout-positief en fout-negatief kost.","Start met voorspellingen waar fouten goedkoop zijn (prioriteren, concepten) in plaats van waar ze levens raken (aannemen, ontslaan)."],
+ actie:"Neem één HR-beslissing en schrijf de vier onderdelen uit: welke voorspelling, wiens oordeel, welke actie, welke feedback?"},
+{t:"Power and Prediction",a:"Ajay Agrawal, Joshua Gans & Avi Goldfarb",y:2022,c:"ai",
+ kern:"We zitten in de 'tussentijd' van AI: puntoplossingen verbeteren bestaande taken, maar de echte disruptie komt van systeemoplossingen — nieuwe manieren van organiseren die pas mogelijk worden als beslissingen worden losgekoppeld en herverdeeld.",
+ inz:["Vergelijk met elektriciteit: fabrieken profiteerden pas echt toen ze hun hele indeling rond de nieuwe technologie herontwierpen.","AI verschuift macht: wie de voorspelmachine bezit, wint invloed over wie op regels en ervaring leunde.","Regels ('zo doen we dat hier') zijn bevroren beslissingen; AI maakt het rendabel om ze weer echte beslissingen te maken."],
+ tips:["Zoek in HR naar 'bevroren regels' (vaste schalen, standaard processen) die met betere voorspelling maatwerk kunnen worden.","Denk voorbij de puntoplossing: wat zou je HR-systeem zijn als je het vandaag met AI opnieuw ontwierp?","Volg wie er in jouw organisatie macht wint en verliest door AI — en begeleid die verschuiving expliciet."],
+ actie:"Noteer drie 'zo doen we dat nu eenmaal'-regels in je organisatie en bedenk bij elk hoe die er met perfecte voorspelling uit zou zien."},
+{t:"Competing in the Age of AI",a:"Marco Iansiti & Karim Lakhani",y:2020,c:"ai",
+ kern:"AI-first bedrijven doorbreken klassieke schaalgrenzen: als algoritmes het operationele hart vormen, groeien schaal, scope en leersnelheid zonder dat de organisatie evenredig meegroeit. Dat verandert ook wat organiseren en leidinggeven betekent.",
+ inz:["De 'AI-fabriek': datapijplijn, algoritmes, experimenteerplatform en infrastructuur als operationeel fundament.","Traditionele silo's zijn de grootste rem; datagedreven bedrijven organiseren rond geïntegreerde dataplatforms.","Netwerk- en leereffecten maken de kloof tussen koplopers en achterblijvers zelfversterkend."],
+ tips:["Behandel HR-data als product: één betrouwbare bron, herbruikbaar over toepassingen heen.","Bouw experimenteercapaciteit in HR: hypothese, test, meting — als routine, niet als project.","Ontwikkel datageletterdheid breed in de organisatie in plaats van analytics in een hoekje te zetten."],
+ actie:"Check vandaag: hoeveel verschillende waarheden bestaan er in je organisatie over iets simpels als 'aantal medewerkers'? Dat is je datavolwassenheid."},
+{t:"The Algorithm",a:"Hilke Schellmann",y:2024,c:"ai",
+ kern:"Onderzoeksjournalistiek naar AI in werving en HR: cv-scanners, videoanalyses en persoonlijkheidsspellen blijken vaak onbetrouwbaar, onwetenschappelijk en discriminerend — terwijl kandidaten er blind door worden afgewezen. Wie AI inkoopt zonder te toetsen, outsourcet zijn ethiek.",
+ inz:["Veel HR-AI meet niet wat leveranciers claimen; validatiestudies ontbreken of blijven geheim.","Bias verstopt zich in proxies: postcode, hobby's en taalgebruik werken als indirecte discriminatie.","De werkgever blijft juridisch en moreel verantwoordelijk, ook als 'het algoritme' besliste."],
+ tips:["Eis van elke HR-tech-leverancier validatiebewijs en bias-audits, en laat een onafhankelijke partij meekijken.","Geef afgewezen kandidaten een menselijke beroepsroute; geen afwijzing puur op algoritme.","Test tools zelf adversarieel: voer identieke cv's met andere namen of gaten in en vergelijk uitkomsten."],
+ actie:"Maak vandaag een lijstje van elk punt in je wervingsproces waar software kandidaten uitfiltert — en check per punt of je kunt uitleggen waarom."},
+{t:"Weapons of Math Destruction",a:"Cathy O'Neil",y:2016,c:"ai",
+ kern:"Algoritmes zijn meningen verpakt in wiskunde. Gevaarlijke modellen delen drie kenmerken: ze zijn ondoorzichtig, schalen enorm en beschadigen mensen — en hun feedbackloops bevestigen de eigen vooroordelen in plaats van ze te corrigeren.",
+ inz:["Modellen getraind op historische data reproduceren historisch onrecht met een aura van objectiviteit.","Proxies zijn het probleem: wat makkelijk meetbaar is, vervangt sluipenderwijs wat er echt toe doet.","Zonder feedbackloop die fouten zichtbaar maakt (wie werd onterecht afgewezen?), leert het model nooit bij."],
+ tips:["Vraag bij elk scoringsmodel: op welke data is dit getraind en wiens verleden zit daarin?","Meet niet alleen wie je aannam en hoe die presteert, maar onderzoek steekproefsgewijs ook wie je afwees.","Behandel uitlegbaarheid als eis: een besluit dat je een medewerker niet kunt uitleggen, hoort niet in HR."],
+ actie:"Kies één geautomatiseerde score in je HR-stack en schrijf in gewone taal op hoe hij tot stand komt — lukt dat niet, dan heb je je actiepunt."},
+{t:"Invisible Women",a:"Caroline Criado Perez",y:2019,c:"ai",
+ kern:"De wereld is ontworpen op data waarin mannen de default zijn — van kantoortemperatuur tot medische tests en veiligheidsmiddelen. De 'gender data gap' is geen kwade opzet maar een blinde vlek, met reële kosten voor de helft van de bevolking.",
+ inz:["Wat niet gemeten wordt, bestaat niet in beleid: dataleemtes worden vanzelf beleidsleemtes.","'Genderneutraal' beleid pakt vaak mannelijk-gedefault uit: van roostering tot promotiecriteria rond zichtbaarheid.","Onbetaalde zorgarbeid is de grootste onzichtbare factor in loopbaanverschillen."],
+ tips:["Splits je HR-data standaard uit naar geslacht (en andere assen): beloning, promotie, verloop, verzuim, opleidingsbudget.","Toets 'neutrale' criteria als beschikbaarheid, reisbereidheid en zichtbaarheid op hun ongelijke effect.","Betrek diverse gebruikers bij het ontwerp van elk nieuw proces of systeem — ook HR-systemen trainen op wie erin zit."],
+ actie:"Draai vandaag één standaard HR-rapport opnieuw, uitgesplitst naar geslacht, en kijk wat je nog niet wist."},
+{t:"The Second Machine Age",a:"Erik Brynjolfsson & Andrew McAfee",y:2014,c:"ai",
+ kern:"Digitale technologie doet voor denkkracht wat de stoommachine deed voor spierkracht — maar exponentieel, digitaal en combinatorisch. De welvaart groeit, maar de verdeling schever: de kloof tussen winnaars en achterblijvers is het echte vraagstuk.",
+ inz:["Exponentiële groei voelt lang als niets en dan ineens als alles: de tweede helft van het schaakbord.","Digitale goederen kosten bijna niets om te kopiëren; winner-takes-most-markten zijn het gevolg.","'Racing with the machine': de combinatie mens+machine verslaat lang zowel mens als machine alleen."],
+ tips:["Investeer in vaardigheden die machines aanvullen: ideeënvorming, complexe communicatie, dealen met het onverwachte.","Herwaardeer functies periodiek: welke taken zijn stilletjes gedigitaliseerd en wat is het nieuwe menswerk?","Neem ongelijkheidseffecten mee in technologiebeslissingen: wie wint en wie verliest er intern bij deze automatisering?"],
+ actie:"Vraag drie mensen in verschillende functies welk deel van hun werk vijf jaar geleden nog handwerk was — en trek de lijn vijf jaar door."},
+{t:"The Coming Wave",a:"Mustafa Suleyman",y:2023,c:"ai",
+ kern:"AI en synthetische biologie vormen een golf die zich, anders dan eerdere technologieën, nauwelijks laat indammen: goedkoop, alomtegenwoordig en autonoom. Het 'containment problem' — kunnen we deze technologie besturen? — is dé opgave van de komende decennia.",
+ inz:["De verspreidingsprikkels (winst, prestige, veiligheid) maken 'gewoon niet doen' geen optie: golven laten zich niet tegenhouden, hooguit kanaliseren.","Techno-optimisme en doemdenken zijn beide vluchtgedrag; nodig is 'containment': techniek, audits, regulering en cultuur samen.","Naties en organisaties die de golf negeren, worden er niet door gespaard maar door verrast."],
+ tips:["Ontwikkel als organisatie een expliciet AI-standpunt: wat doen we wel, wat niet, en wie bewaakt dat?","Bouw interne audit- en escalatieroutes voor AI-gebruik voordat incidenten je ertoe dwingen.","Volg regelgeving (zoals de EU AI Act) proactief; HR-toepassingen vallen vaak in de hoog-risicocategorie."],
+ actie:"Check vandaag of je organisatie weet welke AI-tools medewerkers feitelijk al gebruiken — schaduwgebruik is je eerste governance-vraag."},
+{t:"The Future of the Professions",a:"Richard Susskind & Daniel Susskind",y:2015,c:"ai",
+ kern:"Professies — juristen, artsen, accountants, ook HR — bestaan bij de gratie van schaarse expertise. Technologie ontbundelt die expertise in routines, systemen en zelfbediening, waardoor het professionele monopolie langzaam maar zeker erodeert.",
+ inz:["Professioneel werk blijkt bij decompositie grotendeels routiniseerbaar; het unieke restant is kleiner dan professionals denken.","Expertise migreert naar systemen: van adviseur naar architect van het systeem dat adviseert.","De vraag is niet of machines het werk van professionals overnemen, maar welke taken wanneer — en wie het systeem bezit."],
+ tips:["Ontleed het werk van je HR-team in taken en markeer eerlijk wat een systeem of medewerker-zelfbediening kan overnemen.","Verschuif de professionele trots van 'ik beantwoord vragen' naar 'ik ontwerp het systeem dat vragen voorkomt'.","Investeer in de adviesvaardigheden die overblijven: complexe casuïstiek, ethiek, verandering."],
+ actie:"Turf een week lang welke vragen HR binnenkrijgt en markeer vandaag alvast welk kwart een goede zelfbedieningspagina kan afvangen."},
+{t:"Superagency",a:"Reid Hoffman & Greg Beato",y:2025,c:"ai",
+ kern:"Tegenover doembeelden zet Hoffman 'superagency': AI als versterker van menselijke handelingskracht, zoals auto en internet dat eerder waren. De beste route is iteratieve uitrol — leren door miljoenen gebruikers — met mensen die zelf vormgeven hoe AI hun leven verbetert.",
+ inz:["Elke grote technologie doorliep dezelfde paniekcyclus; uitsluiting van gebruik is riskanter dan begeleide adoptie.","Agency is het kompas: vergroot deze toepassing iemands mogelijkheden en keuzevrijheid, of verkleint ze die?","Mensen vertrouwen AI door hem te gebruiken, niet door erover te lezen — adoptie is een participatieproces."],
+ tips:["Beoordeel AI-initiatieven op het agency-criterium: krijgen medewerkers er handelingsruimte bij of raken ze die kwijt?","Betrek medewerkers als mede-ontwerpers van AI-gebruik in hun eigen werk in plaats van tools op te leggen.","Ruim expliciet tijd in voor spelen en experimenteren; verbieden drijft gebruik ondergronds."],
+ actie:"Vraag vandaag drie medewerkers waar AI hen meer regie zou geven over hun werk — en waar ze bang zijn regie te verliezen."},
+{t:"Reinventing Jobs",a:"Ravin Jesuthasan & John Boudreau",y:2018,c:"ai",
+ kern:"Automatisering is geen aan/uit-knop maar een ontwerpvraagstuk in vier stappen: ontleed de baan in taken, bepaal de opbrengstcurve per taak, kies de juiste automatiseringsvorm (RPA, cognitief, sociaal) en herontwerp dan het menselijke werk.",
+ inz:["Per taak verschilt de vraag: vervangt technologie de mens, versterkt ze hem, of creëert ze nieuw werk?","De opbrengst van beter presteren verschilt per taak: bij sommige taken loont perfectie, bij andere volstaat foutloos.","Wie banen in taken denkt, ziet automatisering als continu herontwerp in plaats van periodieke reorganisaties."],
+ tips:["Analyseer bij elk automatiseringsplan eerst: repetitief of variabel werk, onafhankelijk of interactief, fysiek of mentaal?","Herinvesteer vrijgekomen tijd expliciet: benoem wat het waardevollere menswerk wordt.","Herhaal de taakanalyse jaarlijks; AI-mogelijkheden verschuiven sneller dan functiebeschrijvingen."],
+ actie:"Kies één functie in je organisatie en doorloop de vier stappen op één A4 — begin bij de taak, niet bij de tool."},
+{t:"The Algorithmic Leader",a:"Mike Walsh",y:2019,c:"ai",
+ kern:"Leiders in het algoritmische tijdperk denken vanuit de toekomst terug, ontwerpen voor het onverwachte en combineren computationeel denken met diep menselijke vaardigheden. Tien principes, van 'werk aan het systeem, niet in het systeem' tot 'als twijfel: vraag het een mens'.",
+ inz:["Automatiseer taken, humaniseer banen: haal het robotwerk weg en vergroot het menselijke deel.","Wie alleen optimaliseert wat is, wordt ingehaald door wie herontwerpt wat kan zijn.","Ethische besluitvorming wordt een kernvaardigheid van leiders: algoritmes escaleren de dilemma's naar boven."],
+ tips:["Stel bij elk vraagstuk de vraag: hoe zou een bedrijf dat vandaag start, dit met AI oplossen?","Ontwikkel 'computational thinking' in je MT: problemen ontleden, patronen zien, in systemen denken.","Reserveer leiderschapsagenda voor de vragen die algoritmes opwerpen maar niet kunnen beantwoorden: wat is hier rechtvaardig?"],
+ actie:"Neem één proces waar je verantwoordelijk voor bent en beantwoord schriftelijk: hoe zou een greenfield-concurrent dit vandaag inrichten?"}
+];
+
+/* ============ app ============ */
+const CATS = { fw: "HR & Future of Work", op: "Organisatiepsychologie", ai: "AI & HR" };
+const LS_KEY = "boekvandedag-v1";
+
+function loadState() {
+  try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch { return {}; }
+}
+function saveState(s) {
+  try { localStorage.setItem(LS_KEY, JSON.stringify(s)); } catch {}
+}
+let state = loadState();
+state.read = state.read || {};
+state.fav = state.fav || {};
+
+/* deterministische volgorde: vaste seed, elke dag het volgende boek */
+function mulberry32(seed) {
+  return function () {
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+const ORDER = (() => {
+  const idx = BOOKS.map((_, i) => i);
+  const rnd = mulberry32(20260830);
+  for (let i = idx.length - 1; i > 0; i--) {
+    const j = Math.floor(rnd() * (i + 1));
+    [idx[i], idx[j]] = [idx[j], idx[i]];
+  }
+  return idx;
+})();
+
+function dayNum(d) {
+  return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5);
+}
+const TODAY = dayNum(new Date());
+function bookForDay(n) {
+  const N = BOOKS.length;
+  return BOOKS[ORDER[((n % N) + N) % N]];
+}
+
+let viewDay = TODAY;      /* welke dag toont de kaart */
+let viewBook = null;      /* expliciet gekozen boek uit de bibliotheek (of null) */
+let filter = "alle";
+let query = "";
+
+const fmt = new Intl.DateTimeFormat("nl-NL", { weekday: "long", day: "numeric", month: "long" });
+
+function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+
+function bookId(b) { return b.t; }
+
+function renderCard() {
+  const b = viewBook || bookForDay(viewDay);
+  const id = bookId(b);
+  const isRead = !!state.read[id];
+  const isFav = !!state.fav[id];
+  const card = document.getElementById("card");
+  card.innerHTML =
+    '<div class="chiprow">' +
+      '<span class="catchip ' + b.c + '">' + esc(CATS[b.c]) + '</span>' +
+      (isRead ? '<span class="readmark">&#10003; gelezen</span>' : '') +
+      (isFav ? '<span class="readmark" style="color:var(--gold)">&#9733; favoriet</span>' : '') +
+    '</div>' +
+    '<h1 class="booktitle">' + esc(b.t) + '</h1>' +
+    '<p class="byline"><b>' + esc(b.a) + '</b> &middot; ' + b.y + '</p>' +
+    '<p class="kern">' + esc(b.kern) + '</p>' +
+    '<div class="cols">' +
+      '<div><h2 class="seclabel">Kerninzichten</h2><ul class="plain inz">' +
+        b.inz.map(i => '<li>' + esc(i) + '</li>').join("") + '</ul></div>' +
+      '<div><h2 class="seclabel">Praktische tips</h2><ul class="plain tips">' +
+        b.tips.map(t => '<li>' + esc(t) + '</li>').join("") + '</ul></div>' +
+    '</div>' +
+    '<div class="actie"><span class="seclabel">Vandaag</span><p>' + esc(b.actie) + '</p></div>' +
+    '<div class="cardfoot">' +
+      '<button class="toggle" id="t-read" aria-pressed="' + isRead + '">' + (isRead ? "&#10003; Gelezen" : "Markeer als gelezen") + '</button>' +
+      '<button class="toggle fav" id="t-fav" aria-pressed="' + isFav + '">' + (isFav ? "&#9733; Favoriet" : "&#9734; Favoriet") + '</button>' +
+      (viewBook ? '<button class="backlink" id="t-back">Terug naar het boek van vandaag</button>' : '') +
+    '</div>';
+
+  document.getElementById("t-read").addEventListener("click", () => {
+    if (state.read[id]) delete state.read[id]; else state.read[id] = true;
+    saveState(state); renderAll();
+  });
+  document.getElementById("t-fav").addEventListener("click", () => {
+    if (state.fav[id]) delete state.fav[id]; else state.fav[id] = true;
+    saveState(state); renderAll();
+  });
+  const back = document.getElementById("t-back");
+  if (back) back.addEventListener("click", () => { viewBook = null; viewDay = TODAY; renderAll(); });
+}
+
+function renderDateNav() {
+  const dayL = document.getElementById("daylabel");
+  const dateL = document.getElementById("datelabel");
+  const next = document.getElementById("nextday");
+  if (viewBook) {
+    dayL.textContent = "Uit de bibliotheek";
+    dateL.textContent = "";
+    next.disabled = true;
+    document.getElementById("prevday").disabled = true;
+    return;
+  }
+  document.getElementById("prevday").disabled = false;
+  const diff = TODAY - viewDay;
+  dayL.textContent = diff === 0 ? "Vandaag" : diff === 1 ? "Gisteren" : diff + " dagen geleden";
+  const d = new Date();
+  d.setDate(d.getDate() - diff);
+  dateL.textContent = fmt.format(d);
+  next.disabled = viewDay >= TODAY;
+}
+
+function renderProgress() {
+  const n = Object.keys(state.read).length;
+  document.getElementById("progress").textContent = n + " van " + BOOKS.length + " gelezen";
+}
+
+function matches(b) {
+  if (filter === "fav" && !state.fav[bookId(b)]) return false;
+  if (filter === "gelezen" && !state.read[bookId(b)]) return false;
+  if (["fw", "op", "ai"].includes(filter) && b.c !== filter) return false;
+  if (query) {
+    const q = query.toLowerCase();
+    if (!b.t.toLowerCase().includes(q) && !b.a.toLowerCase().includes(q)) return false;
+  }
+  return true;
+}
+
+function renderLibrary() {
+  const grid = document.getElementById("grid");
+  const list = BOOKS.filter(matches);
+  document.getElementById("libcount").textContent = list.length + " boeken";
+  document.getElementById("empty").hidden = list.length > 0;
+  grid.innerHTML = "";
+  list.forEach(b => {
+    const id = bookId(b);
+    const el = document.createElement("button");
+    el.className = "booklet";
+    el.innerHTML =
+      '<span class="t">' + esc(b.t) + '</span>' +
+      '<span class="m"><span class="dot ' + b.c + '"></span>' + esc(b.a) +
+        '<span class="marks">' + (state.fav[id] ? "&#9733;" : "") + (state.read[id] ? " &#10003;" : "") + '</span></span>';
+    el.addEventListener("click", () => {
+      viewBook = b;
+      renderAll();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    grid.appendChild(el);
+  });
+}
+
+function renderChips() {
+  const defs = [["alle", "Alle"], ["fw", CATS.fw], ["op", CATS.op], ["ai", CATS.ai], ["fav", "★ Favorieten"], ["gelezen", "✓ Gelezen"]];
+  const wrap = document.getElementById("chips");
+  wrap.innerHTML = "";
+  defs.forEach(([key, label]) => {
+    const c = document.createElement("button");
+    c.className = "chip";
+    c.textContent = label;
+    c.setAttribute("aria-pressed", String(filter === key));
+    c.addEventListener("click", () => { filter = key; renderChips(); renderLibrary(); });
+    wrap.appendChild(c);
+  });
+}
+
+function renderAll() {
+  renderDateNav();
+  renderCard();
+  renderProgress();
+  renderLibrary();
+}
+
+document.getElementById("prevday").addEventListener("click", () => { viewBook = null; viewDay--; renderAll(); });
+document.getElementById("nextday").addEventListener("click", () => { if (viewDay < TODAY) { viewBook = null; viewDay++; renderAll(); } });
+document.getElementById("search").addEventListener("input", e => { query = e.target.value.trim(); renderLibrary(); });
+
+renderChips();
+renderAll();
+</script>
+</body>
+</html>
