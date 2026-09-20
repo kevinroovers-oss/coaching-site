@@ -1,0 +1,342 @@
+/* ---------------------------------------------------------------------------
+   Chrome: preloader, cursor, section indicator, sound toggle, service overlay.
+--------------------------------------------------------------------------- */
+
+/* --- preloader ----------------------------------------------------------- */
+.preloader {
+  position: fixed;
+  left: var(--gutter);
+  bottom: var(--s5);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  transition: opacity 600ms var(--ease);
+}
+
+.preloader.is-done {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.preloader-count {
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-62);
+}
+
+.preloader-rule {
+  display: block;
+  width: 72px;
+  height: 1px;
+  background: var(--ink-12);
+}
+
+.preloader-rule i {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+}
+
+/* --- cursor -------------------------------------------------------------- */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  pointer-events: none;
+  mix-blend-mode: normal;
+  opacity: 0;
+  transition: opacity var(--t-micro) var(--ease);
+}
+
+.cursor.is-on {
+  opacity: 1;
+}
+
+.cursor i {
+  display: block;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: var(--ink);
+  transition: transform var(--t-micro-slow) var(--ease), background-color var(--t-micro) var(--ease);
+}
+
+.cursor.is-active i {
+  transform: scale(3.2);
+  background: var(--accent);
+}
+
+/* Hidden wherever there is no real pointer. */
+@media (hover: none), (pointer: coarse) {
+  .cursor { display: none; }
+}
+
+/* --- section indicator ---------------------------------------------------
+   Typographic, not a progress bar: six numerals and one hairline. The active
+   numeral is the only thing that changes.
+------------------------------------------------------------------------- */
+/* Hugs the edge rather than sitting on the gutter: it keeps the numerals clear
+   of the scene, which reaches close to the right of the frame in most
+   formations, and it reads as a mark on the page rather than a UI panel. */
+.indicator {
+  position: fixed;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  opacity: 0;
+  transition: opacity 800ms var(--ease);
+}
+
+.is-ready .indicator {
+  opacity: 1;
+}
+
+.indicator ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  text-align: right;
+}
+
+.indicator li {
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-62);
+  transition: color var(--t-micro-slow) var(--ease);
+}
+
+.indicator li.is-active {
+  color: var(--accent);
+}
+
+.indicator li.is-past {
+  color: var(--ink-62);
+}
+
+.indicator-rule {
+  position: relative;
+  display: block;
+  width: 1px;
+  height: 128px;
+  background: var(--ink-12);
+}
+
+.indicator-rule i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 24px;
+  background: var(--ink);
+  will-change: transform;
+}
+
+@media (max-width: 900px) {
+  .indicator { display: none; }
+}
+
+/* --- sound toggle -------------------------------------------------------- */
+.sound {
+  position: fixed;
+  right: var(--gutter);
+  bottom: var(--s5);
+  z-index: 30;
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  width: 24px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 800ms var(--ease);
+}
+
+.is-ready .sound {
+  opacity: 1;
+}
+
+.sound-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 100%;
+}
+
+.sound-bars i {
+  display: block;
+  width: 1px;
+  height: 4px;
+  background: var(--ink-62);
+  transform-origin: bottom;
+  transition: height var(--t-micro-slow) var(--ease), background-color var(--t-micro) var(--ease);
+}
+
+.sound:hover .sound-bars i {
+  background: var(--ink-52);
+}
+
+.sound[aria-pressed='true'] .sound-bars i {
+  background: var(--accent);
+  animation: bars 1.6s var(--ease) infinite alternate;
+}
+
+.sound[aria-pressed='true'] .sound-bars i:nth-child(2) { animation-delay: 0.2s; }
+.sound[aria-pressed='true'] .sound-bars i:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bars {
+  from { height: 4px; }
+  to { height: 14px; }
+}
+
+/* --- service overlay -----------------------------------------------------
+   Not a page. The scene stays live and blurs behind the panel.
+------------------------------------------------------------------------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--gutter);
+}
+
+.overlay[hidden] {
+  display: none;
+}
+
+.overlay-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(244, 243, 240, 0.82);
+  backdrop-filter: blur(24px) saturate(104%);
+  -webkit-backdrop-filter: blur(24px) saturate(104%);
+  opacity: 0;
+}
+
+.overlay-panel {
+  position: relative;
+  width: min(56ch, 100%);
+  padding: var(--s6) 0 0;
+  opacity: 0;
+}
+
+.overlay-num {
+  display: block;
+  margin-bottom: var(--s3);
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+
+.overlay-title {
+  margin: 0 0 var(--s4);
+  font-size: clamp(1.75rem, 3.6vw, 3rem);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.032em;
+  text-wrap: balance;
+}
+
+.overlay-what {
+  margin: 0 0 var(--s5);
+  max-width: 44ch;
+  font-size: clamp(1rem, 1.35vw, 1.125rem);
+  line-height: 1.6;
+  letter-spacing: -0.012em;
+  color: var(--ink-70);
+}
+
+/* Proof is set apart by a rule in the accent rather than by a label, because
+   there is no label for it in the copy. */
+.overlay-proof {
+  position: relative;
+  margin: 0;
+  padding-left: var(--s3);
+  max-width: 40ch;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--ink-70);
+}
+
+.overlay-proof::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 8px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.overlay-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.overlay-close span,
+.overlay-close::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 16px;
+  height: 1px;
+  margin: 0 0 0 -8px;
+  background: var(--ink);
+  transition: background-color var(--t-micro) var(--ease);
+}
+
+.overlay-close span { transform: rotate(45deg); }
+.overlay-close::after { transform: rotate(-45deg); }
+
+.overlay-close:hover span,
+.overlay-close:hover::after {
+  background: var(--accent);
+}
+
+body.is-overlay-open {
+  overflow: hidden;
+}
+
+/* --- reduced motion ------------------------------------------------------
+   Static formations, no scroll-driven animation, everything readable. The page
+   should still be beautiful — it is just not moving.
+------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .scroll-hint span { animation: none; }
+  .line-i { transform: none; }
+  .reveal { opacity: 1; transform: none; }
+}

@@ -1,0 +1,23 @@
+/* Chrome for the motion study rig only. */
+.study-scroll { height: 900vh; }
+
+.study-ui {
+  position: fixed;
+  left: var(--gutter);
+  bottom: var(--s5);
+  z-index: 2;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.study-label {
+  margin: 0 0 var(--s1);
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.study-hint {
+  margin: 0;
+  color: var(--ink-30);
+}

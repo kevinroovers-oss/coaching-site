@@ -1,0 +1,346 @@
+/* ---------------------------------------------------------------------------
+   Layout. Wide screens: the text holds the left, the scene holds the right.
+   Narrow screens: the scene rises into the top, the text takes the bottom.
+   White space is the design; when in doubt there is more of it.
+--------------------------------------------------------------------------- */
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+.section {
+  position: relative;
+  min-height: 100svh;
+  padding: var(--s8) var(--gutter);
+  display: flex;
+  align-items: center;
+}
+
+/* Widths are a share of the viewport, not a `ch` measure: `ch` here resolves
+   against the column's own 16px font, which would collapse a 64px heading into
+   a 340px box. The reading measure is set on .body instead. */
+.col {
+  width: min(44%, 560px);
+}
+
+.col--wide {
+  width: min(46%, 620px);
+}
+
+/* --- hero ---------------------------------------------------------------- */
+.section--hero {
+  min-height: 100svh;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.hero-inner {
+  width: min(46%, 700px);
+}
+
+.scroll-hint {
+  position: absolute;
+  left: var(--gutter);
+  bottom: var(--s5);
+  margin: 0;
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-62);
+  overflow: hidden;
+}
+
+.scroll-hint {
+  opacity: 0;
+}
+
+.no-motion .scroll-hint {
+  opacity: 1;
+}
+
+.scroll-hint span {
+  display: inline-block;
+  animation: hint 3.6s var(--ease) infinite;
+}
+
+@keyframes hint {
+  0%, 62%, 100% { transform: translateY(0); opacity: 1; }
+  74% { transform: translateY(110%); opacity: 0; }
+  75% { transform: translateY(-110%); opacity: 0; }
+  88% { transform: translateY(0); opacity: 1; }
+}
+
+/* --- principles ---------------------------------------------------------- */
+.principles,
+.services,
+.credentials {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.section--principles {
+  align-items: flex-start;
+  padding-top: var(--s9);
+}
+
+/* Each principle gets most of a screen to itself, so its formation has room to
+   assemble, hold, and come apart again before the next one. */
+.principle {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 66svh;
+  padding: var(--s5) 0;
+  border-top: 1px solid var(--ink-12);
+}
+
+.principle:last-child {
+  border-bottom: 1px solid var(--ink-12);
+}
+
+.principle .num {
+  margin-bottom: var(--s2);
+}
+
+.principle .body {
+  max-width: 38ch;
+}
+
+/* --- services ------------------------------------------------------------ */
+.service {
+  border-top: 1px solid var(--ink-12);
+}
+
+.service:last-child {
+  border-bottom: 1px solid var(--ink-12);
+}
+
+.service-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4ch 1fr auto;
+  align-items: baseline;
+  gap: var(--s3);
+  width: 100%;
+  padding: var(--s4) 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.service-card .num {
+  padding-top: 0.25em;
+  transition: color var(--t-micro) var(--ease);
+}
+
+.service-title {
+  font-size: clamp(1.125rem, 1.7vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.024em;
+  transition: color var(--t-micro) var(--ease), transform var(--t-micro-slow) var(--ease);
+}
+
+/* The mark is a dot that becomes the accent as you approach — the same dot as
+   the favicon and the cursor. One shape, used everywhere. */
+.service-mark {
+  align-self: center;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink-12);
+  transition: background-color var(--t-micro) var(--ease), transform var(--t-micro-slow) var(--ease);
+}
+
+.service-card:hover .service-mark,
+.service-card:focus-visible .service-mark {
+  background: var(--accent);
+  transform: scale(1.5);
+}
+
+.service-card:hover .service-title,
+.service-card:focus-visible .service-title {
+  transform: translateX(8px);
+}
+
+.service-card:hover .num,
+.service-card:focus-visible .num {
+  color: var(--accent);
+}
+
+/* Siblings step back while one card is approached, matching what the scene
+   does to the elements that are not part of that hub. */
+.services.is-hovering .service-card:not(:hover) .service-title {
+  color: var(--ink-62);
+}
+
+.services .service-card,
+.services .service-title,
+.services .num {
+  transition-duration: var(--t-micro-slow);
+}
+
+/* --- credentials --------------------------------------------------------- */
+.credentials {
+  border-top: 1px solid var(--ink-12);
+}
+
+.credential {
+  padding: var(--s3) 0;
+  border-bottom: 1px solid var(--ink-12);
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+  color: var(--ink-70);
+}
+
+/* --- contact ------------------------------------------------------------- */
+.section--contact {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 108svh;
+}
+
+/* The closing ring frames this block. The measure is deliberately narrow so
+   the type sits inside the circle rather than crossing it. */
+.contact-inner {
+  width: min(34ch, 78vw);
+}
+
+.contact-line {
+  margin: 0 0 var(--s5);
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  color: var(--ink-70);
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  align-items: center;
+  margin: 0 0 var(--s5);
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+}
+
+.contact-meta {
+  margin: 0;
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-62);
+}
+
+.footer {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: var(--s5);
+  text-align: center;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-62);
+}
+
+/* --- narrow screens ------------------------------------------------------
+   Not a reduced version: the same scene, the same formations, the same
+   transitions. Only the staging changes — the scene moves to the top of the
+   viewport and the text sits under it.
+------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  :root {
+    --s8: 96px;
+    --s9: 128px;
+  }
+
+  /* Narrow screens stack instead of sitting side by side: the scene rises into
+     the top of the viewport and the text takes the bottom. Sections that are
+     taller than one screen scroll their text up through the scene, so each
+     text column carries a soft field of background with it — see .col::before
+     below. Nothing is removed, only restaged. */
+  .section {
+    min-height: 100svh;
+    align-items: flex-end;
+    padding-bottom: var(--s7);
+    padding-top: 42svh;
+  }
+
+  .col,
+  .col--wide,
+  .hero-inner {
+    position: relative;
+    width: 100%;
+    max-width: none;
+  }
+
+  /* A halo of background behind the text, masked to soft edges at the top and
+     bottom, so a column scrolling through the scene stays readable without a
+     visible panel anywhere. */
+  .col::before,
+  .col--wide::before,
+  .hero-inner::before,
+  .contact-inner::before {
+    content: '';
+    position: absolute;
+    inset: -40px -20px;
+    z-index: -1;
+    background: var(--bg);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 64px, #000 calc(100% - 40px), transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 64px, #000 calc(100% - 40px), transparent);
+  }
+
+  .contact-inner {
+    position: relative;
+  }
+
+  .section--hero {
+    align-items: flex-end;
+  }
+
+  .section--principles {
+    padding-top: 30svh;
+  }
+
+  .principle {
+    min-height: 56svh;
+  }
+
+  .body,
+  .principle .body {
+    max-width: none;
+  }
+
+  .section--contact {
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: 40svh;
+  }
+
+  .contact-inner {
+    width: 100%;
+  }
+
+  .service-card {
+    grid-template-columns: 3.5ch 1fr auto;
+    gap: var(--s2);
+  }
+}
+
+@media (max-width: 520px) {
+  .service-card:hover .service-title {
+    transform: none;
+  }
+}

@@ -1,0 +1,152 @@
+/* ---------------------------------------------------------------------------
+   Type is the second lead next to the scene. One family, one scale, and no
+   weight above 500 — the size does the work, not the boldness.
+--------------------------------------------------------------------------- */
+
+.h1 {
+  margin: 0;
+  font-size: clamp(2.75rem, 9.2vw, 9.5rem);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+  /* The name is thirteen characters and belongs on one line at any width. */
+  white-space: nowrap;
+}
+
+.h2 {
+  margin: 0 0 var(--s5);
+  font-size: clamp(2rem, 4.6vw, 4rem);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.h2--center {
+  text-align: center;
+  margin-bottom: var(--s4);
+}
+
+.h3 {
+  margin: 0 0 var(--s2);
+  font-size: clamp(1.25rem, 1.9vw, 1.625rem);
+  font-weight: 500;
+  line-height: 1.16;
+  letter-spacing: -0.022em;
+}
+
+.body {
+  margin: 0 0 var(--s3);
+  max-width: var(--measure);
+  font-size: 1rem;
+  line-height: 1.75;
+  letter-spacing: -0.006em;
+  color: var(--ink-70);
+}
+
+.body:last-child {
+  margin-bottom: 0;
+}
+
+.num {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-62);
+}
+
+.hero-line {
+  margin: var(--s4) 0 0;
+  max-width: 24ch;
+  font-size: clamp(1.0625rem, 1.5vw, 1.375rem);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.015em;
+  color: var(--ink-70);
+}
+
+.intro {
+  margin: calc(var(--s5) * -1 + var(--s1)) 0 var(--s6);
+  font-size: clamp(1.125rem, 1.8vw, 1.5rem);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.022em;
+  color: var(--ink);
+}
+
+/* Line reveal primitive. Each line is a mask; the inner span is what moves.
+   Text never fades on its own — it rises out from behind an edge. */
+.line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.line-i {
+  display: block;
+  transform: translate3d(0, 105%, 0);
+  will-change: transform;
+}
+
+.is-ready .line-i,
+.no-motion .line-i {
+  transform: none;
+}
+
+/* Elements that reveal as a block rather than line by line. */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  will-change: opacity, transform;
+}
+
+.no-motion .reveal,
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+.link {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  letter-spacing: -0.015em;
+  padding-bottom: 2px;
+}
+
+/* Two hairlines: the ink one is always there, the accent one wipes across it
+   from the left on approach. Nothing scales, nothing bounces. */
+.link::after,
+.link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+}
+
+.link::after {
+  background: var(--ink-52);
+}
+
+.link::before {
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 520ms var(--ease);
+  z-index: 1;
+}
+
+.link:hover::before,
+.link:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--accent);
+}

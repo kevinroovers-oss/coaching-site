@@ -1,265 +1,131 @@
 <!DOCTYPE html>
-<html lang="nl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kevin Roovers Coaching | Sterke teams bouw je op talent</title>
-  <meta name="description" content="Teamcoaching en talentontwikkeling met CliftonStrengths van Gallup. Kevin Roovers, Gallup-Certified Strengths Coach, helpt teams bouwen op wat ze van nature goed kunnen. Plan een vrijblijvende kennismaking.">
-  <meta name="author" content="Kevin Roovers">
-  <link rel="canonical" href="https://kevinrooverscoaching.com/">
-  <meta name="theme-color" content="#2b4a3a">
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>%TITLE%</title>
+    <meta name="description" content="%DESCRIPTION%" />
+    <link rel="canonical" href="%URL%" />
+    <meta name="theme-color" content="#F4F3F0" />
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="nl_NL">
-  <meta property="og:site_name" content="Kevin Roovers Coaching">
-  <meta property="og:url" content="https://kevinrooverscoaching.com/">
-  <meta property="og:title" content="Kevin Roovers Coaching | Sterke teams bouw je op talent">
-  <meta property="og:description" content="Teamcoaching en talentontwikkeling met CliftonStrengths van Gallup. Plan een vrijblijvende kennismaking van 30 minuten.">
-  <meta property="og:image" content="https://kevinrooverscoaching.com/og-image.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Kevin Roovers Coaching | Sterke teams bouw je op talent">
-  <meta name="twitter:description" content="Teamcoaching en talentontwikkeling met CliftonStrengths van Gallup. Plan een vrijblijvende kennismaking.">
-  <meta name="twitter:image" content="https://kevinrooverscoaching.com/og-image.jpg">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="%TITLE%" />
+    <meta property="og:description" content="%DESCRIPTION%" />
+    <meta property="og:url" content="%URL%" />
+    <meta property="og:image" content="%URL%/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="%TITLE%" />
+    <meta name="twitter:description" content="%DESCRIPTION%" />
+    <meta name="twitter:image" content="%URL%/og-image.jpg" />
 
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="favicon.svg">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
-  <link rel="stylesheet" href="styles.css">
+    <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body>
+    <canvas class="scene" id="scene" aria-hidden="true"></canvas>
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Kevin Roovers Coaching",
-    "description": "Teamcoaching en talentontwikkeling met CliftonStrengths van Gallup.",
-    "url": "https://kevinrooverscoaching.com/",
-    "email": "kevinroovers@gmail.com",
-    "image": "https://kevinrooverscoaching.com/og-image.jpg",
-    "areaServed": "NL",
-    "availableLanguage": "Nederlands",
-    "founder": {
-      "@type": "Person",
-      "name": "Kevin Roovers",
-      "jobTitle": "Gallup-Certified Strengths Coach",
-      "hasCredential": "Gallup-Certified Strengths Coach"
-    },
-    "knowsAbout": ["CliftonStrengths", "Teamontwikkeling", "Talentontwikkeling", "Strengths-based coaching"]
-  }
-  </script>
-</head>
-<body>
-  <a class="skip-link" href="#main">Direct naar de inhoud</a>
-
-  <div class="floating-talents" aria-hidden="true">
-    <span style="--top:6%;  --left:5%;  --delay:0s;   --dur:16s; --size:1.5rem;">Empathie</span>
-    <span style="--top:14%; --left:80%; --delay:-3s;  --dur:19s; --size:1.9rem;">Strategisch</span>
-    <span style="--top:24%; --left:18%; --delay:-6s;  --dur:21s; --size:1.3rem;">Verbondenheid</span>
-    <span style="--top:9%;  --left:48%; --delay:-9s;  --dur:17s; --size:1.2rem;">Focus</span>
-    <span style="--top:33%; --left:68%; --delay:-2s;  --dur:23s; --size:1.6rem;">Ideeënvorming</span>
-    <span style="--top:41%; --left:8%;  --delay:-7s;  --dur:18s; --size:1.4rem;">Positivisme</span>
-    <span style="--top:28%; --left:90%; --delay:-5s;  --dur:16s; --size:1.1rem;">Analytisch</span>
-    <span style="--top:50%; --left:40%; --delay:-11s; --dur:22s; --size:1.7rem;">Harmonie</span>
-    <span style="--top:46%; --left:58%; --delay:-4s;  --dur:25s; --size:1.2rem;">Maximaliseren</span>
-    <span style="--top:38%; --left:30%; --delay:-8s;  --dur:18s; --size:1.5rem;">Leergierigheid</span>
-    <span style="--top:18%; --left:34%; --delay:-13s; --dur:24s; --size:1.1rem;">Relatievorming</span>
-    <span style="--top:58%; --left:78%; --delay:-6s;  --dur:20s; --size:1.3rem;">Toekomstgericht</span>
-    <span style="--top:64%; --left:12%; --delay:-1s;  --dur:21s; --size:1.6rem;">Discipline</span>
-    <span style="--top:70%; --left:50%; --delay:-10s; --dur:17s; --size:1.2rem;">Verantwoordelijkheid</span>
-    <span style="--top:74%; --left:84%; --delay:-4s;  --dur:23s; --size:1.4rem;">Communicatie</span>
-    <span style="--top:82%; --left:26%; --delay:-7s;  --dur:19s; --size:1.5rem;">Intellect</span>
-    <span style="--top:88%; --left:62%; --delay:-12s; --dur:22s; --size:1.3rem;">Individualiseren</span>
-    <span style="--top:92%; --left:8%;  --delay:-3s;  --dur:18s; --size:1.2rem;">Input</span>
-    <span style="--top:54%; --left:22%; --delay:-9s;  --dur:24s; --size:1.1rem;">Activator</span>
-    <span style="--top:96%; --left:46%; --delay:-5s;  --dur:20s; --size:1.4rem;">Zelfverzekerdheid</span>
-  </div>
-
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#top">Kevin Roovers <span>Coaching</span></a>
-      <a class="btn btn-small" href="https://calendly.com/kevinroovers/30min" target="_blank" rel="noopener">Plan een kennismaking</a>
+    <!-- The preloader is the start of the story, not a screen in front of it:
+         the scene is already assembling behind this. -->
+    <div class="preloader" id="preloader" aria-hidden="true">
+      <span class="preloader-count" id="preloaderCount">0</span>
+      <span class="preloader-rule"><i id="preloaderRule"></i></span>
     </div>
-  </header>
 
-  <main id="main">
-    <!-- HERO -->
-    <section class="hero" id="top">
-      <div class="container hero-inner">
-        <h1>Sterke teams bouw je op talent</h1>
-        <p class="lead">De meeste teams steken hun energie in wat niet goed gaat. Ik help je het omdraaien. Ontdek waar de kracht van je mensen zit en zet die gericht in. Met CliftonStrengths van Gallup als fundament werk je aan meer energie, scherpere samenwerking en betere resultaten.</p>
-        <div class="cta-block">
-          <a class="btn" href="https://calendly.com/kevinroovers/30min" target="_blank" rel="noopener">Plan een kennismaking</a>
-          <p class="cta-note">30 minuten, vrijblijvend. Geen verkooppraatje. Je loopt sowieso weg met één concreet inzicht over je team.</p>
-        </div>
-      </div>
-      <div class="scene" aria-hidden="true">
-        <svg viewBox="0 0 1440 220" preserveAspectRatio="none">
-          <circle class="scene-sun" cx="1140" cy="74" r="34"></circle>
-          <path class="scene-mtn-far"  d="M0,150 L210,66 L360,128 L560,52 L760,134 L980,58 L1180,120 L1440,70 L1440,220 L0,220 Z"></path>
-          <path class="scene-mtn-near" d="M0,176 L260,104 L470,166 L700,96 L920,160 L1180,98 L1440,150 L1440,220 L0,220 Z"></path>
-          <path class="hill-back"  d="M0,170 C320,128 520,196 760,162 C1020,124 1200,190 1440,150 L1440,220 L0,220 Z"></path>
-          <path class="hill-front" d="M0,192 C260,162 480,214 720,188 C960,160 1180,212 1440,184 L1440,220 L0,220 Z"></path>
-        </svg>
-      </div>
-    </section>
+    <div class="cursor" id="cursor" aria-hidden="true"><i></i></div>
 
-    <!-- FORMULE -->
-    <section class="formula-band" aria-label="De kern: talent maal investment is strength">
-      <div class="container center">
-        <p class="formula">
-          <span class="formula-term">Talent</span>
-          <span class="formula-op" aria-hidden="true">&times;</span>
-          <span class="formula-term">Investment</span>
-          <span class="formula-op" aria-hidden="true">=</span>
-          <span class="formula-term formula-result">Strength</span>
-        </p>
-        <p class="formula-note">Een talent is een natuurlijk patroon in denken, voelen of doen. Investeer je erin, dan wordt het een kracht waar je elke dag op kunt bouwen.</p>
-      </div>
-    </section>
-
-    <!-- STATISTIEKEN -->
-    <section class="section section-stats" id="resultaat">
-      <div class="container narrow center reveal">
-        <p class="eyebrow">Wat het oplevert</p>
-        <h2>Werken vanuit kracht loont</h2>
-        <p class="section-intro">Gallup onderzocht het bij miljoenen medewerkers wereldwijd. Teams die hun talenten kennen en gericht inzetten, presteren beter en hebben meer plezier in hun werk.</p>
-      </div>
-      <div class="container">
-        <div class="stats-grid stats-grid-3">
-          <div class="stat">
-            <span class="stat-number" data-target="6" data-suffix="&times;">6&times;</span>
-            <p class="stat-label">zo betrokken zijn mensen die hun talenten dagelijks gebruiken</p>
-          </div>
-          <div class="stat">
-            <span class="stat-number" data-target="3" data-suffix="&times;">3&times;</span>
-            <p class="stat-label">vaker een hoge kwaliteit van leven</p>
-          </div>
-          <div class="stat">
-            <span class="stat-number" data-target="72" data-suffix="%">72%</span>
-            <p class="stat-label">lager personeelsverloop in teams die bouwen op talent</p>
-          </div>
-        </div>
-        <p class="stats-source">Bron: Gallup, meta-analyse strengths-based ontwikkeling.</p>
-      </div>
-    </section>
-
-    <!-- HERKENNING -->
-    <section class="section" id="herkenning">
-      <div class="container">
-        <p class="eyebrow">Klinkt dit bekend?</p>
-        <div class="cards">
-          <article class="card">
-            <h2>Je team draait, maar het bruist niet</h2>
-            <p>Deadlines worden gehaald, iedereen levert. Toch mist er iets. De samenwerking voelt stroef en je krijgt de vinger niet op de zere plek.</p>
-          </article>
-          <article class="card">
-            <h2>Er zit meer in je mensen dan eruit komt</h2>
-            <p>Je ziet het talent, maar het komt er niet uit. Ontwikkelgesprekken blijven hangen bij targets en functioneren. Zelden gaan ze over wat iemand écht goed kan.</p>
-          </article>
-          <article class="card">
-            <h2>Iedereen werkt hard, maar niet per se slim</h2>
-            <p>Taken zijn verdeeld op functie, niet op talent. Mensen doen werk dat hen energie kost, terwijl hun sterkste kant onbenut blijft.</p>
-          </article>
-        </div>
-        <p class="closing-line">Onbenut talent verdwijnt niet. Het loopt alleen op een dag de deur uit.</p>
-      </div>
-    </section>
-
-    <!-- AANBOD -->
-    <section class="section section-alt" id="aanbod">
-      <div class="container narrow">
-        <p class="eyebrow">Hoe ik werk</p>
-        <p class="section-intro">CliftonStrengths is meer dan een test. Het is een manier van kijken: je bouwt een team op wat mensen van nature goed kunnen, in plaats van eindeloos te sleutelen aan wat ze niet kunnen. Gallup onderzocht decennialang wat sterke teams onderscheidt. Dat onderzoek is het fundament onder mijn aanpak.</p>
-
-        <div class="offer">
-          <div class="offer-item">
-            <h2>Voor teams</h2>
-            <p>Ieder teamlid maakt de CliftonStrengths-assessment en krijgt een persoonlijk rapport met alle 34 talenten op volgorde. Vooraf voer ik met iedereen een intakegesprek aan de hand van dat rapport. In de teamsessie, die ik altijd op maat maak, brengen we alle talenten samen in een team grid. In één oogopslag zie je waar de kracht van het team zit, waar het scheef hangt en hoe mensen elkaar aanvullen. Je gaat naar huis met concrete afspraken waar je meteen mee aan de slag kunt.</p>
-          </div>
-          <div class="offer-item">
-            <h2>Voor individuen</h2>
-            <p>Je maakt de CliftonStrengths-assessment en krijgt je volledige rapport met alle 34 talenten. In een coachingsessie van 90 minuten duiken we in je belangrijkste talenten: wat betekenen ze in je werk, waar geven ze je energie en hoe zet je ze bewuster in? Je loopt naar buiten met scherp zicht op je eigen kracht.</p>
-          </div>
-        </div>
-
-        <div class="walk-block">
-          <div class="walk-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 20h18"/>
-              <path d="M5 20l3-9 4 3 2-5 3 6"/>
-              <path d="M14 9l2-4"/>
-            </svg>
-          </div>
-          <div class="walk-text">
-            <h2>Liever in beweging? We lopen buiten</h2>
-            <p>Een gesprek hoeft niet aan een vergadertafel. Een deel van de sessies kunnen we buiten doen, wandelend in de natuur. Beweging maakt het hoofd vrij, gesprekken lopen makkelijker en inzichten komen vanzelf. De aanpak blijft hetzelfde, alleen de omgeving verandert.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="hill-divider" aria-hidden="true">
-        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-          <path d="M0,64 C240,112 480,16 720,40 C960,64 1200,120 1440,72 L1440,120 L0,120 Z"></path>
-        </svg>
-      </div>
-    </section>
-
-    <!-- OVER MIJ -->
-    <section class="section" id="over-mij">
-      <div class="container about">
-        <div class="about-photo">
-          <img src="portret.png" alt="Portretfoto van Kevin Roovers" width="956" height="905" loading="lazy">
-        </div>
-        <div class="about-text">
-          <p class="eyebrow">Wie ik ben</p>
-          <p>Mijn manier van kijken komt van het honkbalveld. Ik speelde jarenlang op niveau, en in topsport draait alles om de juiste mensen op de juiste plek, met talenten die elkaar aanvullen. Een winnend team bestaat uit spelers die ieder iets anders inbrengen en op elkaar ingespeeld raken. Je rekt niemand op tot iets wat hij niet is. Je scherpt aan wat er al in zit.</p>
-          <p>Op kantoor zijn we dat vreemd genoeg vergeten. Daar gaat onze aandacht vooral naar wat mensen nog niet kunnen, naar ontwikkelpunten en gaten dichten. Ik draai het liever om. Toen ik CliftonStrengths van Gallup tegenkwam, viel het op zijn plek. Het is een manier om precies dat sportprincipe naar teams te vertalen. Inmiddels ben ik er officieel in gecertificeerd als Gallup-Certified Strengths Coach.</p>
-          <p>In de jaren daarna werkte ik aan persoonlijke ontwikkeling en talentontwikkeling in uiteenlopende rollen, van scale-ups tot corporates. Nu doe ik dat als Talent &amp; Culture Manager bij een Nederlands platformbedrijf. Ik coach er dagelijks medewerkers en bouw teams die draaien op ieders kracht.</p>
-          <p>Waar ik het voor doe, is dat ene moment dat iemand doorkrijgt waar zijn kracht zit en je het vertrouwen ziet groeien. Mensen zien dan opeens wat er altijd al in zat.</p>
-          <p>Buiten werk vind je me op de trail of in een triatlon. Lange afstanden, eigen tempo, blijven gaan. Zo kijk ik ook naar ontwikkeling. Het draait om volhouden in de goede richting.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- AFSLUITENDE CTA -->
-    <section class="section section-cta" id="contact">
-      <div class="scene scene-top" aria-hidden="true">
-        <svg viewBox="0 0 1440 160" preserveAspectRatio="none">
-          <path class="scene-mtn-far"  d="M0,70 L240,18 L430,72 L660,12 L880,76 L1120,20 L1440,72 L1440,0 L0,0 Z"></path>
-          <path class="scene-mtn-near" d="M0,96 L260,44 L470,100 L700,40 L920,98 L1180,46 L1440,92 L1440,0 L0,0 Z"></path>
-          <path class="hill-front" d="M0,116 C280,86 480,134 720,108 C960,82 1180,130 1440,104 L1440,0 L0,0 Z"></path>
-        </svg>
-      </div>
-      <div class="container narrow center">
-        <h2>Benieuwd wat dit voor jouw team doet?</h2>
-        <p>Laten we dertig minuten praten. Vrijblijvend, zodat we samen ontdekken of het klikt.</p>
-        <div class="cta-block">
-          <a class="btn" href="https://calendly.com/kevinroovers/30min" target="_blank" rel="noopener">Plan een kennismaking</a>
-          <p class="cta-note">30 minuten, vrijblijvend. Geen verkooppraatje. Je loopt sowieso weg met één concreet inzicht over je team.</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-brand-block">
-        <p class="footer-brand">Kevin Roovers Coaching</p>
-        <p class="footer-tag">Gallup-Certified Strengths Coach</p>
-      </div>
-      <p class="footer-meta">
-        <a href="mailto:kevinroovers@gmail.com">kevinroovers@gmail.com</a>
-        <span aria-hidden="true">·</span>
-        <a href="privacy.html">Privacyverklaring</a>
-      </p>
+    <div class="indicator" id="indicator" aria-hidden="true">
+      <ol>
+        <li data-target="hero"><span>01</span></li>
+        <li data-target="about"><span>02</span></li>
+        <li data-target="principles"><span>03</span></li>
+        <li data-target="services"><span>04</span></li>
+        <li data-target="credentials"><span>05</span></li>
+        <li data-target="contact"><span>06</span></li>
+      </ol>
+      <span class="indicator-rule"><i id="indicatorRule"></i></span>
     </div>
-  </footer>
 
-  <script src="script.js" defer></script>
-</body>
+    <button class="sound" id="sound" type="button" aria-pressed="false" aria-label="Sound">
+      <span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+
+    <main id="main">
+      <section class="section section--hero" id="hero" data-section="hero">
+        <div class="hero-inner">
+          <h1 class="h1">%HERO_NAME%</h1>
+          <p class="hero-line">%HERO_LINE%</p>
+        </div>
+        <p class="scroll-hint"><span>%SCROLL_HINT%</span></p>
+      </section>
+
+      <section class="section section--about" id="about" data-section="about">
+        <div class="col">
+          <h2 class="h2">%ABOUT_HEADING%</h2>
+          %ABOUT_PARAGRAPHS%
+        </div>
+      </section>
+
+      <section class="section section--principles" id="principles" data-section="principles">
+        <div class="col col--wide">
+          <h2 class="h2">%PRINCIPLES_HEADING%</h2>
+          <ol class="principles">%PRINCIPLE_ITEMS%
+          </ol>
+        </div>
+      </section>
+
+      <section class="section section--services" id="services" data-section="services">
+        <div class="col col--wide">
+          <h2 class="h2">%SERVICES_HEADING%</h2>
+          <p class="intro reveal">%SERVICES_INTRO%</p>
+          <ol class="services">%SERVICE_ITEMS%
+          </ol>
+        </div>
+      </section>
+
+      <section class="section section--credentials" id="credentials" data-section="credentials">
+        <div class="col">
+          <h2 class="h2">%CREDENTIALS_HEADING%</h2>
+          <ul class="credentials">
+            %CREDENTIAL_ITEMS%
+          </ul>
+        </div>
+      </section>
+
+      <section class="section section--contact" id="contact" data-section="contact">
+        <div class="contact-inner">
+          <h2 class="h2 h2--center">%CONTACT_HEADING%</h2>
+          <p class="contact-line reveal">%CONTACT_LINE%</p>
+          <p class="contact-links reveal">
+            <a class="link magnetic" href="mailto:%EMAIL%">%EMAIL%</a>
+            <a class="link magnetic" href="%LINKEDIN%" rel="noopener noreferrer" target="_blank"
+              >%LINKEDIN_LABEL%</a
+            >
+          </p>
+          <p class="contact-meta reveal">%LOCATION%</p>
+        </div>
+        <footer class="footer"><p>%FOOTER%</p></footer>
+      </section>
+    </main>
+
+    <!-- Service detail. A dialog, not a page: the scene stays live behind it. -->
+    <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="overlayTitle" hidden>
+      <div class="overlay-scrim" data-close></div>
+      <article class="overlay-panel">
+        <span class="overlay-num" id="overlayNum"></span>
+        <h3 class="overlay-title" id="overlayTitle"></h3>
+        <p class="overlay-what" id="overlayWhat"></p>
+        <p class="overlay-proof" id="overlayProof"></p>
+        <button class="overlay-close" id="overlayClose" type="button" aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </article>
+    </div>
+
+    <script type="application/json" id="serviceData">%SERVICE_DATA%</script>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
