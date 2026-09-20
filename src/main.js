@@ -30,10 +30,16 @@ const preloader = initPreloader();
 const audio = createAudio();
 initSoundToggle(audio);
 
+// Glass preset: 'quiet', 'liquid' or 'prism'. See GLASS_PRESETS in
+// src/scene/Elements.js for what each dial does. ?glass=prism in the URL
+// overrides it, which makes comparing them a refresh rather than a rebuild.
+const glass = new URLSearchParams(location.search).get('glass') || 'liquid';
+
 const scene = new Scene(document.getElementById('scene'), {
   reducedMotion,
   isTouch,
   quality,
+  glass,
   onFormation: () => audio.tick(),
 });
 

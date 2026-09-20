@@ -88,6 +88,10 @@ The scene reads the same three colours, but from JavaScript — change them in
 - `src/styles/base.css` — the `:root` tokens above
 - `src/scene/Elements.js` — the `uBase`, `uBg` and `uAccent` uniforms
 
+The glass reflects a **fourth set of colours** that the CSS knows nothing about:
+`ENV` in `src/scene/Elements.js`. Those four are what make the scene colourful,
+so that is the place to go if you want a different mood.
+
 and, if you change the accent, also in `public/favicon.svg` and
 `scripts/make-og.mjs`. Then regenerate the share image (below).
 
@@ -158,12 +162,47 @@ legacy/                    the previous Dutch one-pager, moved aside untouched
 
 ## Details worth knowing
 
-**Materials.** No standard Three.js material anywhere. Elements use one
-`ShaderMaterial` with a wrapped two-light studio term, a fresnel rim, and a slow
-noise gradient. The rim is kept small on purpose: a rod is mostly edge-on to the
-camera, so an unshaped fresnel washes the whole thing pale.
+**Materials — the glass.** No standard Three.js material anywhere. The elements
+are glass, built from five things in one `ShaderMaterial`:
 
-**Lighting and shadow.** There are no lights in the scene. A shadow map over a
+1. **Refraction.** A screen-space lookup into a backdrop buffer, displaced along
+   the surface normal.
+2. **Dispersion.** Each colour channel is displaced by a different amount, which
+   is where a coloured edge comes from.
+3. **Reflection.** A small procedural studio — warm above, cool below, one amber
+   key, one teal fill — sampled by the reflection vector.
+4. **Specular.** One tight bright highlight. This is what says "hard surface".
+5. **Absorption.** Light crossing near the silhouette travels further through
+   the glass and comes out darker.
+
+Point 3 is where the colour lives, and it is the one that is easy to get wrong.
+Two things that were tried and thrown away: giving each element its own hue
+turns the swarm into confetti, and putting colour only on the rim is invisible
+on a rod four pixels wide. Reflecting a shared environment fixes both — elements
+pointing different ways catch different parts of it, the way real glass does,
+and the palette is then four editable colours rather than noise. Point 5 matters
+more than it sounds: without it a lone element on the off-white simply vanishes.
+
+The **backdrop buffer** is the swarm drawn once more at an eighth resolution
+with a cheap flat material, then blurred twice. Dense parts of a formation come
+out foggy and solid; a lone element stays almost clear. It costs two extra draw
+calls and two very small blurs.
+
+**The glass dials** are `GLASS_PRESETS` at the top of `src/scene/Elements.js`,
+and the palette is `ENV` just above them.
+
+| Preset | What it is |
+| --- | --- |
+| `quiet` | Smoked glass. The mass still reads near-black, colour only in the glints. Closest to the original brief. |
+| `liquid` | **The default.** Clearly glass, clearly coloured, still a calm object. |
+| `prism` | Full spectrum. Bright and playful, and a long way from "calm and precise". |
+
+Switch permanently by changing the fallback in `src/main.js`, or compare them
+without rebuilding by adding `?glass=prism` to the URL. `/motion-study.html`
+takes the same parameter.
+
+**Lighting and shadow.** There are no lights in the scene — the key and fill are
+directions in a shader, not `DirectionalLight`s. A shadow map over a
 few hundred scattered rods gives you a field of little dashes that reads as
 dirt, so the contact shadow is one soft elliptical pool on an invisible floor
 (`ground.frag.glsl`) that follows the swarm and fades out as formations tighten.
@@ -224,32 +263,35 @@ headless Chromium at 1440×900.
 | --- | --- |
 | `three` | 117.5 kB |
 | `gsap` + ScrollTrigger | 45.5 kB |
-| scene + shaders + Lenis | 16.8 kB |
-| site code | 4.0 kB |
-| **JavaScript total** | **183.8 kB** |
-| CSS | 3.8 kB |
+| scene + shaders + Lenis | 17.9 kB |
+| site code | 4.1 kB |
+| **JavaScript total** | **185.0 kB** |
+| CSS | 3.7 kB |
 | HTML | 3.5 kB |
 | Inter (latin subset, woff2) | 71.2 kB |
 
-Budget was 300 kB of JavaScript gzipped. **183.8 kB.**
+Budget was 300 kB of JavaScript gzipped. **185.0 kB.**
 
-**Loading** — 8 requests, 260.6 kB encoded in total. First contentful paint
-**144 ms**, DOMContentLoaded **221 ms**, load **222 ms**. These are local-server
+**Loading** — 8 requests, 261.7 kB encoded in total. First contentful paint
+**140 ms**, DOMContentLoaded **215 ms**, load **217 ms**. These are local-server
 numbers with no network latency: treat them as the floor, not as a field
 measurement. Budget was < 1.5 s first paint. The font is self-hosted and
 preloaded, so there is no third-party connection before first paint.
 
 **Per frame** — the site's own JavaScript (formation blending, damping, and
-writing 300 instance matrices) costs **0.30 ms median, 0.40 ms p95, 1.5 ms max**
-out of a 16.7 ms budget, over 240 frames. The swarm is 2 draw calls, the ground
-is 1, and post is 4 — 7 in total.
+writing 300 instance matrices) costs **0.30 ms median, 0.40 ms p95** out of a
+16.7 ms budget, over 240 frames. The glass added nothing measurable to that: its
+cost is entirely GPU-side. Draw calls are now 11 — the swarm twice (2 + 2), the
+ground once, two blurs for the backdrop, and four for bloom and composite.
 
 **What is not measured here.** This container has no GPU; Chromium runs on
 SwiftShader, so a frame rate measured here would be meaningless. The 60 fps
 claim on a recent MacBook is **not verified** — the JavaScript budget above is,
-and the GPU work is small (7 draws, 300 instances, quarter-resolution bloom,
-no shadow map), but please check it on your own machine and tell me what you
-see. If it needs headroom, the first dial is `count` in `src/scene/Scene.js`.
+and the GPU work is small (11 draws, 300 instances, an eighth-resolution
+backdrop, quarter-resolution bloom, no shadow map), but please check it on your
+own machine and tell me what you see. If it needs headroom, the first dial is
+`count` in `src/scene/Scene.js`, and the second is `refraction: 0` in the glass
+preset, which skips nothing but makes the backdrop buffer irrelevant.
 
 ---
 

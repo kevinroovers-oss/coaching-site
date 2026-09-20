@@ -54,13 +54,17 @@ export class Scene {
     this.elements = new Elements({
       count: options.count || (this.quality === 'high' ? 300 : 140),
       quality: this.quality,
+      preset: options.glass,
     });
     this.scene.add(this.elements.group);
 
     this._buildGround();
 
     this.post = new Post(this.renderer, {
-      bloom: 0.9,
+      background: 0xf4f3f0,
+      // The glass throws colour of its own, so the bloom that used to be the
+      // only saturated thing on screen now has plenty to catch. It earns less.
+      bloom: 0.55,
       grain: 0.026,
       // Just enough to stop the corners from glaring. Any more and it reads as
       // an effect instead of as light.
@@ -143,6 +147,10 @@ export class Scene {
     this.camera.fov = this.narrow ? 46 : 38;
     this.camera.updateProjectionMatrix();
     this.post.setSize(w, h, dpr);
+    this.elements.uniforms.uResolution.value.set(
+      Math.max(1, Math.floor(w * dpr)),
+      Math.max(1, Math.floor(h * dpr))
+    );
     this._settle = 1.2;
   }
 
@@ -258,6 +266,15 @@ export class Scene {
   }
 
   render() {
+    // The glass needs to know what is behind it before it can bend it, so the
+    // swarm is drawn once cheaply into a small blurred buffer, then again for
+    // real with that buffer bound. Two extra draw calls and two tiny blurs.
+    this.ground.visible = false;
+    this.elements.useBackdropMaterial(true);
+    this.elements.uniforms.uBackdrop.value = this.post.renderBackdrop(this.scene, this.camera);
+    this.elements.useBackdropMaterial(false);
+    this.ground.visible = true;
+
     this.post.render(this.scene, this.camera, this._time);
   }
 

@@ -55,7 +55,10 @@ main {
   opacity: 0;
 }
 
-.no-motion .scroll-hint {
+/* Both the preloader and the hint live in the bottom-left corner. With reduced
+   motion the hint has no entrance animation to wait for, so it has to wait for
+   the ready flag instead, or the two overlap while the number is still there. */
+.no-motion.is-ready .scroll-hint {
   opacity: 1;
 }
 

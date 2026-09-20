@@ -3,6 +3,39 @@ import { FORMATIONS, TIMELINE, HUB_COUNT, EDGES, hash } from './formations.js';
 import { damp, smoothstep, clamp } from '../motion/easing.js';
 import elementVert from './shaders/element.vert.glsl';
 import elementFrag from './shaders/element.frag.glsl';
+import backdropFrag from './shaders/backdrop.frag.glsl';
+
+// The glass dials. Everything about how the material looks lives here.
+//
+//   refraction  how far the backdrop lookup is displaced. 0 = no bending.
+//   dispersion  how differently each colour channel is displaced. This is the
+//               coloured fringe at the edges, and the most "glass" of the four.
+//   iridescence strength of the spectral sheen. 0 = clear glass, 1 = full
+//               thin-film rainbow. This is the dial to turn if you want more
+//               or less colour.
+//   tint        how much of its own density the glass keeps. Higher = smokier
+//               and closer to the original near-black.
+//   specular    size and brightness of the highlight.
+//
+// Three starting points, so you can compare like for like. Switch with the
+// `preset` option on Scene, or edit ACTIVE below.
+// The four colours the glass reflects. Everything the swarm is coloured by
+// comes from here.
+export const ENV = {
+  high: 0xffe9c8, // looking up: warm light
+  low: 0x8ecfd2,  // looking down: cool bounce
+  key: 0xff8a33,  // the warm light, a sibling of --accent
+  fill: 0x2fb6c9, // the cool one
+};
+
+export const GLASS_PRESETS = {
+  // Smoked glass. The mass still reads near-black; colour only at the edges.
+  quiet:  { refraction: 0.035, dispersion: 0.30, iridescence: 0.45, tint: 1.15, specular: 0.8 },
+  // The default. Clearly glass, clearly coloured, still a calm object.
+  liquid: { refraction: 0.055, dispersion: 0.45, iridescence: 0.80, tint: 1.00, specular: 1.0 },
+  // Full prism. Bright, playful, much further from the original brief.
+  prism:  { refraction: 0.085, dispersion: 0.75, iridescence: 1.25, tint: 0.80, specular: 1.25 },
+};
 
 // Two geometries, one material, two draw calls for the whole swarm.
 //   rods  — thin capsule-ish cylinders, the "members" of a structure
@@ -18,8 +51,9 @@ const TMP_S = new THREE.Vector3();
 const TMP_P = new THREE.Vector3();
 
 export class Elements {
-  constructor({ count, quality }) {
+  constructor({ count, quality, preset = 'liquid' }) {
     this.count = count;
+    this.preset = GLASS_PRESETS[preset] ? preset : 'liquid';
     this.group = new THREE.Group();
 
     // --- per-element identity -------------------------------------------
@@ -84,6 +118,8 @@ export class Elements {
     const rodGeo = new THREE.CylinderGeometry(0.036, 0.036, 0.86, segs, 1);
     const nodeGeo = new THREE.IcosahedronGeometry(0.1, quality === 'low' ? 0 : 1);
 
+    const glass = GLASS_PRESETS[this.preset];
+
     this.uniforms = {
       uTime: { value: 0 },
       uPulse: { value: 0 },
@@ -92,14 +128,40 @@ export class Elements {
       uAccent: { value: new THREE.Color(0xae460c) },
       uKeyDir: { value: new THREE.Vector3(0.55, 0.78, 0.5) },
       uFillDir: { value: new THREE.Vector3(-0.7, 0.1, 0.55) },
+      // The reflected studio. This is the palette — edit these four and the
+      // whole scene changes colour. Warm above, cool below, amber key, teal
+      // fill: premium and deliberately not the purple/blue cliche.
+      uEnvHigh: { value: new THREE.Color(ENV.high) },
+      uEnvLow: { value: new THREE.Color(ENV.low) },
+      uEnvKey: { value: new THREE.Color(ENV.key) },
+      uEnvFill: { value: new THREE.Color(ENV.fill) },
+      // Bound by Scene once the backdrop buffer exists.
+      uBackdrop: { value: null },
+      uResolution: { value: new THREE.Vector2(1, 1) },
+      uRefraction: { value: glass.refraction },
+      uDispersion: { value: glass.dispersion },
+      uIridescence: { value: glass.iridescence },
+      uTint: { value: glass.tint },
+      uSpecular: { value: glass.specular },
     };
 
+    // The glass is opaque in the depth sense — it samples a buffer to look
+    // transparent. That sidesteps every sorting problem a real transparent
+    // instanced mesh would bring, at no visual cost on this background.
     const material = new THREE.ShaderMaterial({
       vertexShader: elementVert,
       fragmentShader: elementFrag,
       uniforms: this.uniforms,
     });
     this.material = material;
+
+    // The same geometry drawn cheaply into the backdrop buffer, so elements
+    // refract each other rather than only the empty background.
+    this.backdropMaterial = new THREE.ShaderMaterial({
+      vertexShader: elementVert,
+      fragmentShader: backdropFrag,
+      uniforms: this.uniforms,
+    });
 
     this.rods = new THREE.InstancedMesh(rodGeo, material, this.rodIdx.length);
     this.nodes = new THREE.InstancedMesh(nodeGeo, material, this.nodeIdx.length);
@@ -298,9 +360,17 @@ export class Elements {
     return e[0] === hub || e[1] === hub;
   }
 
+  // Swapped by Scene for the backdrop pass and swapped straight back.
+  useBackdropMaterial(on) {
+    const m = on ? this.backdropMaterial : this.material;
+    this.rods.material = m;
+    this.nodes.material = m;
+  }
+
   dispose() {
     this.rods.geometry.dispose();
     this.nodes.geometry.dispose();
     this.material.dispose();
+    this.backdropMaterial.dispose();
   }
 }

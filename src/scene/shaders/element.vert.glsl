@@ -9,6 +9,7 @@ attribute float aDim;       // 0..1, how far this element steps back
 uniform float uTime;
 
 varying vec3 vNormal;
+varying vec3 vViewNormal; // needed for screen-space refraction
 varying vec3 vWorld;
 varying float vSeed;
 varying float vHighlight;
@@ -32,7 +33,9 @@ void main() {
 
   // Instance scale is uniform (the rod's aspect is baked into its geometry),
   // so rotating the normal by the instance matrix is enough — no inverse needed.
-  vNormal = normalize(mat3(modelMatrix) * mat3(instanceMatrix) * normal);
+  vec3 n = normalize(mat3(modelMatrix) * mat3(instanceMatrix) * normal);
+  vNormal = n;
+  vViewNormal = normalize(mat3(viewMatrix) * n);
 
   gl_Position = projectionMatrix * viewMatrix * world;
 }
