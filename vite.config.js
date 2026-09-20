@@ -3,6 +3,9 @@ import glsl from 'vite-plugin-glsl';
 import content from './vite-plugin-content.js';
 
 export default defineConfig({
+  // Relative asset paths, so the build runs from any directory — a domain
+  // root, a subpath, or a static preview host — without reconfiguring.
+  base: './',
   plugins: [glsl({ compress: false }), content()],
   build: {
     target: 'es2020',
