@@ -25,6 +25,7 @@ export const meta = {
     "Shape Up",
     "Scaling Up",
     "Interim HR",
+    "Scale-ups",
   ],
   serviceArea: "Nederland",
   language: "nl",
@@ -39,7 +40,7 @@ export const hero = {
 export const about = {
   heading: "Losse onderdelen. Eén organisatie.",
   paragraphs: [
-    "Twaalf jaar in mensen en teams. Het grootste deel daarvan op plekken waar nog niets stond. Geen functies op papier. Geen loopbaanpaden. Geen salarisstructuur. Alleen mensen, en een bedrijf dat harder groeide dan zijn fundament.",
+    "Acht jaar in scale-ups. Mens, team en organisatie, alle drie tegelijk. Meestal op plekken waar nog niets stond. Geen functies op papier. Geen loopbaanpaden. Geen salarisstructuur. Alleen mensen, en een bedrijf dat harder groeide dan zijn fundament.",
     "Daar doe ik mijn beste werk. Ik bouw het raamwerk. En dan zorg ik dat je teamleads het zonder mij draaien.",
     "Voordat ik teams bouwde in bedrijven, leidde ik er een op het honkbalveld. Hoofdklasse. Vijfentwintig spelers, vijf man staf. Zelfde principe: iedereen kent zijn rol, en waarom die ertoe doet.",
   ],
