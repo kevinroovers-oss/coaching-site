@@ -9,6 +9,16 @@ import { E, D } from '../motion/easing.js';
 
 const ENDPOINT = '/api/chat';
 
+// Injected by the content plugin, so the assistant's fallback copy lives in
+// content.js with the rest of the words.
+const STRINGS = (() => {
+  try {
+    return JSON.parse(document.getElementById('askStrings')?.textContent || '{}');
+  } catch {
+    return {};
+  }
+})();
+
 export function initAssistant({ onOpen, onClose } = {}) {
   const root = document.getElementById('ask');
   if (!root) return { open: () => {}, isOpen: () => false };
@@ -78,9 +88,7 @@ export function initAssistant({ onOpen, onClose } = {}) {
       if (!res.ok || !res.body) {
         // 404/405 means there is no function behind this page at all.
         const offline = res.status === 404 || res.status === 405;
-        let message = offline
-          ? 'The assistant only runs on the deployed site. Email kevinroovers@gmail.com in the meantime.'
-          : 'Something went wrong on my side.';
+        let message = offline ? STRINGS.offline : STRINGS.generic;
         if (!offline) {
           try {
             const data = await res.json();
@@ -127,7 +135,7 @@ export function initAssistant({ onOpen, onClose } = {}) {
       else history.pop();
     } catch {
       target.parentElement.remove();
-      note('I could not reach the assistant. Email kevinroovers@gmail.com instead.');
+      note(STRINGS.unreachable);
       history.pop();
     } finally {
       target.parentElement?.classList.remove('is-streaming');

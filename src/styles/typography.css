@@ -25,6 +25,7 @@
 .h2--center {
   text-align: center;
   margin-bottom: var(--s4);
+  font-size: clamp(1.875rem, 3.9vw, 3.25rem);
 }
 
 .h3 {
@@ -59,7 +60,9 @@
 
 .hero-line {
   margin: var(--s4) 0 0;
-  max-width: 24ch;
+  /* Wide enough that each sentence of the hero line gets its own row. The
+     Dutch second sentence is longer than the English one was. */
+  max-width: 40ch;
   font-size: clamp(1.125rem, 1.6vw, 1.5rem);
   font-weight: 400;
   line-height: 1.45;

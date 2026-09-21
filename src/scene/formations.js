@@ -236,7 +236,9 @@ function ring(i, n, out) {
   // indices land far apart. Without this the nodes arrive in visible clumps.
   const k = (Math.floor(i / 2) * 37) % per;
   const a = (k / per) * TAU;
-  const r = band === 0 ? 3.15 : 3.95;
+  // Sized so the contact block sits inside it. The Dutch heading is longer
+  // than the English one was, so the circle grew rather than the type shrank.
+  const r = band === 0 ? 3.8 : 4.65;
   const x = Math.cos(a) * r;
   const y = Math.sin(a) * r;
   const z = band === 0 ? 0.35 : -0.35;

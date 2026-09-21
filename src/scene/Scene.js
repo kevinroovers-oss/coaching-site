@@ -28,7 +28,7 @@ const VIEWS = {
   network: { cam: [0, 0.0, 14.5], look: [0, 0, 0],    group: [3.4, 0, 0],    rot: 0.05, nScale: 0.72, nY: 3.0 },
   lattice: { cam: [0, 0.0, 13.6], look: [0, 0, 0],    group: [2.9, 0, 0],    rot: 0.04, nScale: 0.74, nY: 3.0 },
   // The last view pulls back and stops. Nothing else happens after this.
-  ring:    { cam: [0, 0.0, 18.5], look: [0, 0, 0],    group: [0, 0, 0],      rot: 0.00, nScale: 0.86, nY: 2.0 },
+  ring:    { cam: [0, 0.0, 18.5], look: [0, 0, 0],    group: [0, 0, 0],      rot: 0.00, nScale: 0.76, nY: 2.0 },
 };
 
 export class Scene {

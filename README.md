@@ -1,5 +1,8 @@
 # kevinroovers.nl
 
+**The site is in Dutch.** This README is not — it sits next to the code, and
+the code comments are English. All copy lives in `src/data/content.js`.
+
 A one-page site built around a single idea: **loose parts becoming structure.**
 
 A few hundred abstract elements — thin rods and small faceted nodes — float
@@ -36,6 +39,9 @@ heartbeat.
 ## Editing the copy
 
 **All copy lives in `/src/data/content.js`. Nothing is written anywhere else.**
+That includes the assistant's system prompt, the accessible names on the two
+icon buttons, and the assistant's own error messages — there is no Dutch string
+hiding in a JavaScript file.
 
 `vite-plugin-content.js` reads that file and injects it into `index.html` at
 build time, so the page ships as real static HTML (good for first paint and for
@@ -57,12 +63,12 @@ the only ones, and each is there for a reason:
 
 | String | Where | Why |
 | --- | --- | --- |
-| `01`–`06` | section indicator, principle and service numbers | numerals, not words |
-| `Sound` | `aria-label` on the sound toggle | a control needs an accessible name |
-| `Close` | `aria-label` on the overlay close button | same |
-| `Section` | *(removed)* | the indicator is now `aria-hidden` — see below |
+| `01`–`07` | section indicator, principle, step and service numbers | numerals, not words |
+| `Geluid` | `aria-label` on the sound toggle | a control needs an accessible name |
+| `Sluiten` | `aria-label` on both close buttons | same |
+| `Versturen` | `aria-label` on the assistant's send button | same |
 
-Say the word if you want any of them changed or removed.
+The three labels are in `content.ui`, so they are editable like everything else.
 
 ---
 
@@ -123,12 +129,12 @@ everything landing in the right place.
 | --- | --- | --- | --- |
 | 1 | `drift` | Hero | A loose shell. No order yet, but a silhouette. |
 | 2 | `cluster` | About | A woven sphere; rods tangent to the surface. |
-| 3 | `strata` | Principle 1 — *Structure first* | Five level horizontal layers. The most architectural one. |
-| 4 | `orbits` | Principle 2 — *Leaders who do it themselves* | Four separate centres, each with its own rings. No middle any more. |
-| 5 | `spiral` | Principle 3 — *Start with what works* | One helix growing outward and upward from a dense core. |
-| 6 | `steps` | How I build it with you | Five flat treads climbing left to right. The one formation you can count. |
-| 7 | `network` | Services | Six hubs, one per service, wired by members along ten edges. |
-| 8 | `lattice` | Credentials | Four quiet upright rows. Deliberately does not compete with the list. |
+| 3 | `strata` | Principle 1 — *Eerst structuur* | Five level horizontal layers. The most architectural one. |
+| 4 | `orbits` | Principle 2 — *Leiders die het zelf kunnen* | Four separate centres, each with its own rings. No middle any more. |
+| 5 | `spiral` | Principle 3 — *Begin bij wat werkt* | One helix growing outward and upward from a dense core. |
+| 6 | `steps` | Hoe ik het met je opbouw | Five flat treads climbing left to right. The one formation you can count. |
+| 7 | `network` | Wat ik voor je bouw | Six hubs, one per service, wired by members along ten edges. |
+| 8 | `lattice` | Opleiding en certificering | Four quiet upright rows — one per credential. Deliberately does not compete with the list. |
 | 9 | `ring` | Contact | One symmetrical circle. The camera pulls back and stops. |
 
 Formations live in `/src/scene/formations.js` and are plain functions — no
@@ -152,9 +158,10 @@ source of truth for what it is allowed to say.
   cacheable. After the first question in a five-minute window the input costs
   roughly a tenth.
 - **Grounding:** it answers only from the reference, never invents numbers,
-  clients, prices or availability, matches the visitor's language (a Dutch
-  question gets a Dutch answer), keeps to two to four sentences, and points at
-  the email address for anything it does not know.
+  clients, prices or availability, and points at the email address for anything
+  it does not know. It answers in Dutch by default and addresses the visitor as
+  *je*; write to it in another language and it replies in that one. Two to four
+  sentences, plain prose.
 - **Frontend:** `src/ui/assistant.js`. Same dialog family as the service
   overlay, focus-trapped, Escape to close.
 
@@ -190,23 +197,30 @@ characters per message and 20 messages per conversation, server-side.
 
 ## Findability
 
+The site is in Dutch, which is the part that actually matters: your clients are
+Dutch companies and they search in Dutch. The rest supports that.
+
 - The `<title>` is `meta.pageTitle`, not the bare name — that is the line a
-  stranger reads in a search result.
+  stranger reads in a search result, and it carries the two words people
+  actually type: *functiehuis* and *salarishuis*.
+- `meta.subjects` lists the subject terms in the vocabulary clients use —
+  functiehuis, salarishuis, salarisbandbreedtes, loopbaanpaden, EU-richtlijn
+  loontransparantie, interim HR. They are plain vaktermen, not keyword
+  stuffing: each one describes work that is on the page.
 - JSON-LD in the head describes a `Person`, a `ProfessionalService` with its
-  offer catalogue, and a `HowTo` built from the five steps. All of it is
-  generated from `content.js`; none of it is hand-maintained.
-- `robots.txt` and a generated `sitemap.xml` carry the canonical URL. The motion
-  study is excluded and carries `noindex`.
+  offer catalogue and `inLanguage: nl`, and a `HowTo` built from the five
+  steps. All generated from `content.js`; none of it hand-maintained.
+- `<html lang="nl">`, `robots.txt` and a generated `sitemap.xml` carrying the
+  canonical URL. The motion study is excluded and carries `noindex`.
 - The copy ships as real static HTML, so there is nothing for a crawler to
   execute.
 
-**The one thing this cannot fix: the site is in English.** Your clients are
-Dutch companies in and around Utrecht, and they search in Dutch —
-*functiehuis*, *salarishuis*, *loopbaanpaden*, *interim HR*. An English page
-will not rank for any of those, whatever the structured data says. The
-`meta.subjects` list carries a few Dutch terms into the structured data, which
-helps a little and is honest, but it is not a substitute. If reaching Dutch
-clients through search matters, the page needs a Dutch version. Say the word.
+What none of this does is get you ranked. Structured data tells a search engine
+what the page is; it does not tell it the page deserves to be first. That comes
+from other sites linking to yours and from people searching your name and
+clicking. If this matters commercially, the next thing worth doing is not more
+markup — it is getting the URL onto your LinkedIn profile, your email signature,
+and anywhere else that already has your name on it.
 
 ---
 
@@ -352,9 +366,10 @@ Budget was 300 kB of JavaScript gzipped. **185.3 kB.** The Anthropic SDK is not
 in this — it only exists in the Edge Function, which Vercel bundles separately
 and the browser never downloads.
 
-**Loading** — 9 requests, 362.8 kB encoded in total (the portrait is most of the
-increase, and it is lazy-loaded below the fold). First contentful paint
-**140 ms**, DOMContentLoaded **215 ms**, load **218 ms**. These are local-server
+**Loading** — 9 requests, 362.8 kB encoded in total (the portrait is most of
+that, and it is lazy-loaded below the fold). First contentful paint **140–200 ms**
+across runs, load **220 ms–1.4 s** depending on how the software renderer in
+this container behaves on the first frame. These are local-server
 numbers with no network latency: treat them as the floor, not as a field
 measurement. Budget was < 1.5 s first paint. The font is self-hosted and
 preloaded, so there is no third-party connection before first paint.

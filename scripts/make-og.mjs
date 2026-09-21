@@ -21,7 +21,7 @@ await og.goto(url, { waitUntil: 'networkidle' });
 await og.waitForTimeout(4000);
 await og.evaluate(() => {
   // The share card is the scene and the name. Nothing else belongs on it.
-  for (const sel of ['.indicator', '.sound', '.scroll-hint', '.preloader', '.cursor']) {
+  for (const sel of ['.indicator', '.sound', '.scroll-hint', '.preloader', '.cursor', '.ask-open']) {
     document.querySelector(sel)?.remove();
   }
 });

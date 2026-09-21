@@ -1,46 +1,47 @@
-// All copy for the site lives here. Edit here, nowhere else.
+// Alle tekst van de site staat hier. Pas het hier aan, nergens anders.
 
 export const meta = {
   title: "Kevin Roovers",
-  // The <title> tag. Longer than the name on purpose: this is the line that
-  // shows in a search result, and a bare name tells a stranger nothing.
+  // De <title>-tag. Langer dan alleen de naam, met opzet: dit is de regel die
+  // in een zoekresultaat staat, en een kale naam zegt een vreemde niets.
   pageTitle:
-    "Kevin Roovers — career frameworks, pay structures and leadership for growing companies",
+    "Kevin Roovers — functiehuis, salarishuis en leiderschap voor groeiende bedrijven",
   description:
-    "You have the people. I build the structure they grow in. Career frameworks, pay structures, leadership coaching and ways of working for growing companies.",
-  url: "https://kevinroovers.nl", // replace with the real domain
-  // Used for the structured data search engines read. Plain subject terms,
-  // not keyword stuffing: they describe the work and nothing more.
+    "Je hebt de mensen. Ik bouw de structuur waarin ze groeien. Functiehuizen, salarishuizen, leiderschapscoaching en werkritme voor groeiende bedrijven.",
+  url: "https://kevinroovers.nl", // vervang door het echte domein
+  // Voor de structured data die zoekmachines lezen. Gewone vaktermen, geen
+  // keyword stuffing: ze beschrijven het werk en verder niets.
   subjects: [
-    "Career frameworks",
-    "Job architecture",
-    "Salary bands",
-    "EU Pay Transparency Directive",
-    "Leadership coaching",
-    "CliftonStrengths",
-    "Senior and executive hiring",
-    "Shape Up",
-    "Scaling Up",
     "Functiehuis",
     "Salarishuis",
+    "Salarisbandbreedtes",
     "Loopbaanpaden",
+    "Functieprofielen",
+    "EU-richtlijn loontransparantie",
     "Leiderschapscoaching",
+    "CliftonStrengths",
+    "Teamleads coachen",
+    "Senior en executive werving",
+    "Shape Up",
+    "Scaling Up",
+    "Interim HR",
   ],
-  serviceArea: "Netherlands",
+  serviceArea: "Nederland",
+  language: "nl",
 };
 
 export const hero = {
   name: "Kevin Roovers",
-  line: "You have the people. I build the structure they grow in.",
+  line: "Je hebt de mensen. Ik bouw de structuur waarin ze groeien.",
   scrollHint: "Scroll",
 };
 
 export const about = {
-  heading: "Loose parts. One organisation.",
+  heading: "Losse onderdelen. Eén organisatie.",
   paragraphs: [
-    "Twelve years in people and teams. Most of it spent where nothing existed yet. No roles on paper. No career paths. No pay structure. Just people, and a company growing faster than its foundations.",
-    "That's where I do my best work. I build the framework. Then I make sure your team leads can run it without me.",
-    "Before I built teams in companies, I led one on the baseball field. Top division. Twenty-five players, five staff. Same principle: everyone knows their role, and why it matters.",
+    "Twaalf jaar in mensen en teams. Het grootste deel daarvan op plekken waar nog niets stond. Geen functies op papier. Geen loopbaanpaden. Geen salarisstructuur. Alleen mensen, en een bedrijf dat harder groeide dan zijn fundament.",
+    "Daar doe ik mijn beste werk. Ik bouw het raamwerk. En dan zorg ik dat je teamleads het zonder mij draaien.",
+    "Voordat ik teams bouwde in bedrijven, leidde ik er een op het honkbalveld. Hoofdklasse. Vijfentwintig spelers, vijf man staf. Zelfde principe: iedereen kent zijn rol, en waarom die ertoe doet.",
   ],
 };
 
@@ -53,150 +54,166 @@ export const portrait = {
 };
 
 export const principles = {
-  heading: "How I work",
+  heading: "Hoe ik werk",
   items: [
     {
-      title: "Structure first. Growth follows.",
+      title: "Eerst structuur. Groei volgt.",
       text:
-        "Talent needs a frame. Clear roles. Visible paths. Fair pay. Then development becomes a choice, not a coincidence.",
+        "Talent heeft een kader nodig. Heldere rollen. Zichtbare paden. Eerlijke beloning. Dan wordt ontwikkeling een keuze in plaats van toeval.",
     },
     {
-      title: "Leaders who can do it themselves.",
+      title: "Leiders die het zelf kunnen.",
       text:
-        "I don't build dependency. Your team leads run the cycle. I make myself unnecessary. That's the point.",
+        "Ik bouw geen afhankelijkheid. Je teamleads draaien de cyclus. Ik maak mezelf overbodig. Dat is de bedoeling.",
     },
     {
-      title: "Start with what works.",
+      title: "Begin bij wat werkt.",
       text:
-        "As a Gallup-certified CliftonStrengths coach, I begin with strengths. People grow faster on what they can do than on what they lack.",
+        "Als Gallup-gecertificeerd CliftonStrengths-coach begin ik bij sterke punten. Mensen groeien sneller op wat ze kunnen dan op wat ze missen.",
+    },
+  ],
+};
+
+// Het stappenplan. Geschreven voor iemand die zit te twijfelen of hij belt.
+export const process = {
+  heading: "Hoe ik het met je opbouw",
+  intro: "Vijf stappen. De laatste is mijn vertrek.",
+  steps: [
+    {
+      title: "We kijken naar wat er al is",
+      text:
+        "Rollen, beloning, paden, wie waarover beslist. Meestal bestaat een deel al, ongeschreven, in iemands hoofd. Dat zetten we eerst op papier. Daarna pas veranderen we iets.",
+    },
+    {
+      title: "We spreken af wat goed is",
+      text:
+        "Eén pagina: welke rollen je bedrijf echt nodig heeft, waar elke rol voor is, en hoe iemand van de ene naar de andere beweegt. Jij tekent voor die pagina voordat er iets gebouwd wordt.",
+    },
+    {
+      title: "Ik bouw het raamwerk",
+      text:
+        "Functieprofielen, skills, loopbaanpaden en salarisbandbreedtes. Live in een platform dat je teamleads echt gebruiken. Gebouwd rond jouw bedrijf, niet rond een sjabloon.",
+    },
+    {
+      title: "Je teamleads nemen het over",
+      text:
+        "Zij draaien de eerste cyclus. Ik zit ernaast, niet ervoor. Waar het vastloopt, lossen we het samen op.",
+    },
+    {
+      title: "Ik ga weg",
+      text:
+        "Het raamwerk is van jullie, de cyclus draait zonder mij, en je leads weten waarom elk onderdeel er staat. Dat is de bedoeling.",
     },
   ],
 };
 
 export const services = {
-  heading: "What I build for you",
-  intro: "Not maintenance. Foundations.",
+  heading: "Wat ik voor je bouw",
+  intro: "Geen onderhoud. Fundament.",
   items: [
     {
       id: "framework",
-      title: "A career framework. From scratch.",
+      title: "Een functiehuis. Vanaf nul.",
       what:
-        "Job roles, skills profiles and development paths for every person in your company. Live in a platform your team leads actually use.",
+        "Functies, skillsprofielen en ontwikkelpaden voor iedereen in je bedrijf. Live in een platform dat je teamleads echt gebruiken.",
       proof:
-        "Built for a 28-person tech marketplace where none of it existed. Live in Learned within a year.",
+        "Gebouwd voor een tech-marktplaats van 28 mensen waar niets van dit alles bestond. Binnen een jaar live in Learned.",
     },
     {
       id: "pay",
-      title: "Pay that holds up.",
+      title: "Beloning die standhoudt.",
       what:
-        "Salary bands on top of your job architecture. Benchmarked against your market. Ready for the EU Pay Transparency Directive before it's required.",
+        "Salarisbandbreedtes bovenop je functiehuis. Gebenchmarkt tegen jouw markt. Klaar voor de EU-richtlijn loontransparantie voordat het moet.",
       proof:
-        "Set up ahead of the directive, benchmarked against the Utrecht tech market.",
+        "Opgezet vóór de richtlijn, gebenchmarkt tegen de Utrechtse tech-markt.",
     },
     {
       id: "leads",
-      title: "Team leads who lead.",
+      title: "Teamleads die leiden.",
       what:
-        "A four-month coaching programme built on CliftonStrengths. Team sessions. One-to-one coaching. Designed and delivered by me, in-house.",
+        "Een coachingsprogramma van vier maanden op basis van CliftonStrengths. Teamsessies. Eén-op-één coaching. Door mij ontworpen en gegeven, in huis.",
       proof:
-        "Four team leads now run their own development cycle. No external trainers.",
+        "Vier teamleads draaien nu hun eigen ontwikkelcyclus. Zonder externe trainers.",
     },
     {
       id: "hiring",
-      title: "The right people. In the right roles.",
+      title: "De juiste mensen. In de juiste rollen.",
       what:
-        "Senior and executive hiring, from role design to signed offer. Job posts, channel mix, selection, negotiation.",
+        "Senior en executive werving, van rolontwerp tot getekend aanbod. Vacatureteksten, kanaalmix, selectie, onderhandeling.",
       proof:
-        "An engineering team from five to eight. Plus a product manager and a CTO.",
+        "Een engineeringteam van vijf naar acht. Plus een productmanager en een CTO.",
     },
     {
       id: "rhythm",
-      title: "A rhythm that ships.",
+      title: "Een ritme dat oplevert.",
       what:
-        "Shape Up for product teams. Scaling Up for the management team. Fewer things at once. More things finished.",
+        "Shape Up voor productteams. Scaling Up voor het MT. Minder dingen tegelijk. Meer dingen af.",
       proof:
-        "Rolled out company-wide, with the CTO owning adoption in product and IT.",
+        "Bedrijfsbreed uitgerold, met de CTO als eigenaar van de adoptie in product en IT.",
     },
     {
       id: "hard",
-      title: "The hard conversations.",
+      title: "De moeilijke gesprekken.",
       what:
-        "Settlement agreements. Long-term absence. Reintegration under Dutch law. Handled directly, with care for the person and certainty for the company.",
+        "Vaststellingsovereenkomsten. Langdurig verzuim. Re-integratie volgens Nederlands arbeidsrecht. Rechtstreeks aangepakt, met zorg voor de mens en zekerheid voor het bedrijf.",
       proof:
-        "Every case handled as the only people role in the company. Every time.",
-    },
-  ],
-};
-
-// The step-by-step. Written to be read by someone deciding whether to call.
-export const process = {
-  heading: "How I build it with you",
-  intro: "Five steps. The last one is me leaving.",
-  steps: [
-    {
-      title: "We look at what is already there",
-      text:
-        "Roles, pay, paths, who decides what. Usually some of it exists, undocumented, in someone's head. We write that down before we change anything.",
-    },
-    {
-      title: "We agree what good looks like",
-      text:
-        "One page: the roles your company actually needs, what each of them is for, and how someone moves between them. You sign off on that page before anything gets built.",
-    },
-    {
-      title: "I build the framework",
-      text:
-        "Job roles, skills profiles, development paths and salary bands, live in a platform your team leads will use. Built around your company, not around a template.",
-    },
-    {
-      title: "Your team leads take it over",
-      text:
-        "They run the first cycle. I sit next to them, not in front of them. Where it breaks, we fix it together.",
-    },
-    {
-      title: "I leave",
-      text:
-        "The framework is yours, the cycle runs without me, and your leads know why every part of it is there. That is the point.",
+        "Elke zaak zelf gedaan, als enige people-rol in het bedrijf. Elke keer.",
     },
   ],
 };
 
 export const credentials = {
-  heading: "Credentials",
+  heading: "Opleiding en certificering",
   items: [
-    "Gallup-certified CliftonStrengths coach",
+    "Gallup-gecertificeerd CliftonStrengths-coach",
     "The Psychology of Leadership, Behaviour Change Group",
-    "Certified trainer and facilitator, Brout",
+    "Gecertificeerd trainer en facilitator, Brout",
     "BASc Leisure Management, Breda University of Applied Sciences",
   ],
 };
 
 export const contact = {
-  heading: "Let's talk.",
-  line: "About structure that still needs building. Or about baseball.",
+  heading: "Laten we praten.",
+  line: "Over structuur die nog gebouwd moet worden. Of over honkbal.",
   email: "kevinroovers@gmail.com",
   linkedin: "https://linkedin.com/in/kevin-roovers",
   linkedinLabel: "LinkedIn",
-  location: "Soesterberg, the Netherlands",
+  location: "Soesterberg, Nederland",
 };
 
 export const footer = {
-  text: "Designed and built in Soesterberg.",
+  text: "Ontworpen en gebouwd in Soesterberg.",
 };
 
-// The assistant. Every word it is allowed to say about the work comes from
-// this file; `intro` and `prompts` are what a visitor sees before they type.
+// Korte labels op knoppen die geen zichtbare tekst hebben. Geen sitetekst,
+// maar een schermlezer heeft ze nodig.
+export const ui = {
+  sound: "Geluid",
+  close: "Sluiten",
+  send: "Versturen",
+};
+
+// De assistent. Alles wat hij over het werk mag zeggen komt uit dit bestand;
+// `intro` en `prompts` zijn wat een bezoeker ziet voordat hij typt.
 export const assistant = {
-  label: "Ask",
-  title: "Ask about the work",
+  label: "Vraag",
+  title: "Stel een vraag over het werk",
   intro:
-    "This assistant answers from what is on this page. For anything else, email me.",
-  placeholder: "Type your question",
+    "Deze assistent antwoordt op basis van wat op deze pagina staat. Voor al het andere: mail me.",
+  placeholder: "Typ je vraag",
   prompts: [
-    "What would you do first in a 30-person company?",
-    "How do salary bands work?",
-    "What does a career framework cost me in time?",
-    "Can my team leads really run this without you?",
+    "Wat zou je als eerste doen bij een bedrijf van 30 mensen?",
+    "Hoe werken salarisbandbreedtes?",
+    "Hoeveel tijd kost een functiehuis mij?",
+    "Kunnen mijn teamleads dit echt zonder jou draaien?",
   ],
-  disclaimer: "AI assistant. It can be wrong — email me if it matters.",
+  disclaimer: "AI-assistent. Kan het mis hebben — mail me als het ertoe doet.",
+  // Wat de assistent zegt als er iets misgaat. Hij faalt nooit stil.
+  errors: {
+    offline:
+      "De assistent draait alleen op de gepubliceerde site. Mail me intussen op kevinroovers@gmail.com.",
+    unreachable:
+      "Ik kon de assistent niet bereiken. Mail me op kevinroovers@gmail.com.",
+    generic: "Er ging iets mis aan mijn kant.",
+  },
 };

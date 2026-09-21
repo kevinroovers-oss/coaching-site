@@ -130,6 +130,7 @@ function render(html, c) {
         name: hero.name,
         description: meta.description,
         url: meta.url,
+        inLanguage: meta.language || 'nl',
         provider: { '@id': `${meta.url}/#kevin` },
         areaServed: { '@type': 'Country', name: meta.serviceArea },
         knowsAbout: meta.subjects,
@@ -165,6 +166,10 @@ function render(html, c) {
   );
 
   const replacements = {
+    '%UI_SOUND%': esc(c.ui.sound),
+    '%UI_CLOSE%': esc(c.ui.close),
+    '%UI_SEND%': esc(c.ui.send),
+    '%ASK_STRINGS%': JSON.stringify(c.assistant.errors).replace(/</g, '\\u003c'),
     '%PAGE_TITLE%': esc(meta.pageTitle || meta.title),
     '%TITLE%': esc(meta.title),
     '%DESCRIPTION%': esc(meta.description),

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -52,7 +52,7 @@
       <span class="indicator-rule"><i id="indicatorRule"></i></span>
     </div>
 
-    <button class="sound" id="sound" type="button" aria-pressed="false" aria-label="Sound">
+    <button class="sound" id="sound" type="button" aria-pressed="false" aria-label="%UI_SOUND%">
       <span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i></span>
     </button>
 
@@ -144,7 +144,7 @@
       <div class="ask-panel">
         <header class="ask-head">
           <h2 class="ask-title" id="askTitle">%ASK_TITLE%</h2>
-          <button class="ask-close" id="askClose" type="button" aria-label="Close">
+          <button class="ask-close" id="askClose" type="button" aria-label="%UI_CLOSE%">
             <span aria-hidden="true"></span>
           </button>
         </header>
@@ -163,7 +163,7 @@
             maxlength="600"
             placeholder="%ASK_PLACEHOLDER%"
           />
-          <button class="ask-send" type="submit" aria-label="Send">
+          <button class="ask-send" type="submit" aria-label="%UI_SEND%">
             <span aria-hidden="true"></span>
           </button>
         </form>
@@ -179,13 +179,14 @@
         <h3 class="overlay-title" id="overlayTitle"></h3>
         <p class="overlay-what" id="overlayWhat"></p>
         <p class="overlay-proof" id="overlayProof"></p>
-        <button class="overlay-close" id="overlayClose" type="button" aria-label="Close">
+        <button class="overlay-close" id="overlayClose" type="button" aria-label="%UI_CLOSE%">
           <span aria-hidden="true"></span>
         </button>
       </article>
     </div>
 
     <script type="application/json" id="serviceData">%SERVICE_DATA%</script>
+    <script type="application/json" id="askStrings">%ASK_STRINGS%</script>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

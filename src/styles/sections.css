@@ -291,10 +291,11 @@ main {
   min-height: 108svh;
 }
 
-/* The closing ring frames this block. The measure is deliberately narrow so
-   the type sits inside the circle rather than crossing it. */
+/* The closing ring frames this block, so the measure is set against the
+   circle: wide enough for the heading on one line, narrow enough to stay
+   inside it. If you change either, check the other. */
 .contact-inner {
-  width: min(34ch, 78vw);
+  width: min(44ch, 78vw);
 }
 
 .contact-line {
@@ -410,6 +411,17 @@ main {
     justify-content: flex-end;
     align-items: center;
     padding-top: 40svh;
+  }
+
+  /* On a phone the footer joins the flow instead of pinning itself to the
+     bottom edge, where it would land on both the location line above it and
+     the assistant's trigger below. */
+  .footer {
+    position: static;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    margin-top: var(--s6);
   }
 
   .contact-inner {
