@@ -24,6 +24,7 @@ const VIEWS = {
   strata:  { cam: [0, 2.6, 13.2], look: [0, -0.7, 0], group: [2.9, -0.3, 0], rot: -0.20, nScale: 0.70, nY: 3.0 },
   orbits:  { cam: [0, 0.2, 12.6], look: [0, 0, 0],    group: [2.8, 0, 0],    rot: 0.26, nScale: 0.76, nY: 3.0 },
   spiral:  { cam: [0, 0.1, 14.0], look: [0, 0, 0],    group: [2.9, 0, 0],    rot: -0.10, nScale: 0.80, nY: 3.0 },
+  steps:   { cam: [0, 0.0, 15.2], look: [0, 0, 0],    group: [2.5, 0, 0],    rot: 0.10, nScale: 0.74, nY: 3.0 },
   network: { cam: [0, 0.0, 14.5], look: [0, 0, 0],    group: [3.4, 0, 0],    rot: 0.05, nScale: 0.72, nY: 3.0 },
   lattice: { cam: [0, 0.0, 13.6], look: [0, 0, 0],    group: [2.9, 0, 0],    rot: 0.04, nScale: 0.74, nY: 3.0 },
   // The last view pulls back and stops. Nothing else happens after this.

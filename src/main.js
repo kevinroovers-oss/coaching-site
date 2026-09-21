@@ -10,6 +10,7 @@ import { initMagnetic } from './ui/magnetic.js';
 import { initIndicator } from './ui/indicator.js';
 import { initPreloader } from './ui/preloader.js';
 import { initOverlay } from './ui/overlay.js';
+import { initAssistant } from './ui/assistant.js';
 import { createAudio, initSoundToggle } from './audio/ambient.js';
 
 import './styles/base.css';
@@ -33,7 +34,7 @@ initSoundToggle(audio);
 // Glass preset: 'quiet', 'liquid' or 'prism'. See GLASS_PRESETS in
 // src/scene/Elements.js for what each dial does. ?glass=prism in the URL
 // overrides it, which makes comparing them a refresh rather than a rebuild.
-const glass = new URLSearchParams(location.search).get('glass') || 'liquid';
+const glass = new URLSearchParams(location.search).get('glass') || 'quiet';
 
 const scene = new Scene(document.getElementById('scene'), {
   reducedMotion,
@@ -93,6 +94,15 @@ cards.forEach((card, i) => {
   card.addEventListener('click', () => overlay.open(i));
 });
 
+// --- assistant -----------------------------------------------------------
+// Shares the scroll lock with the service overlay: whichever is open, Lenis
+// stops, because it owns the scroll position and body overflow alone won't
+// hold it.
+const assistant = initAssistant({
+  onOpen: () => scroll.lenis?.stop(),
+  onClose: () => scroll.lenis?.start(),
+});
+
 // --- easter egg ----------------------------------------------------------
 // Press and hold anywhere on the hero — or hold the H key — and every element
 // breathes to a heartbeat at about 62 bpm. Release and it settles.
@@ -112,7 +122,7 @@ cards.forEach((card, i) => {
   window.addEventListener('pointerup', stop);
   window.addEventListener('pointercancel', stop);
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'h' && !e.repeat && !overlay.isOpen()) scene.setPulse(true);
+    if (e.key === 'h' && !e.repeat && !overlay.isOpen() && !assistant.isOpen()) scene.setPulse(true);
   });
   window.addEventListener('keyup', (e) => {
     if (e.key === 'h') scene.setPulse(false);
@@ -169,6 +179,7 @@ preloader.ready.then(() => {
 // Exposed for headless capture while tuning; harmless in production.
 window.__site = {
   scene,
+  assistant,
   seek: (p) => {
     scene.setProgress(p);
     scene.smoothProgress = p;

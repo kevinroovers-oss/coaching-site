@@ -16,7 +16,7 @@ const scene = new Scene(canvas, {
   reducedMotion: reduced,
   isTouch,
   quality: isTouch ? 'low' : 'high',
-  glass: new URLSearchParams(location.search).get('glass') || 'liquid',
+  glass: new URLSearchParams(location.search).get('glass') || 'quiet',
   onFormation: (key) => { label.textContent = key; },
 });
 

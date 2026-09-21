@@ -340,3 +340,347 @@ body.is-overlay-open {
   .line-i { transform: none; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* --- the assistant -------------------------------------------------------
+   Deliberately not a bubble with a robot in the corner. The trigger is a word
+   and a dot in the same family as the service marks; the panel is the same
+   dialog as the service overlay, with the scene live and blurred behind it.
+------------------------------------------------------------------------- */
+.ask-open {
+  position: fixed;
+  right: 28px;
+  bottom: var(--s5);
+  z-index: 31;
+  display: flex;
+  align-items: center;
+  gap: var(--s1);
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-62);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 800ms var(--ease), color var(--t-micro) var(--ease);
+}
+
+.is-ready .ask-open {
+  opacity: 1;
+}
+
+.ask-open:hover,
+.ask-open:focus-visible {
+  color: var(--accent);
+}
+
+.ask-open-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  transition: transform var(--t-micro-slow) var(--ease);
+}
+
+.ask-open:hover .ask-open-dot {
+  transform: scale(1.5);
+}
+
+/* The sound toggle shares this corner, so it steps aside for the trigger. */
+.sound {
+  right: 28px;
+  bottom: calc(var(--s5) + var(--s4));
+}
+
+.ask {
+  position: fixed;
+  inset: 0;
+  z-index: 46;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: var(--gutter);
+}
+
+.ask[hidden] {
+  display: none;
+}
+
+.ask-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(244, 243, 240, 0.82);
+  backdrop-filter: blur(24px) saturate(104%);
+  -webkit-backdrop-filter: blur(24px) saturate(104%);
+  opacity: 0;
+}
+
+.ask-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(46ch, 100%);
+  max-height: min(680px, 84svh);
+  opacity: 0;
+}
+
+.ask-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s3);
+  padding-bottom: var(--s2);
+  border-bottom: 1px solid var(--ink-12);
+}
+
+.ask-title {
+  margin: 0;
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.028em;
+}
+
+.ask-close {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.ask-close span,
+.ask-close::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 1px;
+  margin-left: -7px;
+  background: var(--ink);
+  transition: background-color var(--t-micro) var(--ease);
+}
+
+.ask-close span { transform: rotate(45deg); }
+.ask-close::after { transform: rotate(-45deg); }
+.ask-close:hover span,
+.ask-close:hover::after { background: var(--accent); }
+
+.ask-intro {
+  margin: var(--s2) 0 var(--s3);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--ink-62);
+}
+
+.ask-log {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  padding-right: var(--s1);
+}
+
+.ask-log:empty {
+  display: none;
+}
+
+.ask-turn p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  letter-spacing: -0.004em;
+}
+
+/* A question is marked by an accent rule, not by a coloured speech balloon. */
+.ask-turn--user p {
+  padding-left: var(--s2);
+  border-left: 2px solid var(--accent);
+  color: var(--ink);
+}
+
+.ask-turn--assistant p {
+  color: var(--ink-80);
+}
+
+/* A caret while the answer streams in. */
+.ask-turn.is-streaming p::after {
+  content: '';
+  display: inline-block;
+  width: 0.5em;
+  height: 1em;
+  margin-left: 0.1em;
+  vertical-align: -0.15em;
+  background: var(--accent);
+  animation: caret 1s steps(2) infinite;
+}
+
+@keyframes caret {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
+.ask-note {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--ink-62);
+}
+
+.ask-prompts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s1);
+  margin: var(--s2) 0 0;
+}
+
+.ask-prompts[hidden] {
+  display: none;
+}
+
+.ask-prompt {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  text-align: left;
+  color: var(--ink-62);
+  cursor: pointer;
+  transition: color var(--t-micro) var(--ease);
+}
+
+.ask-prompt::before {
+  content: '→';
+  margin-right: 0.6em;
+  color: var(--ink-30);
+  transition: color var(--t-micro) var(--ease);
+}
+
+.ask-prompt:hover,
+.ask-prompt:focus-visible {
+  color: var(--ink);
+}
+
+.ask-prompt:hover::before,
+.ask-prompt:focus-visible::before {
+  color: var(--accent);
+}
+
+.ask-form {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  margin-top: var(--s3);
+  padding-top: var(--s2);
+  border-top: 1px solid var(--ink-12);
+}
+
+.ask-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: var(--s1) 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 1rem;
+  letter-spacing: -0.004em;
+  color: var(--ink);
+}
+
+.ask-input::placeholder {
+  color: var(--ink-30);
+}
+
+.ask-input:focus {
+  outline: none;
+}
+
+.ask-form:focus-within {
+  border-top-color: var(--accent);
+}
+
+.ask-send {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+/* An arrow drawn from two rules — the same vocabulary as everything else. */
+.ask-send span,
+.ask-send::after {
+  content: '';
+  position: absolute;
+  background: var(--ink);
+  transition: background-color var(--t-micro) var(--ease);
+}
+
+.ask-send span {
+  left: 8px;
+  top: 50%;
+  width: 16px;
+  height: 1px;
+}
+
+.ask-send::after {
+  right: 8px;
+  top: 50%;
+  width: 8px;
+  height: 1px;
+  transform-origin: right;
+  transform: rotate(-45deg);
+}
+
+.ask-send:hover span,
+.ask-send:hover::after {
+  background: var(--accent);
+}
+
+.ask-send:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.ask-disclaimer {
+  margin: var(--s2) 0 0;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-62);
+}
+
+.ask.is-busy .ask-input {
+  opacity: 0.5;
+}
+
+@media (max-width: 900px) {
+  .ask {
+    align-items: stretch;
+    justify-content: stretch;
+    padding: var(--gutter) var(--gutter) var(--s4);
+  }
+
+  .ask-panel {
+    width: 100%;
+    max-height: none;
+    justify-content: flex-end;
+  }
+
+  .ask-open {
+    right: var(--gutter);
+  }
+}

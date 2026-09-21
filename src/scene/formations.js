@@ -140,6 +140,32 @@ function spiral(i, n, out) {
 }
 
 // ---------------------------------------------------------------------------
+// 5b. STEPS — the step-by-step. Five rungs climbing left to right, each one a
+//     flat bar of elements. The only formation that is literally what the
+//     section says: you can count the steps.
+// ---------------------------------------------------------------------------
+function steps(i, n, out) {
+  const rungs = 5;
+  const g = i % rungs;
+  const k = Math.floor(i / rungs);
+  const per = Math.ceil(n / rungs);
+  // Each rung is a flat plate, not a bundle: elements laid out on a grid in x
+  // and z so it reads as a tread you could stand on.
+  const cols = Math.max(2, Math.round(Math.sqrt(per * 2.6)));
+  const rows = Math.max(1, Math.ceil(per / cols));
+  const cx = k % cols;
+  const cz = Math.floor(k / cols);
+  const along = cx / Math.max(1, cols - 1) - 0.5;
+  const across = cz / Math.max(1, rows - 1) - 0.5;
+  const x = (g - (rungs - 1) / 2) * 1.5 + along * 1.25;
+  const y = (g - (rungs - 1) / 2) * 0.95 + (hash(i, 61) - 0.5) * 0.1;
+  const z = across * 2.2 + (hash(i, 62) - 0.5) * 0.24;
+  return normalise(set(out, x, y, z,
+    1, 0.04, (hash(i, 63) - 0.5) * 0.18,
+    0.7 + hash(i, 64) * 0.28));
+}
+
+// ---------------------------------------------------------------------------
 // 6. NETWORK — services. Six hubs, one per service, connected by members.
 //    Elements 0..5 ARE the hubs: the UI highlights them on card hover, which
 //    is what makes the 2D/3D link tangible.
@@ -226,6 +252,7 @@ export const FORMATIONS = {
   strata:  { fn: strata,  drift: 0.16, looseness: 0.25 },
   orbits:  { fn: orbits,  drift: 0.3,  looseness: 0.4 },
   spiral:  { fn: spiral,  drift: 0.24, looseness: 0.35 },
+  steps:   { fn: steps,   drift: 0.12, looseness: 0.22 },
   network: { fn: network, drift: 0.18, looseness: 0.3 },
   lattice: { fn: lattice, drift: 0.1,  looseness: 0.18 },
   ring:    { fn: ring,    drift: 0.05, looseness: 0.1 },
@@ -239,7 +266,8 @@ export const TIMELINE = [
   { key: 'strata',  at: 0.31, section: 'principles' },
   { key: 'orbits',  at: 0.40, section: 'principles' },
   { key: 'spiral',  at: 0.49, section: 'principles' },
-  { key: 'network', at: 0.66, section: 'services' },
+  { key: 'steps',   at: 0.58, section: 'process' },
+  { key: 'network', at: 0.70, section: 'services' },
   { key: 'lattice', at: 0.82, section: 'credentials' },
   { key: 'ring',    at: 0.96, section: 'contact' },
 ];

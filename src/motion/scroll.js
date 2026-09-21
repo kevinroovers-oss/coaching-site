@@ -7,7 +7,7 @@ import { TIMELINE } from '../scene/formations.js';
 // the scene then damps that again on its own (see Scene.update), so the
 // formations always arrive a beat after the page does.
 
-const SECTIONS = ['hero', 'about', 'principles', 'services', 'credentials', 'contact'];
+const SECTIONS = ['hero', 'about', 'principles', 'process', 'services', 'credentials', 'contact'];
 
 // Which element each formation belongs to. Anchors are resolved at runtime, so
 // the timeline follows the real layout instead of hard-coded percentages —
@@ -18,6 +18,7 @@ const ANCHORS = {
   strata: { sel: '[data-principle="0"]', align: 'center' },
   orbits: { sel: '[data-principle="1"]', align: 'center' },
   spiral: { sel: '[data-principle="2"]', align: 'center' },
+  steps: { sel: '#process', align: 'center' },
   network: { sel: '#services', align: 'center' },
   lattice: { sel: '#credentials', align: 'center' },
   ring: { sel: '#contact', align: 'center' },

@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.127.0",
     "gsap": "^3.12.5",
     "lenis": "^1.1.18",
     "three": "^0.169.0"

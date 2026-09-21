@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /motion-study.html
+
+Sitemap: https://kevinroovers.nl/sitemap.xml

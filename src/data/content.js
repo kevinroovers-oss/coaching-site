@@ -2,9 +2,31 @@
 
 export const meta = {
   title: "Kevin Roovers",
+  // The <title> tag. Longer than the name on purpose: this is the line that
+  // shows in a search result, and a bare name tells a stranger nothing.
+  pageTitle:
+    "Kevin Roovers — career frameworks, pay structures and leadership for growing companies",
   description:
     "You have the people. I build the structure they grow in. Career frameworks, pay structures, leadership coaching and ways of working for growing companies.",
   url: "https://kevinroovers.nl", // replace with the real domain
+  // Used for the structured data search engines read. Plain subject terms,
+  // not keyword stuffing: they describe the work and nothing more.
+  subjects: [
+    "Career frameworks",
+    "Job architecture",
+    "Salary bands",
+    "EU Pay Transparency Directive",
+    "Leadership coaching",
+    "CliftonStrengths",
+    "Senior and executive hiring",
+    "Shape Up",
+    "Scaling Up",
+    "Functiehuis",
+    "Salarishuis",
+    "Loopbaanpaden",
+    "Leiderschapscoaching",
+  ],
+  serviceArea: "Netherlands",
 };
 
 export const hero = {
@@ -16,10 +38,18 @@ export const hero = {
 export const about = {
   heading: "Loose parts. One organisation.",
   paragraphs: [
-    "Twelve years in talent and people. Most of it spent where nothing existed yet. No roles on paper. No career paths. No pay structure. Just people, and a company growing faster than its foundations.",
+    "Twelve years in people and teams. Most of it spent where nothing existed yet. No roles on paper. No career paths. No pay structure. Just people, and a company growing faster than its foundations.",
     "That's where I do my best work. I build the framework. Then I make sure your team leads can run it without me.",
     "Before I built teams in companies, I led one on the baseball field. Top division. Twenty-five players, five staff. Same principle: everyone knows their role, and why it matters.",
   ],
+};
+
+export const portrait = {
+  src: "/img/kevin-roovers.webp",
+  width: 720,
+  height: 900,
+  alt: "Kevin Roovers",
+  caption: "Kevin Roovers, Soesterberg",
 };
 
 export const principles = {
@@ -98,6 +128,39 @@ export const services = {
   ],
 };
 
+// The step-by-step. Written to be read by someone deciding whether to call.
+export const process = {
+  heading: "How I build it with you",
+  intro: "Five steps. The last one is me leaving.",
+  steps: [
+    {
+      title: "We look at what is already there",
+      text:
+        "Roles, pay, paths, who decides what. Usually some of it exists, undocumented, in someone's head. We write that down before we change anything.",
+    },
+    {
+      title: "We agree what good looks like",
+      text:
+        "One page: the roles your company actually needs, what each of them is for, and how someone moves between them. You sign off on that page before anything gets built.",
+    },
+    {
+      title: "I build the framework",
+      text:
+        "Job roles, skills profiles, development paths and salary bands, live in a platform your team leads will use. Built around your company, not around a template.",
+    },
+    {
+      title: "Your team leads take it over",
+      text:
+        "They run the first cycle. I sit next to them, not in front of them. Where it breaks, we fix it together.",
+    },
+    {
+      title: "I leave",
+      text:
+        "The framework is yours, the cycle runs without me, and your leads know why every part of it is there. That is the point.",
+    },
+  ],
+};
+
 export const credentials = {
   heading: "Credentials",
   items: [
@@ -119,4 +182,21 @@ export const contact = {
 
 export const footer = {
   text: "Designed and built in Soesterberg.",
+};
+
+// The assistant. Every word it is allowed to say about the work comes from
+// this file; `intro` and `prompts` are what a visitor sees before they type.
+export const assistant = {
+  label: "Ask",
+  title: "Ask about the work",
+  intro:
+    "This assistant answers from what is on this page. For anything else, email me.",
+  placeholder: "Type your question",
+  prompts: [
+    "What would you do first in a 30-person company?",
+    "How do salary bands work?",
+    "What does a career framework cost me in time?",
+    "Can my team leads really run this without you?",
+  ],
+  disclaimer: "AI assistant. It can be wrong — email me if it matters.",
 };

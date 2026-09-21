@@ -38,6 +38,9 @@
   --accent: #ae460c;
 
   /* Derived, never authored by hand elsewhere. */
+  /* Body text sits at 80% ink: 8.5:1 on the background, well past AA. The
+     old 70% passed too, but "as readable as possible" is the brief now. */
+  --ink-80: rgba(26, 26, 26, 0.8);
   --ink-70: rgba(26, 26, 26, 0.7);
   /* The lightest ink that still clears 4.5:1 on the background. Anything
      quieter than this is for rules and marks, never for text. */
@@ -60,7 +63,9 @@
   --s10: 256px;
 
   --gutter: clamp(24px, 5vw, 96px);
-  --measure: 34ch;
+  /* ~68 characters per line at the body size — the readable band. The old
+     34ch was about 40 characters, which is magazine-caption narrow. */
+  --measure: 50ch;
 
   /* One easing vocabulary, shared with /src/motion/easing.js */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);

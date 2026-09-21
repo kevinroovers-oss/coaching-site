@@ -188,6 +188,86 @@ main {
   transition-duration: var(--t-micro-slow);
 }
 
+/* --- portrait ------------------------------------------------------------
+   The source photo is a greyscale subject on a saturated orange backdrop; the
+   backdrop is keyed out at build time (scripts/, see README) so what lands here
+   is a cut-out on the page's own off-white. No frame, no border radius.
+------------------------------------------------------------------------- */
+.portrait {
+  margin: var(--s6) 0 0;
+  max-width: 320px;
+}
+
+.portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* A whisper of warmth, so the black and white sits in the same light as the
+     scene rather than looking pasted on. */
+  filter: contrast(1.02) sepia(0.06);
+  /* The photo's backdrop is the page colour, but the page itself carries the
+     scene's vignette, so a hard rectangle would show. Feathering the edges
+     dissolves it into the page. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 5%, #000 96%, transparent),
+    linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 5%, #000 96%, transparent),
+    linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+.portrait figcaption {
+  margin-top: var(--s2);
+  padding-top: var(--s2);
+  border-top: 1px solid var(--ink-12);
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-62);
+}
+
+/* --- the step-by-step ----------------------------------------------------- */
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: step;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 4ch 1fr;
+  gap: var(--s3);
+  padding: var(--s4) 0;
+  border-top: 1px solid var(--ink-12);
+}
+
+.step:last-child {
+  border-bottom: 1px solid var(--ink-12);
+}
+
+.step-num {
+  padding-top: 0.35em;
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+
+.step-body .h3 {
+  margin-bottom: var(--s2);
+}
+
+.step-body .body {
+  margin-bottom: 0;
+  max-width: 46ch;
+}
+
+/* The last step is the whole point of the method, so it gets the emphasis. */
+.step:last-child .step-body .h3 {
+  color: var(--accent);
+}
+
 /* --- credentials --------------------------------------------------------- */
 .credentials {
   border-top: 1px solid var(--ink-12);
@@ -196,10 +276,10 @@ main {
 .credential {
   padding: var(--s3) 0;
   border-bottom: 1px solid var(--ink-12);
-  font-size: clamp(1rem, 1.3vw, 1.125rem);
-  line-height: 1.4;
-  letter-spacing: -0.015em;
-  color: var(--ink-70);
+  font-size: clamp(1.0625rem, 1.35vw, 1.1875rem);
+  line-height: 1.45;
+  letter-spacing: -0.012em;
+  color: var(--ink-80);
 }
 
 /* --- contact ------------------------------------------------------------- */
@@ -219,10 +299,10 @@ main {
 
 .contact-line {
   margin: 0 0 var(--s5);
-  font-size: 1rem;
-  line-height: 1.6;
-  letter-spacing: -0.01em;
-  color: var(--ink-70);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  letter-spacing: -0.008em;
+  color: var(--ink-80);
 }
 
 .contact-links {
@@ -339,6 +419,15 @@ main {
   .service-card {
     grid-template-columns: 3.5ch 1fr auto;
     gap: var(--s2);
+  }
+
+  .step {
+    grid-template-columns: 3.5ch 1fr;
+    gap: var(--s2);
+  }
+
+  .portrait {
+    max-width: 260px;
   }
 }
 

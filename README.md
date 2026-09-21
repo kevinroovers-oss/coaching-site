@@ -126,13 +126,87 @@ everything landing in the right place.
 | 3 | `strata` | Principle 1 — *Structure first* | Five level horizontal layers. The most architectural one. |
 | 4 | `orbits` | Principle 2 — *Leaders who do it themselves* | Four separate centres, each with its own rings. No middle any more. |
 | 5 | `spiral` | Principle 3 — *Start with what works* | One helix growing outward and upward from a dense core. |
-| 6 | `network` | Services | Six hubs, one per service, wired by members along ten edges. |
-| 7 | `lattice` | Credentials | Four quiet upright rows. Deliberately does not compete with the list. |
-| 8 | `ring` | Contact | One symmetrical circle. The camera pulls back and stops. |
+| 6 | `steps` | How I build it with you | Five flat treads climbing left to right. The one formation you can count. |
+| 7 | `network` | Services | Six hubs, one per service, wired by members along ten edges. |
+| 8 | `lattice` | Credentials | Four quiet upright rows. Deliberately does not compete with the list. |
+| 9 | `ring` | Contact | One symmetrical circle. The camera pulls back and stops. |
 
 Formations live in `/src/scene/formations.js` and are plain functions — no
 Three.js in that file, so they stay easy to read and to retune. Camera and
 staging per formation are the `VIEWS` table at the top of `/src/scene/Scene.js`.
+
+---
+
+## The assistant
+
+A chat panel that answers questions about the work. It is grounded in
+`src/data/content.js` — the same file the page is built from — so there is one
+source of truth for what it is allowed to say.
+
+- **Backend:** `api/chat.js`, a Vercel Edge Function. The API key lives there
+  and never reaches the browser.
+- **Model:** `claude-opus-5`, streamed, adaptive thinking at `low` effort. A
+  website Q&A does not repay deep reasoning, and low effort keeps the first
+  token quick.
+- **Caching:** the system prompt is long and never changes, so it is marked
+  cacheable. After the first question in a five-minute window the input costs
+  roughly a tenth.
+- **Grounding:** it answers only from the reference, never invents numbers,
+  clients, prices or availability, matches the visitor's language (a Dutch
+  question gets a Dutch answer), keeps to two to four sentences, and points at
+  the email address for anything it does not know.
+- **Frontend:** `src/ui/assistant.js`. Same dialog family as the service
+  overlay, focus-trapped, Escape to close.
+
+### Switching it on
+
+It needs one environment variable in the Vercel project:
+
+```
+ANTHROPIC_API_KEY = sk-ant-...
+```
+
+Get one at console.anthropic.com. **Without it the endpoint returns 503 and the
+panel says the assistant is offline** — it never fails silently, and the rest of
+the site is unaffected. On a preview with no backend at all (a static file
+server, or before the first deploy) the panel says so and gives the email
+address instead.
+
+### What it costs, and what to watch
+
+Every conversation is billed to that key. Opus 5 is $5 per million input tokens
+and $25 per million output; the system prompt is roughly 1,500 tokens, cached
+after the first hit, and answers are capped at 800 tokens. A typical exchange is
+fractions of a cent, but **there is no spend cap in this code** — set a monthly
+budget limit on the API key in the Anthropic console before you point a domain
+at this.
+
+Rate limiting is deliberately thin: a per-isolate counter that slows a casual
+flood and nothing more. Before any real traffic, add rate limiting on the
+`/api/chat` route in Vercel's firewall settings. Input is capped at 1,000
+characters per message and 20 messages per conversation, server-side.
+
+---
+
+## Findability
+
+- The `<title>` is `meta.pageTitle`, not the bare name — that is the line a
+  stranger reads in a search result.
+- JSON-LD in the head describes a `Person`, a `ProfessionalService` with its
+  offer catalogue, and a `HowTo` built from the five steps. All of it is
+  generated from `content.js`; none of it is hand-maintained.
+- `robots.txt` and a generated `sitemap.xml` carry the canonical URL. The motion
+  study is excluded and carries `noindex`.
+- The copy ships as real static HTML, so there is nothing for a crawler to
+  execute.
+
+**The one thing this cannot fix: the site is in English.** Your clients are
+Dutch companies in and around Utrecht, and they search in Dutch —
+*functiehuis*, *salarishuis*, *loopbaanpaden*, *interim HR*. An English page
+will not rank for any of those, whatever the structured data says. The
+`meta.subjects` list carries a few Dutch terms into the structured data, which
+helps a little and is honest, but it is not a substitute. If reaching Dutch
+clients through search matters, the page needs a Dutch version. Say the word.
 
 ---
 
@@ -153,8 +227,11 @@ src/
     reveal.js              staggered line reveals
   ui/
     preloader.js  cursor.js  magnetic.js  indicator.js  overlay.js
+    assistant.js           the chat panel
   audio/ambient.js         Web Audio bed + tick, no files
   styles/                  base (tokens), typography, sections, ui
+api/chat.js                the assistant's backend (Vercel Edge Function)
+scripts/                   one-off asset generators (share image, portrait)
 legacy/                    the previous Dutch one-pager, moved aside untouched
 ```
 
@@ -193,8 +270,8 @@ and the palette is `ENV` just above them.
 
 | Preset | What it is |
 | --- | --- |
-| `quiet` | Smoked glass. The mass still reads near-black, colour only in the glints. Closest to the original brief. |
-| `liquid` | **The default.** Clearly glass, clearly coloured, still a calm object. |
+| `quiet` | **The default.** Smoked glass: the mass still reads near-black and the colour lives in the glints. It keeps the silhouette that made the hero work. |
+| `liquid` | Clearly glass, clearly coloured, still a calm object. More colour, less weight. |
 | `prism` | Full spectrum. Bright and playful, and a long way from "calm and precise". |
 
 Switch permanently by changing the fallback in `src/main.js`, or compare them
@@ -263,23 +340,27 @@ headless Chromium at 1440×900.
 | --- | --- |
 | `three` | 117.5 kB |
 | `gsap` + ScrollTrigger | 45.5 kB |
-| scene + shaders + Lenis | 17.9 kB |
-| site code | 4.1 kB |
-| **JavaScript total** | **185.0 kB** |
-| CSS | 3.7 kB |
-| HTML | 3.5 kB |
+| scene + shaders + Lenis | 18.1 kB |
+| site code (incl. the chat panel) | 5.3 kB |
+| **JavaScript total** | **185.3 kB** |
+| CSS | 4.7 kB |
+| HTML | 4.6 kB |
 | Inter (latin subset, woff2) | 71.2 kB |
+| Portrait (webp, lazy) | 98.7 kB |
 
-Budget was 300 kB of JavaScript gzipped. **185.0 kB.**
+Budget was 300 kB of JavaScript gzipped. **185.3 kB.** The Anthropic SDK is not
+in this — it only exists in the Edge Function, which Vercel bundles separately
+and the browser never downloads.
 
-**Loading** — 8 requests, 261.7 kB encoded in total. First contentful paint
-**140 ms**, DOMContentLoaded **215 ms**, load **217 ms**. These are local-server
+**Loading** — 9 requests, 362.8 kB encoded in total (the portrait is most of the
+increase, and it is lazy-loaded below the fold). First contentful paint
+**140 ms**, DOMContentLoaded **215 ms**, load **218 ms**. These are local-server
 numbers with no network latency: treat them as the floor, not as a field
 measurement. Budget was < 1.5 s first paint. The font is self-hosted and
 preloaded, so there is no third-party connection before first paint.
 
 **Per frame** — the site's own JavaScript (formation blending, damping, and
-writing 300 instance matrices) costs **0.30 ms median, 0.40 ms p95** out of a
+writing 300 instance matrices) costs **0.20 ms median, 0.40 ms p95** out of a
 16.7 ms budget, over 240 frames. The glass added nothing measurable to that: its
 cost is entirely GPU-side. Draw calls are now 11 — the swarm twice (2 + 2), the
 ground once, two blurs for the backdrop, and four for bloom and composite.
@@ -292,6 +373,30 @@ backdrop, quarter-resolution bloom, no shadow map), but please check it on your
 own machine and tell me what you see. If it needs headroom, the first dial is
 `count` in `src/scene/Scene.js`, and the second is `refraction: 0` in the glass
 preset, which skips nothing but makes the backdrop buffer irrelevant.
+
+---
+
+## The portrait
+
+`public/img/kevin-roovers.webp` is generated from `legacy/portret.png` by
+`scripts/make-portrait.mjs`. The source is a greyscale subject on a saturated
+orange backdrop that clashes with this palette, so the script keys the backdrop
+out and composites the subject onto the page's own off-white.
+
+Two things mark a pixel as background and both have to be read: it is saturated
+orange, **and** the source PNG already carries an alpha channel. Keying on
+colour alone turns every transparent pixel black, because an RGB of 0,0,0 has no
+saturation and looks like ink. That bug is why the first two attempts came out
+with a black box around his head.
+
+```bash
+npm i -D playwright && npx playwright install chromium
+node scripts/make-portrait.mjs
+```
+
+If you swap the source photo, re-run it and update `portrait.width` /
+`portrait.height` in `content.js`. The `--bg` value is duplicated at the top of
+the script — keep the two in step.
 
 ---
 
@@ -326,6 +431,10 @@ Or connect the repository at vercel.com and accept the defaults:
 - Build command: `npm run build`
 - Output directory: `dist`
 - Install command: `npm install`
+
+`api/chat.js` is picked up automatically — no configuration needed. **Set
+`ANTHROPIC_API_KEY` in Settings → Environment Variables** or the assistant will
+report itself offline.
 
 Then point `kevinroovers.nl` at the project in **Settings → Domains**, and set
 the real domain in `meta.url` in `src/data/content.js` so the canonical link and
