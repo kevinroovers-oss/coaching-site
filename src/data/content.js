@@ -184,7 +184,7 @@ export const credentials = {
     "Gallup-gecertificeerd CliftonStrengths-coach",
     "The Psychology of Leadership, Behaviour Change Group",
     "Gecertificeerd trainer en facilitator, Brout",
-    "BASc Leisure Management, Breda University of Applied Sciences",
+    "Sturen op mandaat, Neuromanagement (Sven Gall)",
   ],
 };
 
