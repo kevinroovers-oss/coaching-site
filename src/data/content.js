@@ -110,54 +110,70 @@ export const process = {
 export const services = {
   heading: "Wat ik voor je bouw",
   intro: "Geen onderhoud. Fundament.",
+  // De titel is de overtuiging, niet het product. Alle zes beginnen hetzelfde,
+  // met opzet: zo leest de lijst als een manifest en springt het verschil eruit.
+  // Het product staat in `wat` — dat is de "hoe", die je later kunt aanscherpen.
+  // `bron` verwijst naar de boeken uit je eigen bibliotheek waar de claim op rust.
   items: [
     {
       id: "framework",
-      title: "Een functiehuis. Vanaf nul.",
+      title:
+        "De beste organisaties weten wat hun mensen kunnen, niet alleen welke functie ze hebben.",
       what:
-        "Functies, skillsprofielen en ontwikkelpaden voor iedereen in je bedrijf. Live in een platform dat je teamleads echt gebruiken.",
+        "Een functiehuis vanaf nul: functies, skillsprofielen en ontwikkelpaden voor iedereen in je bedrijf. Live in een platform dat je teamleads echt gebruiken.",
       proof:
         "Gebouwd voor een tech-marktplaats van 28 mensen waar niets van dit alles bestond. Binnen een jaar live in Learned.",
+      bron: "Work Without Jobs, Jesuthasan & Boudreau · The Skills-Powered Organization, Jesuthasan & Kapilashrami",
     },
     {
       id: "pay",
-      title: "Beloning die standhoudt.",
+      title:
+        "De beste organisaties halen geld van tafel als gespreksonderwerp, zodat het over het werk kan gaan.",
       what:
-        "Salarisbandbreedtes bovenop je functiehuis. Gebenchmarkt tegen jouw markt. Klaar voor de EU-richtlijn loontransparantie voordat het moet.",
+        "Een salarishuis bovenop je functiehuis: salarisbandbreedtes, gebenchmarkt tegen jouw markt. Klaar voor de EU-richtlijn loontransparantie voordat het moet.",
       proof:
         "Opgezet vóór de richtlijn, gebenchmarkt tegen de Utrechtse tech-markt.",
+      bron: "Drive, Daniel Pink · Powerful, Patty McCord",
     },
     {
       id: "leads",
-      title: "Teamleads die leiden.",
+      title:
+        "De beste organisaties weten dat betrokkenheid in het team ontstaat, niet in het personeelsbeleid.",
       what:
-        "Een coachingsprogramma van vier maanden op basis van CliftonStrengths. Teamsessies. Eén-op-één coaching. Door mij ontworpen en gegeven, in huis.",
+        "Een coachingsprogramma van vier maanden voor je teamleads, op basis van CliftonStrengths. Teamsessies. Eén-op-één coaching. Door mij ontworpen en gegeven, in huis.",
       proof:
         "Vier teamleads draaien nu hun eigen ontwikkelcyclus. Zonder externe trainers.",
+      bron: "It's the Manager, Clifton & Harter · Nine Lies About Work, Buckingham & Goodall",
     },
     {
       id: "hiring",
-      title: "De juiste mensen. In de juiste rollen.",
+      title:
+        "De beste organisaties selecteren op een vaste methode, niet op een goed gevoel.",
       what:
-        "Senior en executive werving, van rolontwerp tot getekend aanbod. Vacatureteksten, kanaalmix, selectie, onderhandeling.",
+        "Senior en executive werving, van rolontwerp tot getekend aanbod. Vacatureteksten, kanaalmix, gestructureerde selectie, onderhandeling.",
       proof:
         "Een engineeringteam van vijf naar acht. Plus een productmanager en een CTO.",
+      bron: "Work Rules!, Laszlo Bock · Noise, Kahneman, Sibony & Sunstein",
     },
     {
       id: "rhythm",
-      title: "Een ritme dat oplevert.",
+      title:
+        "De beste organisaties belonen afgemaakt werk, niet zichtbare drukte.",
       what:
-        "Shape Up voor productteams. Scaling Up voor het MT. Minder dingen tegelijk. Meer dingen af.",
+        "Een werkritme dat oplevert: Shape Up voor productteams, Scaling Up voor het MT. Minder dingen tegelijk. Meer dingen af.",
       proof:
         "Bedrijfsbreed uitgerold, met de CTO als eigenaar van de adoptie in product en IT.",
+      bron: "Deep Work, Cal Newport · The Progress Principle, Amabile & Kramer",
     },
     {
       id: "hard",
-      title: "De moeilijke gesprekken.",
+      title:
+        "De beste organisaties voeren het moeilijke gesprek op tijd, omdat uitstellen niet aardig is maar duur.",
       what:
         "Vaststellingsovereenkomsten. Langdurig verzuim. Re-integratie volgens Nederlands arbeidsrecht. Rechtstreeks aangepakt, met zorg voor de mens en zekerheid voor het bedrijf.",
       proof:
         "Elke zaak zelf gedaan, als enige people-rol in het bedrijf. Elke keer.",
+      bron: "Radical Candor, Kim Scott · Powerful, Patty McCord",
     },
   ],
 };

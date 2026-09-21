@@ -72,6 +72,11 @@ function render(html, c) {
     )
     .join('');
 
+  // The detail lives in the DOM, hidden until the overlay opens, rather than in
+  // a JSON blob. Same click behaviour; the difference is that a crawler and a
+  // visitor without JavaScript can both read it — and since the searchable
+  // words (functiehuis, salarishuis) moved out of the titles into `what`, that
+  // matters more than it used to.
   const serviceItems = services.items
     .map(
       (it, i) => `
@@ -82,6 +87,11 @@ function render(html, c) {
               <span class="service-title">${esc(it.title)}</span>
               <span class="service-mark" aria-hidden="true"></span>
             </button>
+            <div class="service-detail" id="service-${i}" hidden>
+              <p data-field="what">${esc(it.what)}</p>
+              <p data-field="proof">${esc(it.proof)}</p>
+              ${it.bron ? `<p data-field="bron">${esc(it.bron)}</p>` : ''}
+            </div>
           </li>`
     )
     .join('');
@@ -161,10 +171,6 @@ function render(html, c) {
     .map((it) => `<li class="credential reveal">${esc(it)}</li>`)
     .join('\n            ');
 
-  const serviceData = JSON.stringify(
-    services.items.map(({ id, title, what, proof }) => ({ id, title, what, proof }))
-  );
-
   const replacements = {
     '%UI_SOUND%': esc(c.ui.sound),
     '%UI_CLOSE%': esc(c.ui.close),
@@ -190,7 +196,6 @@ function render(html, c) {
     '%SERVICES_HEADING%': lines(services.heading),
     '%SERVICES_INTRO%': esc(services.intro),
     '%SERVICE_ITEMS%': serviceItems,
-    '%SERVICE_DATA%': serviceData.replace(/</g, '\\u003c'),
     '%CREDENTIALS_HEADING%': lines(credentials.heading),
     '%CREDENTIAL_ITEMS%': credentialItems,
     '%CONTACT_HEADING%': lines(contact.heading),

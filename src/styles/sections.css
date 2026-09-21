@@ -141,11 +141,16 @@ main {
   transition: color var(--t-micro) var(--ease);
 }
 
+/* The titles are convictions now, not product names, so they run to a sentence
+   or two. Smaller and looser than a label would be, and every one of the six
+   starts with the same three words — the eye locks on that and reads only what
+   changes. */
 .service-title {
-  font-size: clamp(1.125rem, 1.7vw, 1.5rem);
+  font-size: clamp(1rem, 1.35vw, 1.1875rem);
   font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.024em;
+  line-height: 1.45;
+  letter-spacing: -0.014em;
+  text-wrap: pretty;
   transition: color var(--t-micro) var(--ease), transform var(--t-micro-slow) var(--ease);
 }
 
@@ -266,6 +271,12 @@ main {
 /* The last step is the whole point of the method, so it gets the emphasis. */
 .step:last-child .step-body .h3 {
   color: var(--accent);
+}
+
+/* The detail sits in the page but stays closed until the overlay opens. It is
+   here for a crawler and for anyone without JavaScript, not for layout. */
+.service-detail[hidden] {
+  display: none;
 }
 
 /* --- credentials --------------------------------------------------------- */

@@ -56,6 +56,36 @@ Two things the plugin decides, rather than the copy:
 - The about heading and the hero line are split at sentence boundaries into
   separate reveal lines.
 
+### The service titles are convictions, not products
+
+Each of the six services leads with a claim about how good organisations work,
+not with the name of a deliverable. All six open with the same three words —
+*De beste organisaties* — on purpose: the repetition turns the list into a
+manifesto and lets the eye read only what changes.
+
+The deliverable is still there; it moved one level down. Each item carries:
+
+| Field | What it is |
+| --- | --- |
+| `title` | the conviction — what you believe |
+| `what` | the deliverable — the *hoe*, which is the part to keep sharpening |
+| `proof` | what you actually did |
+| `bron` | the books the claim rests on |
+
+`bron` is rendered quietly at the bottom of the overlay. The claims are drawn
+from the library in `legacy/boeken.html` — *Powerful*, *Work Rules!*, *Drive*,
+*Noise*, *Deep Work*, *Radical Candor*, *It's the Manager*, *Nine Lies About
+Work*, *Work Without Jobs*, *The Progress Principle*. Delete the field and the
+line disappears.
+
+**Two things this trades away.** The searchable words — *functiehuis*,
+*salarishuis* — left the headings, which is where a search engine weighs them
+most. They now live in `what`, in prose. To keep them visible to a crawler, the
+overlay content is rendered into the page as hidden markup rather than as a JSON
+blob, so it is in the DOM and readable without JavaScript. That recovers most of
+it, not all. If a ranking on *functiehuis* turns out to matter more than the
+positioning, put the word back in one heading.
+
 ### Labels that are not in `content.js`
 
 Four short strings had to be invented and are **not** part of the copy. They are
@@ -202,7 +232,9 @@ Dutch companies and they search in Dutch. The rest supports that.
 
 - The `<title>` is `meta.pageTitle`, not the bare name — that is the line a
   stranger reads in a search result, and it carries the two words people
-  actually type: *functiehuis* and *salarishuis*.
+  actually type: *functiehuis* and *salarishuis*. Since the service headings
+  now lead with convictions, the title is where those words still sit in a
+  heading position.
 - `meta.subjects` lists the subject terms in the vocabulary clients use —
   functiehuis, salarishuis, salarisbandbreedtes, loopbaanpaden, EU-richtlijn
   loontransparantie, interim HR. They are plain vaktermen, not keyword

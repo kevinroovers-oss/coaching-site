@@ -12,7 +12,21 @@ export function initOverlay({ onOpen, onClose } = {}) {
   const title = document.getElementById('overlayTitle');
   const what = document.getElementById('overlayWhat');
   const proof = document.getElementById('overlayProof');
-  const data = JSON.parse(document.getElementById('serviceData').textContent);
+  const bron = document.getElementById('overlayBron');
+
+  // Read the detail out of the page rather than out of a JSON blob, so the
+  // same words serve the overlay, a crawler and anyone without JavaScript.
+  const cards = [...document.querySelectorAll('.service-card')];
+  const data = cards.map((card) => {
+    const detail = card.parentElement.querySelector('.service-detail');
+    const field = (name) => detail?.querySelector(`[data-field="${name}"]`)?.textContent ?? '';
+    return {
+      title: card.querySelector('.service-title')?.textContent ?? '',
+      what: field('what'),
+      proof: field('proof'),
+      bron: field('bron'),
+    };
+  });
 
   let openIndex = null;
   let lastFocus = null;
@@ -29,6 +43,8 @@ export function initOverlay({ onOpen, onClose } = {}) {
     title.textContent = item.title;
     what.textContent = item.what;
     proof.textContent = item.proof;
+    bron.textContent = item.bron;
+    bron.hidden = !item.bron;
 
     root.hidden = false;
     document.body.classList.add('is-overlay-open');
@@ -44,7 +60,7 @@ export function initOverlay({ onOpen, onClose } = {}) {
       0.08
     );
     tl.fromTo(
-      [num, title, what, proof],
+      [num, title, what, proof, bron],
       { opacity: 0, y: 16 },
       { opacity: 1, y: 0, duration: 0.8, stagger: 0.06, ease: E.out },
       0.14

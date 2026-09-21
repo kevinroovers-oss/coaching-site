@@ -246,13 +246,15 @@
   color: var(--accent);
 }
 
+/* Smaller than it was: the title is a full sentence now, not a product name,
+   and at the old size four lines of it swallowed the panel. */
 .overlay-title {
   margin: 0 0 var(--s4);
-  font-size: clamp(1.75rem, 3.6vw, 3rem);
+  font-size: clamp(1.5rem, 2.8vw, 2.25rem);
   font-weight: 500;
-  line-height: 1.04;
-  letter-spacing: -0.032em;
-  text-wrap: balance;
+  line-height: 1.12;
+  letter-spacing: -0.028em;
+  text-wrap: pretty;
 }
 
 .overlay-what {
@@ -339,6 +341,22 @@ body.is-overlay-open {
   .scroll-hint span { animation: none; }
   .line-i { transform: none; }
   .reveal { opacity: 1; transform: none; }
+}
+
+/* The books the claim rests on. Quiet, and the last thing in the panel. */
+.overlay-bron {
+  margin: var(--s4) 0 0;
+  padding-top: var(--s2);
+  border-top: 1px solid var(--ink-12);
+  max-width: 44ch;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  color: var(--ink-62);
+}
+
+.overlay-bron[hidden] {
+  display: none;
 }
 
 /* --- the assistant -------------------------------------------------------
