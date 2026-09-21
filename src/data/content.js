@@ -40,9 +40,9 @@ export const hero = {
 export const about = {
   heading: "Losse onderdelen. Eén organisatie.",
   paragraphs: [
-    "Acht jaar in scale-ups. Mens, team en organisatie, alle drie tegelijk. Meestal op plekken waar nog niets stond. Geen functies op papier. Geen loopbaanpaden. Geen salarisstructuur. Alleen mensen, en een bedrijf dat harder groeide dan zijn fundament.",
+    "Acht jaar in scale-ups. Mens, team en organisatie. Ik ken de fase waarin het gaat kraken. Mensen worden leidinggevende zonder ooit geleid te hebben. Niemand weet wat de volgende stap is. Salarissen zijn stuk voor stuk apart onderhandeld. Wat werkte bij vijftien mensen, werkt niet meer bij veertig.",
     "Daar doe ik mijn beste werk. Ik bouw het raamwerk. En dan zorg ik dat je teamleads het zonder mij draaien.",
-    "Voordat ik teams bouwde in bedrijven, leidde ik er een op het honkbalveld. Hoofdklasse. Vijfentwintig spelers, vijf man staf. Zelfde principe: iedereen kent zijn rol, en waarom die ertoe doet.",
+    "Voordat ik teams bouwde in bedrijven, leidde ik er een op het honkbalveld. Hoofdklasse. Vijfentwintig spelers, vijf man staf. Op een veld zie je het meteen: een speler op de verkeerde positie kost je de wedstrijd, hoe goed die speler ook is. In een organisatie duurt het langer voordat je het merkt, maar het kost net zo hard. Dus begin ik bij talent. Eerst wat iemand van nature goed kan, dan pas welke positie daarbij hoort.",
   ],
 };
 
@@ -70,7 +70,7 @@ export const principles = {
     {
       title: "Begin bij wat werkt.",
       text:
-        "Als Gallup-gecertificeerd CliftonStrengths-coach begin ik bij sterke punten. Mensen groeien sneller op wat ze kunnen dan op wat ze missen.",
+        "Als Gallup-gecertificeerd CliftonStrengths-coach begin ik bij sterke punten. Net als in sport: je wint niet met de beste spelers, je wint met spelers op de juiste positie.",
     },
   ],
 };
