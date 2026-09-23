@@ -20,7 +20,7 @@ export const meta = {
     "Salarishuis",
     "Salarisbandbreedtes",
     "Loopbaanpaden",
-    "Functieprofielen",
+    "Rollen en rolprofielen",
     "EU-richtlijn loontransparantie",
     "Leiderschapscoaching",
     "CliftonStrengths",
@@ -70,7 +70,7 @@ export const principles = {
     {
       title: "Ik bouw mezelf eruit.",
       text:
-        "Niet ik draai de cyclus. Jouw teamleads draaien hem. Overbodig worden is het doel, niet het risico.",
+        "Niet ik voer de gesprekken. Jouw teamleads voeren ze. Overbodig worden is het doel, niet het risico.",
     },
     {
       title: "Je wint niet met de beste spelers.",
@@ -98,17 +98,17 @@ export const process = {
     {
       title: "Ik bouw het raamwerk",
       text:
-        "Functieprofielen, skills, loopbaanpaden, salarisbandbreedtes. Live in een platform dat je teamleads echt gebruiken. Om jouw bedrijf heen gebouwd, niet om een sjabloon.",
+        "Rollen, skills, loopbaanpaden, salarisbandbreedtes. Live in een platform dat je teamleads echt gebruiken. Om jouw bedrijf heen gebouwd, niet om een sjabloon.",
     },
     {
       title: "Je teamleads nemen het over",
       text:
-        "Zij draaien de eerste cyclus. Ik zit ernaast, niet ervoor. Waar het vastloopt, lossen we het samen op.",
+        "Zij voeren de eerste gesprekken zelf. Ik zit ernaast, niet ervoor. Waar het vastloopt, lossen we het samen op.",
     },
     {
       title: "Ik ga weg",
       text:
-        "Het raamwerk is van jullie. De cyclus draait zonder mij. En je leads weten waarom elk onderdeel er staat.",
+        "Het raamwerk is van jullie. Het loopt zonder mij. En je leads weten waarom elk onderdeel er staat.",
     },
   ],
 };
@@ -126,7 +126,7 @@ export const services = {
       title:
         "De beste organisaties weten wat hun mensen kunnen, niet welke functie ze hebben.",
       what:
-        "Een functiehuis vanaf nul. Functies, skillsprofielen, ontwikkelpaden. Live in een platform dat je teamleads echt gebruiken.",
+        "Een huis van rollen, niet van functies. Wat mensen doen en kunnen, met de skills en ontwikkelpaden die daarbij horen. Live in een platform dat je teamleads echt gebruiken.",
       proof:
         "Gebouwd voor een tech-marktplaats van 28 mensen waar niets van dit alles bestond. Binnen een jaar live in Learned.",
       bron: "Work Without Jobs, Jesuthasan & Boudreau · The Skills-Powered Organization, Jesuthasan & Kapilashrami",
@@ -136,7 +136,7 @@ export const services = {
       title:
         "De beste organisaties halen geld van tafel, zodat het over het werk kan gaan.",
       what:
-        "Een salarishuis bovenop je functiehuis. Bandbreedtes, gebenchmarkt tegen jouw markt. Klaar voor de EU-richtlijn loontransparantie voordat het moet.",
+        "Een salarishuis bovenop je rollen. Bandbreedtes, gebenchmarkt tegen jouw markt. Klaar voor de EU-richtlijn loontransparantie voordat het moet.",
       proof:
         "Opgezet vóór de richtlijn, gebenchmarkt tegen de Utrechtse tech-markt.",
       bron: "Drive, Daniel Pink · Powerful, Patty McCord",
@@ -148,7 +148,7 @@ export const services = {
       what:
         "Vier maanden coaching voor je teamleads, op basis van CliftonStrengths. Teamsessies. Eén-op-één. Door mij ontworpen en gegeven, in huis.",
       proof:
-        "Vier teamleads draaien nu hun eigen ontwikkelcyclus. Zonder externe trainers.",
+        "Vier teamleads voeren hun ontwikkelgesprekken nu zelf. Zonder externe trainers.",
       bron: "It's the Manager, Clifton & Harter · Nine Lies About Work, Buckingham & Goodall",
     },
     {
@@ -166,9 +166,9 @@ export const services = {
       title:
         "De beste organisaties belonen afgemaakt werk, niet zichtbare drukte.",
       what:
-        "Een werkritme dat oplevert. Shape Up voor productteams, Scaling Up voor het MT. Minder tegelijk. Meer af.",
+        "Een werkritme dat past bij hoe jouw teams werken. Vaste blokken, een duidelijke eigenaar per stuk werk, en een plek waar keuzes vallen. Minder tegelijk. Meer af.",
       proof:
-        "Bedrijfsbreed uitgerold, met de CTO als eigenaar van de adoptie in product en IT.",
+        "Bij een tech-scale-up werd dat Shape Up voor de productteams en Scaling Up voor het MT. Bedrijfsbreed uitgerold, met de CTO als eigenaar.",
       bron: "Deep Work, Cal Newport · The Progress Principle, Amabile & Kramer",
     },
     {
