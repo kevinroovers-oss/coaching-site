@@ -425,16 +425,22 @@ preset, which skips nothing but makes the backdrop buffer irrelevant.
 
 ## The portrait
 
-`public/img/kevin-roovers.webp` is generated from `legacy/portret.png` by
-`scripts/make-portrait.mjs`. The source is a greyscale subject on a saturated
-orange backdrop that clashes with this palette, so the script keys the backdrop
-out and composites the subject onto the page's own off-white.
+`public/img/kevin-roovers.webp` is generated from `legacy/portret-2026.webp` by
+`scripts/make-portrait.mjs`. The source is a greyscale subject on a flat light
+backdrop, and that backdrop is never exactly this page's off-white. The
+difference shows: a portrait sitting in a column of `#F4F3F0` with its own grey
+rectangle around it reads as a pasted-in photo.
 
-Two things mark a pixel as background and both have to be read: it is saturated
-orange, **and** the source PNG already carries an alpha channel. Keying on
-colour alone turns every transparent pixel black, because an RGB of 0,0,0 has no
-saturation and looks like ink. That bug is why the first two attempts came out
-with a black box around his head.
+So the script measures the backdrop from the four corners rather than assuming
+it, then maps that value onto the page background and carries every tone below
+it along. The subject is converted to pure grey first — a colour cast in the
+source fights the warm off-white — and the result is composited onto the
+background instead of shipping an alpha channel, which sidesteps every encoder
+that quietly flattens transparency to black.
+
+The crop is built around the subject, not around the canvas: the script finds
+the ink, frames 4:5 around it with a little air above the hair, and resizes to
+720x900.
 
 ```bash
 npm i -D playwright && npx playwright install chromium
