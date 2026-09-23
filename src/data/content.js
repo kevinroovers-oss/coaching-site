@@ -44,7 +44,7 @@ export const hero = {
 export const about = {
   heading: "Losse onderdelen. Eén organisatie.",
   paragraphs: [
-    "Er komt een moment dat groei gaat schuren. Mensen worden leidinggevende zonder ooit geleid te hebben. Niemand weet wat de volgende stap is. Salarissen zijn stuk voor stuk apart onderhandeld. Wat werkte bij vijftien mensen, werkt niet meer bij veertig.",
+    "Er komt een moment dat groei gaat schuren. Mensen worden leidinggevende zonder ooit geleid te hebben. Niemand weet wat de volgende stap is. Niemand kan uitleggen welk gedrag hier beloond wordt. Wat werkte bij vijftien mensen, werkt niet meer bij veertig.",
     "Dat vraagt geen beleid. Dat vraagt vorm. Acht jaar scale-up leerde me waar die vorm begint: bij wat mensen kunnen, niet bij wat er op hun contract staat.",
     "Op een honkbalveld zie je dat meteen. Ik leidde er een team in de hoofdklasse. Vijfentwintig spelers, vijf man staf. Een speler op de verkeerde positie kost je de wedstrijd, hoe goed die speler ook is. In een bedrijf duurt het langer voor je het ziet. Het kost net zo hard.",
     "Dus begin ik bij talent. Eerst wat iemand van nature goed kan. Dan pas welke positie daarbij hoort.",
