@@ -1,4 +1,8 @@
 // Alle tekst van de site staat hier. Pas het hier aan, nergens anders.
+//
+// Toon: kort, stellend, tegen één lezer. Begin bij zijn situatie, niet bij mijn
+// cv. Geen versterkers, geen vakjargon voordat de menselijke zin er staat.
+// Een omkering zegt meer dan een bijvoeglijk naamwoord.
 
 export const meta = {
   title: "Kevin Roovers",
@@ -40,9 +44,10 @@ export const hero = {
 export const about = {
   heading: "Losse onderdelen. Eén organisatie.",
   paragraphs: [
-    "Acht jaar in scale-ups. Mens, team en organisatie. Ik ken de fase waarin het gaat kraken. Mensen worden leidinggevende zonder ooit geleid te hebben. Niemand weet wat de volgende stap is. Salarissen zijn stuk voor stuk apart onderhandeld. Wat werkte bij vijftien mensen, werkt niet meer bij veertig.",
-    "Daar doe ik mijn beste werk. Ik bouw het raamwerk. En dan zorg ik dat je teamleads het zonder mij draaien.",
-    "Voordat ik teams bouwde in bedrijven, leidde ik er een op het honkbalveld. Hoofdklasse. Vijfentwintig spelers, vijf man staf. Op een veld zie je het meteen: een speler op de verkeerde positie kost je de wedstrijd, hoe goed die speler ook is. In een organisatie duurt het langer voordat je het merkt, maar het kost net zo hard. Dus begin ik bij talent. Eerst wat iemand van nature goed kan, dan pas welke positie daarbij hoort.",
+    "Er komt een moment dat groei gaat schuren. Mensen worden leidinggevende zonder ooit geleid te hebben. Niemand weet wat de volgende stap is. Salarissen zijn stuk voor stuk apart onderhandeld. Wat werkte bij vijftien mensen, werkt niet meer bij veertig.",
+    "Dat vraagt geen beleid. Dat vraagt vorm. Acht jaar scale-up leerde me waar die vorm begint: bij wat mensen kunnen, niet bij wat er op hun contract staat.",
+    "Op een honkbalveld zie je dat meteen. Ik leidde er een team in de hoofdklasse. Vijfentwintig spelers, vijf man staf. Een speler op de verkeerde positie kost je de wedstrijd, hoe goed die speler ook is. In een bedrijf duurt het langer voor je het ziet. Het kost net zo hard.",
+    "Dus begin ik bij talent. Eerst wat iemand van nature goed kan. Dan pas welke positie daarbij hoort.",
   ],
 };
 
@@ -55,45 +60,45 @@ export const portrait = {
 };
 
 export const principles = {
-  heading: "Hoe ik werk",
+  heading: "Waar ik van uitga",
   items: [
     {
-      title: "Eerst structuur. Groei volgt.",
+      title: "Vrijheid heeft vorm nodig.",
       text:
-        "Talent heeft een kader nodig. Heldere rollen. Zichtbare paden. Eerlijke beloning. Dan wordt ontwikkeling een keuze in plaats van toeval.",
+        "Zonder kader is ontwikkeling toeval. Heldere rollen. Zichtbare paden. Eerlijke beloning. Dan wordt groeien een keuze.",
     },
     {
-      title: "Leiders die het zelf kunnen.",
+      title: "Ik bouw mezelf eruit.",
       text:
-        "Ik bouw geen afhankelijkheid. Je teamleads draaien de cyclus. Ik maak mezelf overbodig. Dat is de bedoeling.",
+        "Niet ik draai de cyclus. Jouw teamleads draaien hem. Overbodig worden is het doel, niet het risico.",
     },
     {
-      title: "Begin bij wat werkt.",
+      title: "Je wint niet met de beste spelers.",
       text:
-        "Als Gallup-gecertificeerd CliftonStrengths-coach begin ik bij sterke punten. Net als in sport: je wint niet met de beste spelers, je wint met spelers op de juiste positie.",
+        "Je wint met spelers op de juiste positie. Als Gallup-gecertificeerd CliftonStrengths-coach begin ik daarom bij wat iemand al kan.",
     },
   ],
 };
 
 // Het stappenplan. Geschreven voor iemand die zit te twijfelen of hij belt.
 export const process = {
-  heading: "Hoe ik het met je opbouw",
+  heading: "Hoe het gaat",
   intro: "Vijf stappen. De laatste is mijn vertrek.",
   steps: [
     {
-      title: "We kijken naar wat er al is",
+      title: "We kijken wat er al is",
       text:
-        "Rollen, beloning, paden, wie waarover beslist. Meestal bestaat een deel al, ongeschreven, in iemands hoofd. Dat zetten we eerst op papier. Daarna pas veranderen we iets.",
+        "Rollen, beloning, paden, wie waarover beslist. Het meeste bestaat al, ongeschreven, in iemands hoofd. Dat zetten we eerst op papier. Veranderen komt later.",
     },
     {
       title: "We spreken af wat goed is",
       text:
-        "Eén pagina: welke rollen je bedrijf echt nodig heeft, waar elke rol voor is, en hoe iemand van de ene naar de andere beweegt. Jij tekent voor die pagina voordat er iets gebouwd wordt.",
+        "Eén pagina: welke rollen je echt nodig hebt, waar ze voor zijn, hoe iemand van de ene naar de andere beweegt. Jij tekent. Daarna pas bouwen we.",
     },
     {
       title: "Ik bouw het raamwerk",
       text:
-        "Functieprofielen, skills, loopbaanpaden en salarisbandbreedtes. Live in een platform dat je teamleads echt gebruiken. Gebouwd rond jouw bedrijf, niet rond een sjabloon.",
+        "Functieprofielen, skills, loopbaanpaden, salarisbandbreedtes. Live in een platform dat je teamleads echt gebruiken. Om jouw bedrijf heen gebouwd, niet om een sjabloon.",
     },
     {
       title: "Je teamleads nemen het over",
@@ -103,7 +108,7 @@ export const process = {
     {
       title: "Ik ga weg",
       text:
-        "Het raamwerk is van jullie, de cyclus draait zonder mij, en je leads weten waarom elk onderdeel er staat. Dat is de bedoeling.",
+        "Het raamwerk is van jullie. De cyclus draait zonder mij. En je leads weten waarom elk onderdeel er staat.",
     },
   ],
 };
@@ -119,9 +124,9 @@ export const services = {
     {
       id: "framework",
       title:
-        "De beste organisaties weten wat hun mensen kunnen, niet alleen welke functie ze hebben.",
+        "De beste organisaties weten wat hun mensen kunnen, niet welke functie ze hebben.",
       what:
-        "Een functiehuis vanaf nul: functies, skillsprofielen en ontwikkelpaden voor iedereen in je bedrijf. Live in een platform dat je teamleads echt gebruiken.",
+        "Een functiehuis vanaf nul. Functies, skillsprofielen, ontwikkelpaden. Live in een platform dat je teamleads echt gebruiken.",
       proof:
         "Gebouwd voor een tech-marktplaats van 28 mensen waar niets van dit alles bestond. Binnen een jaar live in Learned.",
       bron: "Work Without Jobs, Jesuthasan & Boudreau · The Skills-Powered Organization, Jesuthasan & Kapilashrami",
@@ -129,9 +134,9 @@ export const services = {
     {
       id: "pay",
       title:
-        "De beste organisaties halen geld van tafel als gespreksonderwerp, zodat het over het werk kan gaan.",
+        "De beste organisaties halen geld van tafel, zodat het over het werk kan gaan.",
       what:
-        "Een salarishuis bovenop je functiehuis: salarisbandbreedtes, gebenchmarkt tegen jouw markt. Klaar voor de EU-richtlijn loontransparantie voordat het moet.",
+        "Een salarishuis bovenop je functiehuis. Bandbreedtes, gebenchmarkt tegen jouw markt. Klaar voor de EU-richtlijn loontransparantie voordat het moet.",
       proof:
         "Opgezet vóór de richtlijn, gebenchmarkt tegen de Utrechtse tech-markt.",
       bron: "Drive, Daniel Pink · Powerful, Patty McCord",
@@ -139,9 +144,9 @@ export const services = {
     {
       id: "leads",
       title:
-        "De beste organisaties weten dat betrokkenheid in het team ontstaat, niet in het personeelsbeleid.",
+        "De beste organisaties weten dat betrokkenheid in het team ontstaat, niet in het beleid.",
       what:
-        "Een coachingsprogramma van vier maanden voor je teamleads, op basis van CliftonStrengths. Teamsessies. Eén-op-één coaching. Door mij ontworpen en gegeven, in huis.",
+        "Vier maanden coaching voor je teamleads, op basis van CliftonStrengths. Teamsessies. Eén-op-één. Door mij ontworpen en gegeven, in huis.",
       proof:
         "Vier teamleads draaien nu hun eigen ontwikkelcyclus. Zonder externe trainers.",
       bron: "It's the Manager, Clifton & Harter · Nine Lies About Work, Buckingham & Goodall",
@@ -149,7 +154,7 @@ export const services = {
     {
       id: "hiring",
       title:
-        "De beste organisaties selecteren op een vaste methode, niet op een goed gevoel.",
+        "De beste organisaties selecteren op methode, niet op onderbuik.",
       what:
         "Senior en executive werving, van rolontwerp tot getekend aanbod. Vacatureteksten, kanaalmix, gestructureerde selectie, onderhandeling.",
       proof:
@@ -161,7 +166,7 @@ export const services = {
       title:
         "De beste organisaties belonen afgemaakt werk, niet zichtbare drukte.",
       what:
-        "Een werkritme dat oplevert: Shape Up voor productteams, Scaling Up voor het MT. Minder dingen tegelijk. Meer dingen af.",
+        "Een werkritme dat oplevert. Shape Up voor productteams, Scaling Up voor het MT. Minder tegelijk. Meer af.",
       proof:
         "Bedrijfsbreed uitgerold, met de CTO als eigenaar van de adoptie in product en IT.",
       bron: "Deep Work, Cal Newport · The Progress Principle, Amabile & Kramer",
@@ -169,9 +174,9 @@ export const services = {
     {
       id: "hard",
       title:
-        "De beste organisaties voeren het moeilijke gesprek op tijd, omdat uitstellen niet aardig is maar duur.",
+        "De beste organisaties voeren het moeilijke gesprek op tijd. Uitstellen is niet aardig, het is duur.",
       what:
-        "Vaststellingsovereenkomsten. Langdurig verzuim. Re-integratie volgens Nederlands arbeidsrecht. Rechtstreeks aangepakt, met zorg voor de mens en zekerheid voor het bedrijf.",
+        "Vaststellingsovereenkomsten. Langdurig verzuim. Re-integratie volgens Nederlands arbeidsrecht. Recht op de zaak af, met zorg voor de mens en zekerheid voor het bedrijf.",
       proof:
         "Elke zaak zelf gedaan, als enige people-rol in het bedrijf. Elke keer.",
       bron: "Radical Candor, Kim Scott · Powerful, Patty McCord",
@@ -180,7 +185,7 @@ export const services = {
 };
 
 export const credentials = {
-  heading: "Opleiding en certificering",
+  heading: "Waar ik het vandaan heb",
   items: [
     "Gallup-gecertificeerd CliftonStrengths-coach",
     "The Psychology of Leadership, Behaviour Change Group",
@@ -191,7 +196,7 @@ export const credentials = {
 
 export const contact = {
   heading: "Laten we praten.",
-  line: "Over structuur die nog gebouwd moet worden. Of over honkbal.",
+  line: "Over wat er nog gebouwd moet worden. Of over honkbal.",
   email: "kevinroovers@gmail.com",
   linkedin: "https://linkedin.com/in/kevin-roovers",
   linkedinLabel: "LinkedIn",
