@@ -88,17 +88,17 @@ export const process = {
     {
       title: "We kijken wat er al is",
       text:
-        "Rollen, beloning, paden, wie waarover beslist. Het meeste bestaat al, ongeschreven, in iemands hoofd. Dat zetten we eerst op papier. Veranderen komt later.",
+        "Rollen, paden, wie waarover beslist, en welk gedrag er nu feitelijk beloond wordt. Het meeste bestaat al, ongeschreven, in iemands hoofd. Dat zetten we eerst op papier. Veranderen komt later.",
     },
     {
       title: "We spreken af wat goed is",
       text:
-        "Eén pagina: welke rollen je echt nodig hebt, waar ze voor zijn, hoe iemand van de ene naar de andere beweegt. Jij tekent. Daarna pas bouwen we.",
+        "Eén pagina: welke rollen je echt nodig hebt, waar ze voor zijn, en welk gedrag je in elke rol wilt belonen. Jij tekent. Daarna pas bouwen we.",
     },
     {
       title: "Ik bouw het raamwerk",
       text:
-        "Rollen, skills, loopbaanpaden, salarisbandbreedtes. Live in een platform dat je teamleads echt gebruiken. Om jouw bedrijf heen gebouwd, niet om een sjabloon.",
+        "Rollen, skills en loopbaanpaden, met zichtbaar welk gedrag beloond wordt en wat dat waard is. Live in een platform dat je teamleads echt gebruiken. Om jouw bedrijf heen gebouwd, niet om een sjabloon.",
     },
     {
       title: "Je teamleads nemen het over",
